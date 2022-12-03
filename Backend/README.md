@@ -1,7 +1,7 @@
 # AirBnB Clone
 
 ## Database Schema Design
-> insert database schema design here>
+![Database Schema](https://github.com/leongkevin/AirBnB/blob/main/Backend/images/airbnb-clone.jpg)
 
 ## API Documentation
 
