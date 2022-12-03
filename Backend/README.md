@@ -2,6 +2,7 @@
 
 ## Database Schema Design
 ![Database Schema](https://github.com/leongkevin/AirBnB/blob/main/Backend/images/airbnb-clone.jpg)
+Source: https://dbdiagram.io/d/631fa35d0911f91ba59287fb
 
 ## API Documentation
 
