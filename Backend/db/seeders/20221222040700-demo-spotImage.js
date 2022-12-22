@@ -23,3 +23,27 @@ module.exports = {
      */
   }
 };
+
+
+[
+	{
+		spotId: 1,
+		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+		preview: true,
+	},
+	{
+		spotId: 1,
+		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+		preview: true,
+	},
+	{
+		spotId: 2,
+		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+		preview: false,
+	},
+	{
+		spotId: 2,
+		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+		preview: true,
+	},
+];

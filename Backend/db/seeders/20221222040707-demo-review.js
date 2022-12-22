@@ -23,3 +23,25 @@ module.exports = {
      */
   }
 };
+
+
+[
+	{
+		userId: 1,
+		spotId: 1,
+		review: "The best place I've ever vacationed at!!!",
+		stars: 5,
+	},
+	{
+		userId: 1,
+		spotId: 1,
+		review: "The worst place I've ever vacationed at!!!",
+		stars: 1,
+	},
+	{
+		userId: 1,
+		spotId: 1,
+		review: 'Above average',
+		stars: 4,
+	},
+];
