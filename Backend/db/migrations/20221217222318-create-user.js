@@ -45,4 +45,4 @@ module.exports = {
     return queryInterface.dropTable(options);
   }
 };
-{"user":{"id":4,"username":"Spidey","email":"spidey@spider.man"}}
+

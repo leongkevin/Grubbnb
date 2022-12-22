@@ -52,6 +52,19 @@ router.post('/', validateSignup, async (req, res) => {
 	});
 });
 
-module.exports = router;
+router.get('/', async (req, res) => {
+	const allUsers = await User.findAll();
 
-// {"XSRF-Token":"5jQbRd1T-OfK642vwTDdufbpRfD_DnT1ZaE8"}
+	res.json(allUsers);
+});
+
+// Add a XSRF-TOKEN cookie
+router.get('/api/csrf/restore', (req, res) => {
+	const csrfToken = req.csrfToken();
+	res.cookie('XSRF-TOKEN', csrfToken);
+	res.status(200).json({
+		'XSRF-Token': csrfToken,
+	});
+});
+
+module.exports = router;
