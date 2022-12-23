@@ -6,50 +6,48 @@ if (process.env.NODE_ENV === 'production') {
 	options.schema = process.env.SCHEMA; // define your schema in options object
 }
 
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up (queryInterface, Sequelize) {
-    /**
-     * Add seed commands here.
-     *
-     * Example:
-     * await queryInterface.bulkInsert('People', [{
-     *   name: 'John Doe',
-     *   isBetaMember: false
-     * }], {});
-    */
-  },
+	up: async (queryInterface, Sequelize) => {
+		options.tableName = 'SpotImages';
+		return queryInterface.bulkInsert(
+			options,
+			[
+				{
+					spotId: 1,
+					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					preview: true,
+				},
+				{
+					spotId: 1,
+					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					preview: true,
+				},
+				{
+					spotId: 2,
+					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					preview: false,
+				},
+				{
+					spotId: 2,
+					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					preview: true,
+				},
+			],
+			{}
+		);
+	},
 
-  async down (queryInterface, Sequelize) {
-    /**
-     * Add commands to revert seed here.
-     *
-     * Example:
-     * await queryInterface.bulkDelete('People', null, {});
-     */
-  }
+	down: async (queryInterface, Sequelize) => {
+		options.tableName = 'SpotImages';
+		const Op = Sequelize.Op;
+		return queryInterface.bulkDelete(
+			options,
+			{
+				spotId: {
+					[Op.in]: [1, 2],
+				},
+			},
+			{}
+		);
+	},
 };
-
-
-[
-	{
-		spotId: 1,
-		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
-		preview: true,
-	},
-	{
-		spotId: 1,
-		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
-		preview: true,
-	},
-	{
-		spotId: 2,
-		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
-		preview: false,
-	},
-	{
-		spotId: 2,
-		url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
-		preview: true,
-	},
-];
