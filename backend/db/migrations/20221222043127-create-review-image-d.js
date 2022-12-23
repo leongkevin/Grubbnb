@@ -22,6 +22,10 @@ module.exports = {
       reviewId: {
         type: Sequelize.INTEGER,
         allowNull: false,
+				reference: {
+					model: 'Reviews',
+					key: 'id',
+				},
       },
       createdAt: {
         allowNull: false,
