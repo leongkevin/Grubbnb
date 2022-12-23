@@ -26,6 +26,9 @@ module.exports = {
 			spotId: {
 				type: Sequelize.INTEGER,
 				allowNull: false,
+				reference: {
+					model: 'Spots',
+					key: 'id',
 			},
 			startDate: {
 				type: Sequelize.DATE,
