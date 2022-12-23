@@ -9,9 +9,9 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 router.get('/', async (req, res) => {
-	// const allSpots = await Spot.findAll();
+	const allSpots = await Spot.findAll();
 
-	// res.json(allSpots);
+	res.json(allSpots);
 	res.send('Hello World!');
 });
 
