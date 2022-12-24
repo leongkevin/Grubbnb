@@ -30,7 +30,6 @@ router.post('/test', function (req, res) {
 // If current user session is not valid, set req.user to null
 router.use(restoreUser);
 
-
 // router.get('/restore-user', (req, res) => {
 // 	return res.json(req.user);
 // });

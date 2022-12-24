@@ -57,7 +57,11 @@ module.exports = {
 			options,
 			{
 				name: {
-					[Op.in]: ['5 Bryant Park', 'Asphalt Green UES', 'Asphalt Green BPC'],
+					[Op.in]: [
+						'5 Bryant Park',
+						'Asphalt Green UES',
+						'Asphalt Green BPC',
+					],
 				},
 			},
 			{}
