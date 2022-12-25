@@ -13,4 +13,21 @@ router.get('/', async (req, res) => {
 	res.json(allSpots);
 });
 
+router.post('/', async (req, res) => {
+	const {
+		ownerId,
+		address,
+		city,
+		state,
+		country,
+		lat,
+		lng,
+		name,
+		description,
+		price,
+	} = req.body;
+
+	// if()
+});
+
 module.exports = router;
