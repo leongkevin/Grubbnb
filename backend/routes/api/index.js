@@ -9,7 +9,7 @@ const reviewImagesRouter = require('./reviewimages.js');
 const { restoreUser, requireAuth } = require('../../utils/auth.js');
 
 router.get('/test', function (req, res) {
-	res.json({ message: 'succuess' });
+	res.json({ message: 'success' });
 });
 
 router.post('/test', function (req, res) {
