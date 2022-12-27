@@ -18,6 +18,8 @@ app.use(express.json());
 
 const routes = require('./routes');
 
+const { ValidationError } = require('sequelize');
+
 // Security Middleware
 if (!isProduction) {
 	// enable cors only in development
@@ -53,8 +55,6 @@ app.use((_req, _res, next) => {
 	next(err);
 });
 
-const { ValidationError } = require('sequelize');
-
 // Process sequelize errors
 app.use((err, _req, _res, next) => {
 	// check if error is a Sequelize error:
@@ -69,12 +69,22 @@ app.use((err, _req, _res, next) => {
 app.use((err, _req, res, _next) => {
 	res.status(err.status || 500);
 	console.error(err);
-	res.json({
-		title: err.title || 'Server Error',
-		message: err.message,
-		errors: err.errors,
-		stack: isProduction ? null : err.stack,
-	});
+
+	if (err.status === 400) {
+		res.json({
+			message: 'Validation Error',
+			statusCode: err.status,
+			errors: err.errors,
+		});
+	} else {
+		res.json({
+			title: err.title || 'Server Error',
+			message: err.message,
+			statusCode: err.status,
+			errors: err.errors,
+			stack: isProduction ? null : err.stack,
+		});
+	}
 });
 
 module.exports = app;

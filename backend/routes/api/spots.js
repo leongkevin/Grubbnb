@@ -42,10 +42,7 @@ const validateSpot = [
 	check('country').isString().withMessage('Country is required'),
 	check('lat').isDecimal().withMessage('Latitude is not valid'),
 	check('lng').isDecimal().withMessage('Longitude is not valid'),
-	check('name')
-		.isString()
-		.not()
-		.withMessage('Name must be less than 50 characters'),
+	check('name').isString().withMessage('Name must be less than 50 characters'),
 	check('description').isString().withMessage('Description is required'),
 	check('price').isDecimal().withMessage('Price per day is required'),
 	handleValidationErrors,
@@ -153,11 +150,14 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 	let spot = await Spot.findByPk(req.params.spotId);
 	// console.log(spot.address)
 	if (spot === null) {
-		const error = res.status(404).json({
-			message: "Spot couldn't be found",
-			statusCode: 404,
-		});
-		return error;
+		// const error = res.status(404).json({
+		// 	message: "Spot couldn't be found",
+		// 	statusCode: 404,
+		// });
+		// const err = Error("Bad requesssst.");
+		// err.status = 400;
+		// err.title = "Bad request.";
+		return validateSpot;
 		// res.json({ message: `success`});
 	}
 
