@@ -8,6 +8,15 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+// Error Response: Body validation error
+
+// Status Code: 400
+
+// Headers:
+
+// Content-Type: application/json
+// Body:
+
 // Body validation error
 // {
 // 	"message": "Validation Error",
@@ -55,6 +64,20 @@ const validateSpot = [
 // 	"price": null
 // }
 
+// Get all Spots
+// Returns all the spots.
+
+// Require Authentication: false
+
+// Request
+
+// Method: GET
+// URL: /spots
+// Body: none
+// Successful Response
+
+// Status Code: 200
+
 router.get('/', async (req, res) => {
 	const allSpots = await Spot.findAll();
 	res.json(allSpots);
@@ -90,6 +113,25 @@ router.post('/', [requireAuth, validateSpot], async (req, res) => {
 });
 
 // Edit a Spot
+// Updates and returns an existing spot.
+
+// Require Authentication: true
+
+// Require proper authorization: Spot must belong to the current user
+
+// Request
+
+// Method: PUT
+
+// URL: /api/spots/:spotId
+
+// Successful Response
+
+// Status Code: 200
+
+// Headers:
+
+// Content-Type: application/json
 router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 	// const id = req.params.spotId;
 	const id = req.user.id;
@@ -135,15 +177,66 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 		await spot.save();
 		res.json(spot);
 	}
-
-	// res.json({ message: `spotId is: ${spot.id}` });
-	// res.json({ message: `spotId is: ${req.user.id}` });
-	// res.json({ message: `ownerId is: ${req.params.spotId}`});
+	// res.json({ message: `ownerId is: ${req.user.id}` });
+	// res.json({ message: `spotId is: ${req.params.spotId}`});
 });
 
-router.delete('/', [requireAuth, validateSpot], async (req, res) => {
-});
+// Delete a Spot
+// Deletes an existing spot.
 
+// Require Authentication: true
+
+// Require proper authorization: Spot must belong to the current user
+
+// Request
+
+// Method: DELETE
+// URL: /api/spots/:spotId
+// Body: none
+// Successful Response
+
+// Status Code: 200
+
+// Headers:
+
+// Content-Type: application/json
+// Body:
+
+// {
+// 	"message": "Successfully deleted",
+// 	"statusCode": 200
+// }
+
+router.delete('/:spotId', requireAuth, async (req, res) => {
+	// const id = req.user.id;
+	// const {
+	// 	ownerId,
+	// 	address,
+	// 	city,
+	// 	state,
+	// 	country,
+	// 	lat,
+	// 	lng,
+	// 	name,
+	// 	description,
+	// 	price,
+	// } = req.body;
+	// console.log(req.body)
+	let spot = await Spot.findByPk(req.params.spotId);
+	if (!spot) {
+		res.status(404).json({
+			message: "Spot couldn't be found",
+			statusCode: 404,
+		});
+	} else if (spot.ownerId === req.user.id) {
+		await spot.destroy();
+		res.status(200).json({
+			message: 'Successfully deleted',
+			statusCode: 200,
+		});
+		// res.json({ message: spot});
+	}
+});
 
 module.exports = router;
 
