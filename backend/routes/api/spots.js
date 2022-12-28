@@ -8,6 +8,11 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+const statusCode404 = {
+	message: "Spot couldn't be found",
+	statusCode: 404,
+}
+
 // Error Response: Body validation error
 
 // Status Code: 400
@@ -42,7 +47,9 @@ const validateSpot = [
 	check('country').isString().withMessage('Country is required'),
 	check('lat').isDecimal().withMessage('Latitude is not valid'),
 	check('lng').isDecimal().withMessage('Longitude is not valid'),
-	check('name').isString().withMessage('Name must be less than 50 characters'),
+	check('name')
+		.isString()
+		.withMessage('Name must be less than 50 characters'),
 	check('description').isString().withMessage('Description is required'),
 	check('price').isDecimal().withMessage('Price per day is required'),
 	handleValidationErrors,
@@ -224,10 +231,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 	// console.log(req.body)
 	let spot = await Spot.findByPk(req.params.spotId);
 	if (!spot) {
-		res.status(404).json({
-			message: "Spot couldn't be found",
-			statusCode: 404,
-		});
+		res.status(404).json(statusCode404);
 	} else if (spot.ownerId === req.user.id) {
 		await spot.destroy();
 		res.status(200).json({
@@ -235,6 +239,30 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 			statusCode: 200,
 		});
 		// res.json({ message: spot});
+	}
+});
+
+// Get all Spots owned by the Current User
+// Returns all the spots owned (created) by the current user.
+
+// Require Authentication: true
+
+// Request
+
+// Method: GET
+// URL: /api/user/spots
+// Body: none
+// Successful Response
+
+// Status Code: 200
+
+router.get('/current', requireAuth, async (req, res) => {
+	const currentSpotsOfUser = await Spot.findAll({ where: { ownerId: 69 } });
+	// console.log(currentSpot.ownerId);
+	if(!currentSpotsOfUser[0]) {
+		res.status(404).json(statusCode404);
+	} else {
+		res.status(200).json(currentSpotsOfUser);
 	}
 });
 
