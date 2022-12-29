@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, User } = require('../../db/models');
+const { Spot, User, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -132,10 +132,6 @@ router.post('/', [requireAuth, validateSpot], async (req, res) => {
 // Successful Response
 
 // Status Code: 200
-
-// Headers:
-
-// Content-Type: application/json
 router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 	// const id = req.params.spotId;
 	const id = req.user.id;
@@ -196,16 +192,6 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 
 // Status Code: 200
 
-// Headers:
-
-// Content-Type: application/json
-// Body:
-
-// {
-// 	"message": "Successfully deleted",
-// 	"statusCode": 200
-// }
-
 router.delete('/:spotId', requireAuth, async (req, res) => {
 	const spot = await Spot.findByPk(req.params.spotId);
 	if (!spot) {
@@ -228,7 +214,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 // Request
 
 // Method: GET
-// URL: /api/user/spots
+// URL: /api/spots/current
 // Body: none
 // Successful Response
 

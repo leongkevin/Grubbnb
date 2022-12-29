@@ -326,7 +326,7 @@ Returns all the spots owned (created) by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/user/spots
+    -   URL: /api/spots/current
     -   Body: none
 
 -   Successful Response

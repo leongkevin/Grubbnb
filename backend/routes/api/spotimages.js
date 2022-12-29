@@ -1,7 +1,7 @@
 const express = require('express');
 
 const { setTokenCookie, restoreUser } = require('../../utils/auth');
-const { SpotImage } = require('../../db/models');
+const { Spot, User, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
