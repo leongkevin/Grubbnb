@@ -32,3 +32,6 @@ npx sequelize seed:generate --name demo-spotImage
 npx sequelize seed:generate --name demo-booking
 npx sequelize seed:generate --name demo-review
 npx sequelize seed:generate --name demo-reviewImage
+
+npx dotenv sequelize db:migrate
+npx dotenv sequelize db:seed:all

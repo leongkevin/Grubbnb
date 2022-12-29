@@ -11,7 +11,7 @@ const router = express.Router();
 const statusCode404 = {
 	message: "Spot couldn't be found",
 	statusCode: 404,
-}
+};
 
 // Error Response: Body validation error
 
@@ -68,21 +68,21 @@ const validateSpot = [
 // 	"price": null
 // }
 
-// Get all Spots
-// Returns all the spots.
-
-// Require Authentication: false
-
-// Request
-
-// Method: GET
-// URL: /spots
-// Body: none
-// Successful Response
-
-// Status Code: 200
-
 router.get('/', async (req, res) => {
+	// Get all Spots
+	// Returns all the spots.
+
+	// Require Authentication: false
+
+	// Request
+
+	// Method: GET
+	// URL: /spots
+	// Body: none
+	// Successful Response
+
+	// Status Code: 200
+
 	const allSpots = await Spot.findAll();
 	res.json(allSpots);
 });
@@ -154,18 +154,10 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 
 	// findByPk
 	// The findByPk method obtains only a single entry from the table, using the provided primary key.
-	let spot = await Spot.findByPk(req.params.spotId);
+	const spot = await Spot.findByPk(req.params.spotId);
 	// console.log(spot.address)
 	if (spot === null) {
-		// const error = res.status(404).json({
-		// 	message: "Spot couldn't be found",
-		// 	statusCode: 404,
-		// });
-		// const err = Error("Bad requesssst.");
-		// err.status = 400;
-		// err.title = "Bad request.";
-		return validateSpot;
-		// res.json({ message: `success`});
+		res.status(404).json(statusCode404);
 	}
 
 	if (spot.ownerId === req.user.id) {
@@ -215,21 +207,7 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 // }
 
 router.delete('/:spotId', requireAuth, async (req, res) => {
-	// const id = req.user.id;
-	// const {
-	// 	ownerId,
-	// 	address,
-	// 	city,
-	// 	state,
-	// 	country,
-	// 	lat,
-	// 	lng,
-	// 	name,
-	// 	description,
-	// 	price,
-	// } = req.body;
-	// console.log(req.body)
-	let spot = await Spot.findByPk(req.params.spotId);
+	const spot = await Spot.findByPk(req.params.spotId);
 	if (!spot) {
 		res.status(404).json(statusCode404);
 	} else if (spot.ownerId === req.user.id) {
@@ -257,12 +235,36 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 // Status Code: 200
 
 router.get('/current', requireAuth, async (req, res) => {
-	const currentSpotsOfUser = await Spot.findAll({ where: { ownerId: 69 } });
+	const currentSpotsOfUser = await Spot.findAll({
+		where: { ownerId: req.user.id },
+	});
 	// console.log(currentSpot.ownerId);
-	if(!currentSpotsOfUser[0]) {
+	if (!currentSpotsOfUser[0]) {
 		res.status(404).json(statusCode404);
 	} else {
 		res.status(200).json(currentSpotsOfUser);
+	}
+});
+
+// Get details of a Spot from an id
+// Returns the details of a spot specified by its id.
+
+// Require Authentication: false
+
+// Request
+
+// Method: GET
+// URL: /api/spots/:spotId
+// Body: none
+// Successful Response
+
+// Status Code: 200
+router.get('/:spotId', async (req, res) => {
+	const spot = await Spot.findByPk(req.params.spotId);
+	if (spot === null) {
+		res.status(404).json(statusCode404);
+	} else {
+		res.status(200).json(spot);
 	}
 });
 
