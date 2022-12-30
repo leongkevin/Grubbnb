@@ -1,7 +1,14 @@
 const express = require('express');
 
 const { requireAuth, restoreUser } = require('../../utils/auth');
-const { Spot, User, Review, Booking, SpotImage, ReviewImage } = require('../../db/models');
+const {
+	Spot,
+	User,
+	Review,
+	Booking,
+	SpotImage,
+	ReviewImage,
+} = require('../../db/models');
 
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
@@ -55,6 +62,12 @@ const validateSpot = [
 	handleValidationErrors,
 ];
 
+const validateReview = [
+	check('review').isString().withMessage('Review text is required'),
+	check('stars').isInt().withMessage('Stars must be an integer from 1 to 5'),
+	handleValidationErrors,
+];
+
 // Test validation errors
 // {
 // 	"address": null,
@@ -88,6 +101,20 @@ router.get('/', async (req, res) => {
 });
 
 // Create a Spot
+// Creates and returns a new spot.
+
+// Require Authentication: true
+
+// Request
+
+// Method: POST
+
+// URL: /api/spots
+
+// Successful Response
+
+// Status Code: 201
+
 router.post('/', [requireAuth, validateSpot], async (req, res) => {
 	const {
 		address,
@@ -253,6 +280,94 @@ router.get('/:spotId', async (req, res) => {
 		res.status(200).json(spot);
 	}
 });
+
+// Create a Review for a Spot based on the Spot's id
+// Create and return a new review for a spot specified by id.
+
+// Require Authentication: true
+
+// Request
+
+// Method: POST
+
+// URL: /api/spots/:spotId/reviews
+
+// Headers:
+
+// Content-Type: application/json
+// Body:
+
+// {
+// 	"review": "This was an awesome spot!",
+// 	"stars": 5
+// }
+// Successful Response
+
+// Status Code: 201
+router.post(
+	'/:spotId/reviews',
+	[requireAuth, validateReview],
+	async (req, res) => {
+		const { userId, spotId, review, stars } = req.body;
+		const spot = req.params;
+
+		const findSpot = await Spot.findAll({
+			where: { id: spot.spotId }, // key is "id" but cannot access unless called spotId
+		});
+
+		const reviewsBySameUser = await Review.findAll({
+			where: { userId: req.user.id }, // Search by user
+		});
+
+		// res.status(201).json(reviewsBySameUser);
+		//{
+		// 	"review": null,
+		//	"stars": null
+		//}
+		// Do not comment out a required column, it will have a sql validation error
+		// Must create a new spot before creating a review for a spot
+
+		const arrayOfReviewsBySameUser = [];
+		// res.json(spot.spotId);
+		for (let i = 0; i < reviewsBySameUser.length; i++) {
+			const el = reviewsBySameUser[i];
+			console.log(el.spotId === parseInt(spot.spotId))
+			for (const key in el) {
+				// res.json({currentEl: el.spotId, currentSpot: spot.spotId});
+				// console.log(el.spotId === spot.spotId)
+				if (el.spotId === parseInt(spot.spotId)) { // String coming from database
+					console.log(spot.spotId)
+					arrayOfReviewsBySameUser.push(el.spotId);
+				}
+			}
+		}
+		// console.log(arrayOfReviewsBySameUser.length)
+		// res.json(arrayOfReviewsBySameUser.length);
+
+		if (findSpot[0] && arrayOfReviewsBySameUser.length < 1) {
+			// Spot exists && User review array is not more than 1 review
+			const createReview = await Review.create({
+				userId: req.user.id,
+				spotId: spot.spotId,
+				review: req.body.review,
+				stars: req.body.stars,
+			});
+			res.status(201).json(createReview);
+		} else if (arrayOfReviewsBySameUser.length >= 1) {
+			// Error response: Review from the current user already exists for the Spot
+			// Status Code: 403
+				res.status(403).json({
+					"message": "User already has a review for this spot",
+					"statusCode": 403
+				});
+		} else {
+			// 	Error response: Couldn't find a Spot with the specified id
+
+			// 	Status Code: 404
+			res.status(404).json(statusCode404);
+		}
+	}
+);
 
 module.exports = router;
 
