@@ -369,6 +369,9 @@ router.post(
 	}
 );
 
+router.get('/spots/:spotId/images', requireAuth, async (req, res) => {
+});
+
 module.exports = router;
 
 // "XSRF-Token":"XlMibXoV-s-U9NurOoF4ypskHe2BUXzFELC8"

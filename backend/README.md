@@ -698,7 +698,7 @@ Returns all the reviews written by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/user/reviews
+    -   URL: /api/review/current
     -   Body: none
 
 -   Successful Response
