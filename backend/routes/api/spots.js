@@ -331,12 +331,13 @@ router.post(
 		// res.json(spot.spotId);
 		for (let i = 0; i < reviewsBySameUser.length; i++) {
 			const el = reviewsBySameUser[i];
-			console.log(el.spotId === parseInt(spot.spotId))
+			// console.log(el.spotId === parseInt(spot.spotId));
 			for (const key in el) {
 				// res.json({currentEl: el.spotId, currentSpot: spot.spotId});
 				// console.log(el.spotId === spot.spotId)
-				if (el.spotId === parseInt(spot.spotId)) { // String coming from database
-					console.log(spot.spotId)
+				if (el.spotId === parseInt(spot.spotId)) {
+					// String coming from database
+					// console.log(spot.spotId);
 					arrayOfReviewsBySameUser.push(el.spotId);
 				}
 			}
@@ -356,10 +357,10 @@ router.post(
 		} else if (arrayOfReviewsBySameUser.length >= 1) {
 			// Error response: Review from the current user already exists for the Spot
 			// Status Code: 403
-				res.status(403).json({
-					"message": "User already has a review for this spot",
-					"statusCode": 403
-				});
+			res.status(403).json({
+				message: 'User already has a review for this spot',
+				statusCode: 403,
+			});
 		} else {
 			// 	Error response: Couldn't find a Spot with the specified id
 
@@ -369,9 +370,21 @@ router.post(
 	}
 );
 
-router.get('/spots/:spotId/images', requireAuth, async (req, res) => {
-});
+
 
 module.exports = router;
 
 // "XSRF-Token":"XlMibXoV-s-U9NurOoF4ypskHe2BUXzFELC8"
+
+// router.post(
+// 	'/:spotId/reviews',
+// 	[requireAuth, validateSpot, validateReview],
+// 	async (req, res) => {
+// 		const { userId, spotId, review, stars } = req.body;
+
+// 		const createReview = await Review.create({
+// 			userId, spotId, review, stars
+// 		});
+// 		res.status(201).json(createReview);
+// 	}
+// );
