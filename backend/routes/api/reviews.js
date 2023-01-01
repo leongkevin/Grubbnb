@@ -20,49 +20,6 @@ const statusCode404 = {
 	statusCode: 404,
 };
 
-// Get all Reviews of the Current User
-// Returns all the reviews written by the current user.
-
-// Require Authentication: true
-
-// Request
-
-// Method: GET
-// URL: /api/user/reviews
-// Body: none
-// Successful Response
-
-// Status Code: 200
-router.get('/current', requireAuth, async (req, res) => {
-	const { user } = req;
-
-	const currentReviewsOfUser = await Review.findAll({
-		where: { userId: user.id },
-		include: [
-			{ model: User, attributes: ['id', 'firstName', 'lastName'] },
-			{
-				model: Spot,
-				attributes: { exclude: ['description'] },
-				include: [
-					{
-						model: SpotImage,
-						attributes: ['url'],
-						where: { preview: true },
-					},
-				],
-			},
-			{ model: ReviewImage, attributes: ['id', 'url'] },
-		],
-	});
-	if (!currentReviewsOfUser[0]) {
-		res.status(404).json(statusCode404);
-	} else {
-		res.status(200).json({ Reviews: currentReviewsOfUser });
-	}
-});
-
-// router.get('/spots/:spotId/images', requireAuth, async (req, res) => {});
-
 // Add an Image to a Review based on the Review's id
 // Create and return a new image for a review specified by id.
 
@@ -115,5 +72,48 @@ router.post('/:reviewId/images', requireAuth, async (req, res) => {
 		});
 	}
 });
+
+// Get all Reviews of the Current User
+// Returns all the reviews written by the current user.
+
+// Require Authentication: true
+
+// Request
+
+// Method: GET
+// URL: /api/user/reviews
+// Body: none
+// Successful Response
+
+// Status Code: 200
+router.get('/current', requireAuth, async (req, res) => {
+	const { user } = req;
+
+	const currentReviewsOfUser = await Review.findAll({
+		where: { userId: user.id },
+		include: [
+			{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+			{
+				model: Spot,
+				attributes: { exclude: ['description'] },
+				include: [
+					{
+						model: SpotImage,
+						attributes: ['url'],
+						where: { preview: true },
+					},
+				],
+			},
+			{ model: ReviewImage, attributes: ['id', 'url'] },
+		],
+	});
+	if (!currentReviewsOfUser[0]) {
+		res.status(404).json(statusCode404);
+	} else {
+		res.status(200).json({ Reviews: currentReviewsOfUser });
+	}
+});
+
+
 
 module.exports = router;
