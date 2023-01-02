@@ -384,28 +384,28 @@ router.post(
 
 // Status Code: 200
 
-// router.get('/:spotId/reviews', async (req, res) => {
-// 	const { userId, spotId, review, stars } = req.body;
-// 	const spot = req.params;
+router.get('/:spotId/reviews', async (req, res) => {
+	const { userId, spotId, review, stars } = req.body;
+	const spot = req.params;
 
-// 	const findSpot = await Spot.findAll({
-// 		where: { id: spot.spotId },
-// 	});
-// 	// res.json(findSpot[0].id);
+	const findSpot = await Spot.findAll({
+		where: { id: spot.spotId },
+	});
+	// res.json(findSpot[0].id);
 
-// 	if (findSpot[0]) {
-// 		const findReview = await Review.findAll({
-// 			where: { spotId: spot.spotId },
-// 			include: [
-// 				{ model: User, attributes: ['id', 'firstName', 'lastName'] },
-// 				{ model: ReviewImage, attributes: ['id', 'url'] },
-// 			],
-// 		});
-// 		res.status(200).json({ Reviews: findReview });
-// 	} else {
-// 		res.status(404).json(statusCode404);
-// 	}
-// });
+	if (findSpot[0]) {
+		const findReview = await Review.findAll({
+			where: { spotId: spot.spotId },
+			include: [
+				{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+				{ model: ReviewImage, attributes: ['id', 'url'] },
+			],
+		});
+		res.status(200).json({ Reviews: findReview });
+	} else {
+		res.status(404).json(statusCode404);
+	}
+});
 
 module.exports = router;
 
