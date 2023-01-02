@@ -150,7 +150,7 @@ router.put('/:reviewId', [requireAuth, validateReview], async (req, res) => {
 	const { userId, spotId, review, stars } = req.body;
 
 	const findReview = await Review.findByPk(req.params.reviewId);
-	res.json(findReview)
+	// res.json(findReview)
 	if (findReview === null) {
 		res.status(404).json(statusCode404);
 	}
