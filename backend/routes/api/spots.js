@@ -75,6 +75,16 @@ const validateSpotImage = [
 	handleValidationErrors,
 ];
 
+// {
+// 	"startDate": null,
+// 	"endDate": null
+// }
+const validateBooking = [
+	check('startDate').isDate().withMessage('Date is required'),
+	check('endDate').isDate().withMessage('Date is required'),
+	handleValidationErrors,
+];
+
 // Test validation errors
 // {
 // 	"address": null,
@@ -459,6 +469,52 @@ router.post(
 				preview,
 			});
 			res.status(200).json(createSpotImage);
+		} else {
+			res.status(404).json(statusCode404);
+		}
+	}
+);
+
+// Create a Booking from a Spot based on the Spot's id
+// Create and return a new booking from a spot specified by id.
+
+// Require Authentication: true
+
+// Require proper authorization: Spot must NOT belong to the current user
+
+// Request
+
+// Method: POST
+
+// URL: /api/spots/:spotId/bookings
+
+// Body:
+
+// {
+// 	"startDate": "2021-11-19",
+// 	"endDate": "2021-11-20"
+// }
+// Successful Response
+
+// Status Code: 200
+
+router.post(
+	'/:spotIdForBooking/bookings',
+	[requireAuth, validateBooking],
+	async (req, res) => {
+		const { startDate, endDate } = req.body;
+		const spot = req.params;
+
+		const findSpot = await Spot.findByPk(req.params.spotIdForBooking);
+		// res.json(findSpot);
+		if (findSpot) {
+			const createBooking = await Booking.create({
+				spotId: spot.spotIdForBooking,
+				userId: req.user.id,
+				startDate,
+				endDate,
+			});
+			res.status(200).json(createBooking);
 		} else {
 			res.status(404).json(statusCode404);
 		}
