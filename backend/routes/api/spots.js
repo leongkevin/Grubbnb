@@ -75,15 +75,7 @@ const validateSpotImage = [
 	handleValidationErrors,
 ];
 
-// {
-// 	"startDate": null,
-// 	"endDate": null
-// }
-const validateBooking = [
-	check('startDate').isDate().withMessage('Date is required'),
-	check('endDate').isDate().withMessage('Date is required'),
-	handleValidationErrors,
-];
+
 
 // Test validation errors
 // {
@@ -96,6 +88,11 @@ const validateBooking = [
 // 	"name": null,
 // 	"description": null,
 // 	"price": null
+// }
+
+// {
+// 	"startDate": null,
+// 	"endDate": null
 // }
 
 router.get('/', async (req, res) => {
@@ -498,28 +495,83 @@ router.post(
 
 // Status Code: 200
 
-router.post(
-	'/:spotIdForBooking/bookings',
-	[requireAuth, validateBooking],
-	async (req, res) => {
-		const { startDate, endDate } = req.body;
-		const spot = req.params;
+router.post('/:spotIdForBooking/bookings', requireAuth, async (req, res) => {
+	let { startDate, endDate } = req.body;
+	const spot = req.params;
 
-		const findSpot = await Spot.findByPk(req.params.spotIdForBooking);
+	return res.json(startDate)
+
+	// const validateBooking = (startDate, endDate) => {
+
+	// }
+
+	const findSpot = await Spot.findByPk(req.params.spotIdForBooking);
+	if (findSpot) {
+		const findBooking = await Booking.findAll({
+			where: { spotId: findSpot.id },
+			attributes: ['startDate', 'endDate'],
+		});
 		// res.json(findSpot);
-		if (findSpot) {
+		// res.json(findBooking[1]);
+		if (findBooking[0]) {
+			startDate = findBooking[0].startDate;
+			endDate = findBooking[0].endDate;
+		}
+		// res.json(startDate > endDate)
+		// res.json(`${endDate.getFullYear()}-${endDate.getDate()}-${endDate.getMonth()}`);
+
+		if (endDate < startDate) {
+			return res.status(400).json({
+				message: 'Validation error',
+				statusCode: 400,
+				errors: {
+					endDate: 'endDate cannot be on or before startDate',
+				},
+			});
+		} else if (validateBooking) {
 			const createBooking = await Booking.create({
 				spotId: spot.spotIdForBooking,
 				userId: req.user.id,
 				startDate,
 				endDate,
 			});
+
 			res.status(200).json(createBooking);
-		} else {
-			res.status(404).json(statusCode404);
+
+			// res.status(200).json({
+			// 	id: createBooking.id,
+			// 	spotId: createBooking.spotId,
+			// 	userId: createBooking.userId,
+			// 	startDate: `${createBooking.startDate.getFullYear()}-${createBooking.startDate.getDate()}-${createBooking.startDate.getMonth()}`,
+			// 	endDate: `${createBooking.endDate.getFullYear()}-${createBooking.endDate.getDate()}-${createBooking.endDate.getMonth()}`,
+			// 	createdAt: createBooking.createdAt,
+			// 	updatedAt: createBooking.updatedAt,
+			// });
 		}
+	} else {
+		res.status(404).json(statusCode404);
 	}
-);
+
+	// const findReview = await Review.findAll({
+	// 	where: { spotId: spot.spotId },
+	// 	include: [
+	// 		{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+	// 		{ model: ReviewImage, attributes: ['id', 'url'] },
+	// 	],
+	// });
+
+	// if (findSpot) {
+	// 	const createBooking = await Booking.create({
+	// 		spotId: spot.spotIdForBooking,
+	// 		userId: req.user.id,
+	// 		startDate,
+	// 		endDate,
+	// 	});
+	// 	res.status(200).json(createBooking);
+	// } else {
+	// 	res.status(404).json(statusCode404);
+	// }
+});
 
 module.exports = router;
 
