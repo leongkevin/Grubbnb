@@ -177,15 +177,15 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 
 	// findByPk
 	// The findByPk method obtains only a single entry from the table, using the provided primary key.
-	const spot = await Spot.findByPk(req.params.spotId);
+	const findSpot = await Spot.findByPk(req.params.spotId);
 	// console.log(spot.address)
-	if (spot === null) {
+	if (findSpot === null) {
 		res.status(404).json(statusCode404);
 	}
 
-	if (spot.ownerId === req.user.id) {
+	if (findSpot.ownerId === req.user.id) {
 		// comparing ownerId to logged in user
-		spot.set({
+		findSpot.set({
 			address,
 			city,
 			state,
@@ -196,8 +196,8 @@ router.put('/:spotId', [requireAuth, validateSpot], async (req, res) => {
 			description,
 			price,
 		});
-		await spot.save();
-		res.json(spot);
+		await findSpot.save();
+		res.json(findSpot);
 	}
 	// res.json({ message: `ownerId is: ${req.user.id}` });
 	// res.json({ message: `spotId is: ${req.params.spotId}`});
@@ -370,21 +370,60 @@ router.post(
 	}
 );
 
+// Get all Reviews by a Spot's id
+// Returns all the reviews that belong to a spot specified by id.
 
+// Require Authentication: false
+
+// Request
+
+// Method: GET
+// URL: /api/spots/:spotId/reviews
+// Body: none
+// Successful Response
+
+// Status Code: 200
+
+// router.get('/:spotId/reviews', async (req, res) => {
+// 	const { userId, spotId, review, stars } = req.body;
+// 	const spot = req.params;
+
+// 	const findSpot = await Spot.findAll({
+// 		where: { id: spot.spotId },
+// 	});
+// 	// res.json(findSpot[0].id);
+
+// 	if (findSpot[0]) {
+// 		const findReview = await Review.findAll({
+// 			where: { spotId: spot.spotId },
+// 			include: [
+// 				{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+// 				{ model: ReviewImage, attributes: ['id', 'url'] },
+// 			],
+// 		});
+// 		res.status(200).json({ Reviews: findReview });
+// 	} else {
+// 		res.status(404).json(statusCode404);
+// 	}
+// });
 
 module.exports = router;
 
 // "XSRF-Token":"XlMibXoV-s-U9NurOoF4ypskHe2BUXzFELC8"
 
-// router.post(
-// 	'/:spotId/reviews',
-// 	[requireAuth, validateSpot, validateReview],
-// 	async (req, res) => {
-// 		const { userId, spotId, review, stars } = req.body;
-
-// 		const createReview = await Review.create({
-// 			userId, spotId, review, stars
-// 		});
-// 		res.status(201).json(createReview);
-// 	}
-// );
+// const currentReviewsOfUser = await Review.findAll({
+// 	where: { userId: user.id },
+// 	include: [
+// 		{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+// 		{
+// 			model: Spot,
+// 			attributes: { exclude: ['description'] },
+// 			include: [
+// 				{
+// 					model: SpotImage,
+// 					attributes: ['url'],
+// 					where: { preview: true },
+// 				},
+// 			],
+// 		},
+// 		{ model: ReviewImage, attributes: ['id', 'url'] },
