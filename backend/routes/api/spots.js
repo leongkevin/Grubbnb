@@ -10,7 +10,7 @@ const {
 	ReviewImage,
 } = require('../../db/models');
 
-const { check } = require('express-validator');
+const { check, body } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
@@ -76,6 +76,21 @@ const validateSpotImage = [
 ];
 
 
+const validateBooking = [
+	body('startDate').custom(({ startDate, endDate }) => {
+		body.startDate
+	}),
+	handleValidationErrors,
+];
+
+// {
+// 	"message": "Sorry, this spot is already booked for the specified dates",
+// 	"statusCode": 403,
+// 	"errors": [
+// 		"Start date conflicts with an existing booking",
+// 		"End date conflicts with an existing booking"
+// 	]
+// }
 
 // Test validation errors
 // {
@@ -495,11 +510,11 @@ router.post(
 
 // Status Code: 200
 
-router.post('/:spotIdForBooking/bookings', requireAuth, async (req, res) => {
+router.post('/:spotIdForBooking/bookings', [requireAuth, validateBooking], async (req, res) => {
 	let { startDate, endDate } = req.body;
 	const spot = req.params;
 
-	return res.json(startDate)
+	// return res.json(startDate);
 
 	// const validateBooking = (startDate, endDate) => {
 
@@ -547,6 +562,8 @@ router.post('/:spotIdForBooking/bookings', requireAuth, async (req, res) => {
 			// 	createdAt: createBooking.createdAt,
 			// 	updatedAt: createBooking.updatedAt,
 			// });
+		} else {
+			return res.status(403).json(validateBooking);
 		}
 	} else {
 		res.status(404).json(statusCode404);
