@@ -68,6 +68,13 @@ const validateReview = [
 	handleValidationErrors,
 ];
 
+const validateSpotImage = [
+	check('url').isString().withMessage('URL is required'),
+	check('preview').isBoolean().withMessage('Boolean is required'),
+	check('spotId').isInt().withMessage('Id is required'),
+	handleValidationErrors,
+];
+
 // Test validation errors
 // {
 // 	"address": null,
@@ -407,23 +414,57 @@ router.get('/:spotId/reviews', async (req, res) => {
 	}
 });
 
+// Add an Image to a Spot based on the Spot's id
+// Create and return a new image for a spot specified by id.
+
+// Require Authentication: true
+
+// Require proper authorization: Spot must belong to the current user
+
+// Request
+
+// Method: POST
+
+// URL: /api/spot/:spotId/images
+
+// Headers:
+
+// Content-Type: application/json
+// Body:
+
+// {
+// 	"url": "image url",
+// 	"preview": true
+// }
+// Successful Response
+
+// Status Code: 200
+
+router.post(
+	'/:spotId/images',
+	[requireAuth, validateSpotImage],
+	async (req, res) => {
+		const { url, spotId, preview } = req.body;
+		const spot = req.params;
+
+		const findSpot = await Spot.findAll({
+			where: { id: spot.spotId },
+			attributes: { exclude: ['updatedAt', 'createdAt'] },
+		});
+
+		if (findSpot[0]) {
+			const createSpotImage = await SpotImage.create({
+				url,
+				spotId: spot.spotId,
+				preview,
+			});
+			res.status(200).json(createSpotImage);
+		} else {
+			res.status(404).json(statusCode404);
+		}
+	}
+);
+
 module.exports = router;
 
 // "XSRF-Token":"XlMibXoV-s-U9NurOoF4ypskHe2BUXzFELC8"
-
-// const currentReviewsOfUser = await Review.findAll({
-// 	where: { userId: user.id },
-// 	include: [
-// 		{ model: User, attributes: ['id', 'firstName', 'lastName'] },
-// 		{
-// 			model: Spot,
-// 			attributes: { exclude: ['description'] },
-// 			include: [
-// 				{
-// 					model: SpotImage,
-// 					attributes: ['url'],
-// 					where: { preview: true },
-// 				},
-// 			],
-// 		},
-// 		{ model: ReviewImage, attributes: ['id', 'url'] },
