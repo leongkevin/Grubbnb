@@ -167,6 +167,47 @@ router.put('/:reviewId', [requireAuth, validateReview], async (req, res) => {
 	}
 });
 
+// Delete a Review
+// Delete an existing review.
 
+// Require Authentication: true
+
+// Require proper authorization: Review must belong to the current user
+
+// Request
+
+// Method: PUT
+// URL: /api/reviews/:reviewId
+// Body: none
+// Successful Response
+
+// Status Code: 200
+
+// Headers:
+
+// Content-Type: application/json
+// Body:
+
+// {
+// 	"message": "Successfully deleted",
+// 	"statusCode": 200
+// }
+// Error response: Couldn't find a Review with the specified id
+
+// Status Code: 404
+
+router.delete('/:reviewId', requireAuth, async (req, res) => {
+	const findReview = await Review.findByPk(req.params.reviewId);
+	// res.json(req.params.reviewId);
+	if (!findReview) {
+		res.status(404).json(statusCode404);
+	} else if (findReview.userId === req.user.id) {
+		await findReview.destroy();
+		res.status(200).json({
+			message: 'Successfully deleted',
+			statusCode: 200,
+		});
+	}
+});
 
 module.exports = router;
