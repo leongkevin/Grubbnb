@@ -168,12 +168,12 @@ router.get('/', async (req, res) => {
 	// res.json(spotsCopy);
 	spotsCopy.forEach((el) => {
 		let sum = 0;
-		let average = 0;
+		let count = 0;
 		el.Reviews.forEach((ratings) => {
 			sum += ratings.stars;
-			average += 1;
+			count += 1;
 		});
-		el.avgRating = sum / average;
+		el.avgRating = sum / count;
 		delete el.Reviews;
 		delete el.User;
 	});
@@ -377,11 +377,40 @@ router.get('/current', requireAuth, async (req, res) => {
 
 // Status Code: 200
 router.get('/:spotId', async (req, res) => {
+	const findSpots = await Spot.findAll({
+		where: { id: req.params.spotId },
+
+		include: [
+			{ model: Review, attributes: ['spotId', 'stars'] },
+			{ model: SpotImage },
+			{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+		],
+	});
+	// return res.json(findSpots);
+	const spotsCopy = findSpots.map((el) => el.toJSON());
+
+	// res.json(spotsCopy);
+	spotsCopy.forEach((el) => {
+		let sum = 0;
+		let count = 0;
+		el.Reviews.forEach((ratings) => {
+			sum += ratings.stars;
+			count += 1;
+		});
+		el.avgStarRating = sum / count;
+		el.numReviews = count;
+		el.Owner = el.User;
+		delete el.Reviews;
+		delete el.User;
+	});
+
 	const spot = await Spot.findByPk(req.params.spotId);
 	if (spot === null) {
 		res.status(404).json(statusCode404);
 	} else {
-		res.status(200).json(spot);
+		res.status(200).json({
+			Spots: spotsCopy,
+		});
 	}
 });
 
@@ -553,7 +582,15 @@ router.post(
 		// res.json(findSpot[0])
 
 		// res.json(findSpot[0].ownerId)
-		// res.json(req.user.id === findSpot[0].ownerId)
+		// return res.json(req.user.id === findSpot[0].ownerId)
+
+		// return res.json(spot.spotId)
+
+		const findSpotByPK = await Spot.findByPk(spot.spotId);
+				// res.json(findSpotByPK)
+		if(!findSpotByPK) {
+			res.status(404).json(statusCode404)
+		}
 
 		if (findSpot[0] && req.user.id === findSpot[0].ownerId) {
 			const createSpotImage = await SpotImage.create({
@@ -571,8 +608,6 @@ router.post(
 				message: 'Forbidden',
 				statusCode: 403,
 			});
-		} else {
-			res.status(404).json(statusCode404);
 		}
 	}
 );

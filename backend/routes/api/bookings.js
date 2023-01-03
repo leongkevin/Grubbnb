@@ -49,29 +49,13 @@ router.get('/current', requireAuth, async (req, res) => {
 		where: { userId: req.user.id },
 		include: [
 			{
-				model: Spot,
-				attributes: {
-					exclude: ['updatedAt', 'createdAt', 'description'],
-				},
-				include: {
-					model: SpotImage,
-				},
+				model: User,
+				attributes: ['id', 'firstName', 'lastName'],
 			},
 		],
 	});
 
 	const bookingsCopy = findBooking.map((el) => el.toJSON());
-
-	bookingsCopy.forEach((el) => {
-		el.Spot.previewImage = [];
-
-		el.Spot.SpotImages.forEach((SpotImages) => {
-			if (SpotImages.preview) {
-				el.Spot.previewImage = SpotImages.url;
-			}
-		});
-		el.Spot.SpotImages = undefined;
-	});
 
 	res.status(200).json({
 		Bookings: bookingsCopy,

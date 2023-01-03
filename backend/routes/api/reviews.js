@@ -136,7 +136,7 @@ router.get('/current', requireAuth, async (req, res) => {
 		// res.status(200).json({ Reviews: currentReviewsOfUser });
 
 		res.status(200).json({
-			Bookings: currentReviewsOfUserCopy,
+			Reviews: currentReviewsOfUserCopy,
 		});
 	}
 });
