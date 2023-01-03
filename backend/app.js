@@ -70,7 +70,55 @@ app.use((err, _req, res, _next) => {
 	res.status(err.status || 500);
 	console.error(err);
 
-	if (err.status === 400) {
+	// if (err.status === 400) {
+	// 	res.json({
+	// 		message: 'Validation Error',
+	// 		statusCode: err.status,
+	// 		errors: err.errors,
+	// 	});
+	// } else {
+	// 	res.json({
+	// 		title: err.title || 'Server Error',
+	// 		message: err.message,
+	// 		statusCode: err.status,
+	// 		errors: err.errors,
+	// 		stack: isProduction ? null : err.stack,
+	// 	});
+	// }
+
+	if (
+		err.errors.toString() ===
+		'Start date conflicts with an existing booking'
+	) {
+		res.json({
+			message:
+				'Sorry, this spot is already booked for the specified dates',
+			statusCode: 403,
+			errors: err.errors,
+		});
+	} else if (
+		err.errors.toString() === 'End date conflicts with an existing booking'
+	) {
+		res.json({
+			message:
+				'Sorry, this spot is already booked for the specified dates',
+			statusCode: 403,
+			errors: err.errors,
+		});
+	} else if (
+		err.errors.toString() ==
+		[
+			'Start date conflicts with an existing booking',
+			'End date conflicts with an existing booking',
+		]
+	) {
+		res.json({
+			message:
+				'Sorry, this spot is already booked for the specified dates',
+			statusCode: 403,
+			errors: err.errors,
+		});
+	} else if (err.status === 400) {
 		res.json({
 			message: 'Validation Error',
 			statusCode: err.status,

@@ -75,13 +75,12 @@ const validateSpotImage = [
 	handleValidationErrors,
 ];
 
-
-const validateBooking = [
-	body('startDate').custom(({ startDate, endDate }) => {
-		body.startDate
-	}),
-	handleValidationErrors,
-];
+// const validateBooking = [
+// 	body('startDate').custom(({ startDate, endDate }) => {
+// 		body.startDate
+// 	}),
+// 	handleValidationErrors,
+// ];
 
 // {
 // 	"message": "Sorry, this spot is already booked for the specified dates",
@@ -510,85 +509,169 @@ router.post(
 
 // Status Code: 200
 
-router.post('/:spotIdForBooking/bookings', [requireAuth, validateBooking], async (req, res) => {
-	let { startDate, endDate } = req.body;
-	const spot = req.params;
+router.post(
+	'/:spotIdForBooking/bookings',
+	requireAuth,
 
-	// return res.json(startDate);
+	// body('startDate').validator(value, { req, location, path }),
+	check('startDate').custom((value, { req }) => {
+		const { Op } = require('sequelize');
 
-	// const validateBooking = (startDate, endDate) => {
+		// const { startDate } = req.body.startDate;
+		// const { endDate } = req.body.endDate;
+		// value === req.body.startDate
+		// if (req.body.startDate === "2025-11-24") {
+		// if (req.body.endDate === "2025-11-25") {
 
-	// }
+		// const findBookingStartDate = Booking.findAll({
+		// 	where: { spotId: req.params.spotIdForBooking },
+		// 	attributes: ['startDate'],
+		// });
 
-	const findSpot = await Spot.findByPk(req.params.spotIdForBooking);
-	if (findSpot) {
-		const findBooking = await Booking.findAll({
-			where: { spotId: findSpot.id },
-			attributes: ['startDate', 'endDate'],
-		});
-		// res.json(findSpot);
-		// res.json(findBooking[1]);
-		if (findBooking[0]) {
-			startDate = findBooking[0].startDate;
-			endDate = findBooking[0].endDate;
-		}
-		// res.json(startDate > endDate)
-		// res.json(`${endDate.getFullYear()}-${endDate.getDate()}-${endDate.getMonth()}`);
+		// const findBookingStartDate = Booking.findAll({
+		// 	// where: {
+		// 	// 	spotId: req.params.spotIdForBooking,
+		// 		// startDate: {
+		// 		// 	[Op.gte]: startDate,
+		// 		// 	[Op.lte]: endDate,
+		// 		// },
+		// 	// },
+		// 	// attributes: ['startDate'],
+		// });
 
-		if (endDate < startDate) {
-			return res.status(400).json({
-				message: 'Validation error',
-				statusCode: 400,
-				errors: {
-					endDate: 'endDate cannot be on or before startDate',
+		// // value === req.body.startDate
+		// if (!findBookingStartDate[0]) {
+		// 	throw new Error(`${findBookingStartDate.length}`)
+		// 	// throw new Error('Start date conflicts with an existing booking');
+		// }
+		// return true;
+
+		return Booking.findAll({
+			where: {
+				spotId: req.params.spotIdForBooking,
+				startDate: {
+					[Op.gte]: new Date(req.body.startDate),
+					[Op.lte]: new Date(req.body.endDate),
 				},
-			});
-		} else if (validateBooking) {
-			const createBooking = await Booking.create({
-				spotId: spot.spotIdForBooking,
-				userId: req.user.id,
-				startDate,
-				endDate,
-			});
+			},
+			attributes: ['startDate'],
+		}).then((booking) => {
+			if (booking.length) {
+				// throw new Error(`${booking.length}`);
+				// throw new Error(`${req.body.startDate}`);
+				throw new Error(
+					'Start date conflicts with an existing booking'
+				);
+			}
+		});
+		return true;
+	}),
 
-			res.status(200).json(createBooking);
+	check('endDate').custom((value, { req }) => {
+		const { Op } = require('sequelize');
 
-			// res.status(200).json({
-			// 	id: createBooking.id,
-			// 	spotId: createBooking.spotId,
-			// 	userId: createBooking.userId,
-			// 	startDate: `${createBooking.startDate.getFullYear()}-${createBooking.startDate.getDate()}-${createBooking.startDate.getMonth()}`,
-			// 	endDate: `${createBooking.endDate.getFullYear()}-${createBooking.endDate.getDate()}-${createBooking.endDate.getMonth()}`,
-			// 	createdAt: createBooking.createdAt,
-			// 	updatedAt: createBooking.updatedAt,
-			// });
+		return Booking.findAll({
+			where: {
+				spotId: req.params.spotIdForBooking,
+				endDate: {
+					[Op.gte]: new Date(req.body.startDate),
+					[Op.lte]: new Date(req.body.endDate),
+				},
+			},
+			attributes: ['endDate'],
+		}).then((booking) => {
+			if (booking.length) {
+				throw new Error('End date conflicts with an existing booking');
+			}
+		});
+		return true;
+	}),
+
+	handleValidationErrors,
+	async (req, res) => {
+		let { startDate, endDate } = req.body;
+		const spot = req.params;
+
+		// return res.json(startDate);
+
+		// const validateBooking = (startDate, endDate) => {
+
+		// }
+
+		const findSpot = await Spot.findByPk(req.params.spotIdForBooking);
+		if (findSpot) {
+			const findBooking = await Booking.findAll({
+				where: { spotId: findSpot.id },
+				attributes: ['startDate', 'endDate'],
+			});
+			// res.json(findSpot);
+			// res.json(findBooking.length);
+			// if (findBooking.length) {
+			// 	startDate = findBooking[0].startDate;
+			// 	endDate = findBooking[0].endDate;
+			// }
+			// res.json(startDate > endDate)
+			// res.json(startDate)
+			// res.json(endDate)
+			// res.json(`${endDate.getFullYear()}-${endDate.getDate()}-${endDate.getMonth()}`);
+
+			// if (endDate < startDate) {
+			// 	return res.status(400).json({
+			// 		message: 'Validation error',
+			// 		statusCode: 400,
+			// 		errors: {
+			// 			endDate: 'endDate cannot be on or before startDate',
+			// 		},
+			// 	});
+			// } else
+
+			if (startDate) {
+				const createBooking = await Booking.create({
+					spotId: spot.spotIdForBooking,
+					userId: req.user.id,
+					startDate,
+					endDate,
+				});
+
+				res.status(200).json(createBooking);
+
+				// res.status(200).json({
+				// 	id: createBooking.id,
+				// 	spotId: createBooking.spotId,
+				// 	userId: createBooking.userId,
+				// 	startDate: `${createBooking.startDate.getFullYear()}-${createBooking.startDate.getDate()}-${createBooking.startDate.getMonth()}`,
+				// 	endDate: `${createBooking.endDate.getFullYear()}-${createBooking.endDate.getDate()}-${createBooking.endDate.getMonth()}`,
+				// 	createdAt: createBooking.createdAt,
+				// 	updatedAt: createBooking.updatedAt,
+				// });
+			} else {
+				return res.status(403).json(1);
+			}
 		} else {
-			return res.status(403).json(validateBooking);
+			res.status(404).json(statusCode404);
 		}
-	} else {
-		res.status(404).json(statusCode404);
+
+		// const findReview = await Review.findAll({
+		// 	where: { spotId: spot.spotId },
+		// 	include: [
+		// 		{ model: User, attributes: ['id', 'firstName', 'lastName'] },
+		// 		{ model: ReviewImage, attributes: ['id', 'url'] },
+		// 	],
+		// });
+
+		// if (findSpot) {
+		// 	const createBooking = await Booking.create({
+		// 		spotId: spot.spotIdForBooking,
+		// 		userId: req.user.id,
+		// 		startDate,
+		// 		endDate,
+		// 	});
+		// 	res.status(200).json(createBooking);
+		// } else {
+		// 	res.status(404).json(statusCode404);
+		// }
 	}
-
-	// const findReview = await Review.findAll({
-	// 	where: { spotId: spot.spotId },
-	// 	include: [
-	// 		{ model: User, attributes: ['id', 'firstName', 'lastName'] },
-	// 		{ model: ReviewImage, attributes: ['id', 'url'] },
-	// 	],
-	// });
-
-	// if (findSpot) {
-	// 	const createBooking = await Booking.create({
-	// 		spotId: spot.spotIdForBooking,
-	// 		userId: req.user.id,
-	// 		startDate,
-	// 		endDate,
-	// 	});
-	// 	res.status(200).json(createBooking);
-	// } else {
-	// 	res.status(404).json(statusCode404);
-	// }
-});
+);
 
 module.exports = router;
 
