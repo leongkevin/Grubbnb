@@ -90,7 +90,7 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 	if (!findBooking) {
 		res.status(404).json(statusCode404);
 
-	} else if(date <= date) {
+	} else if(new Date(startDate) <= date) {
 		// return res.json(date)
 		// return res.json(startDate)
 		// return res.json(new Date(startDate) > date)
