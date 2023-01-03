@@ -713,6 +713,8 @@ router.post(
 		return true;
 	}),
 
+
+
 	handleValidationErrors,
 	async (req, res) => {
 		let { startDate, endDate } = req.body;
@@ -723,6 +725,14 @@ router.post(
 		// const validateBooking = (startDate, endDate) => {
 
 		// }
+
+		if(startDate > endDate) {
+			return res.status(400).json({
+				message: 'Validation error',
+				statusCode: 401,
+				errors: ["endDate cannot be on or before startDate"]
+			});
+		}
 
 		const findSpot = await Spot.findByPk(req.params.spotIdForBooking);
 		if (findSpot) {
