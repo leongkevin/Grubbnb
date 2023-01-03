@@ -15,6 +15,16 @@ const { handleValidationErrors } = require('../../utils/validation');
 
 const router = express.Router();
 
+const validateBooking = [
+	check('endDate').custom((value, { req }) => {
+		if (value < req.body.startDate) {
+			throw new Error(['endDate cannot come before startDate']);
+		}
+		return true;
+	}),
+	handleValidationErrors,
+];
+
 const statusCode404 = {
 	message: "Booking couldn't be found",
 	statusCode: 404,
@@ -40,7 +50,9 @@ router.get('/current', requireAuth, async (req, res) => {
 		include: [
 			{
 				model: Spot,
-				attributes: { exclude: ['updatedAt', 'createdAt', 'description'] },
+				attributes: {
+					exclude: ['updatedAt', 'createdAt', 'description'],
+				},
 				include: {
 					model: SpotImage,
 				},
@@ -122,49 +134,34 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
 // Status Code: 200
 
-// router.put('/:spotId', [requireAuth, validateBooking], async (req, res) => {
-// 	// const id = req.params.spotId;
-// 	const id = req.user.id;
-// 	const {
-// 		ownerId,
-// 		address,
-// 		city,
-// 		state,
-// 		country,
-// 		lat,
-// 		lng,
-// 		name,
-// 		description,
-// 		price,
-// 	} = req.body;
+router.put(
+	'/:bookingId',
 
-// 	// findByPk
-// 	// The findByPk method obtains only a single entry from the table, using the provided primary key.
-// 	const findSpot = await Spot.findByPk(req.params.spotId);
-// 	// console.log(spot.address)
-// 	if (findSpot === null) {
-// 		res.status(404).json(statusCode404);
-// 	}
+	[requireAuth, validateBooking],
 
-// 	if (findSpot.ownerId === req.user.id) {
-// 		// comparing ownerId to logged in user
-// 		findSpot.set({
-// 			address,
-// 			city,
-// 			state,
-// 			country,
-// 			lat,
-// 			lng,
-// 			name,
-// 			description,
-// 			price,
-// 		});
-// 		await findSpot.save();
-// 		res.json(findSpot);
-// 	}
-// 	// res.json({ message: `ownerId is: ${req.user.id}` });
-// 	// res.json({ message: `spotId is: ${req.params.spotId}`});
-// });
+	async (req, res) => {
+		// const id = req.params.spotId;
+		// const id = req.user.id;
+		const { endDate, createdAt } = req.body;
 
+		const findBooking = await Booking.findByPk(req.params.bookingId);
+		// res.json(findBooking)
+		if (findBooking === null) {
+			res.status(404).json(statusCode404);
+		}
+		const findOwner = await Spot.findByPk(findBooking.spotId);
+
+		// res.json(findOwner)
+
+		if (findOwner.ownerId === req.user.id) {
+			findBooking.set({
+				startDate: req.body.startDate,
+				endDate: req.body.endDate,
+			});
+			await findBooking.save();
+			res.json(findBooking);
+		}
+	}
+);
 
 module.exports = router;

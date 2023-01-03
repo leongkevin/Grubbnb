@@ -113,10 +113,31 @@ router.get('/current', requireAuth, async (req, res) => {
 			{ model: ReviewImage, attributes: ['id', 'url'] },
 		],
 	});
+
+	const currentReviewsOfUserCopy = currentReviewsOfUser.map((el) => el.toJSON());
+
+	currentReviewsOfUserCopy.forEach((el) => {
+		el.Spot.previewImage = [];
+
+		el.Spot.SpotImages.forEach((SpotImages) => {
+			if (SpotImages.preview) {
+				el.Spot.previewImage = SpotImages.url;
+			}
+		});
+		el.Spot.SpotImages = undefined;
+	});
+
+
+
+
 	if (!currentReviewsOfUser[0]) {
 		res.status(404).json(statusCode404);
 	} else {
-		res.status(200).json({ Reviews: currentReviewsOfUser });
+		// res.status(200).json({ Reviews: currentReviewsOfUser });
+
+		res.status(200).json({
+			Bookings: currentReviewsOfUserCopy,
+		});
 	}
 });
 
