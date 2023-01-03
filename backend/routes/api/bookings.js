@@ -96,4 +96,75 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 	}
 });
 
+// Edit a Booking
+// Update and return an existing booking.
+
+// Require Authentication: true
+
+// Require proper authorization: Booking must belong to the current user
+
+// Request
+
+// Method: PUT
+
+// URL: /api/spots/:spotId/bookings/:bookingId
+
+// Headers:
+
+// Content-Type: application/json
+// Body:
+
+// {
+// 	"startDate": "2021-11-19",
+// 	"endDate": "2021-11-20"
+// }
+// Successful Response
+
+// Status Code: 200
+
+// router.put('/:spotId', [requireAuth, validateBooking], async (req, res) => {
+// 	// const id = req.params.spotId;
+// 	const id = req.user.id;
+// 	const {
+// 		ownerId,
+// 		address,
+// 		city,
+// 		state,
+// 		country,
+// 		lat,
+// 		lng,
+// 		name,
+// 		description,
+// 		price,
+// 	} = req.body;
+
+// 	// findByPk
+// 	// The findByPk method obtains only a single entry from the table, using the provided primary key.
+// 	const findSpot = await Spot.findByPk(req.params.spotId);
+// 	// console.log(spot.address)
+// 	if (findSpot === null) {
+// 		res.status(404).json(statusCode404);
+// 	}
+
+// 	if (findSpot.ownerId === req.user.id) {
+// 		// comparing ownerId to logged in user
+// 		findSpot.set({
+// 			address,
+// 			city,
+// 			state,
+// 			country,
+// 			lat,
+// 			lng,
+// 			name,
+// 			description,
+// 			price,
+// 		});
+// 		await findSpot.save();
+// 		res.json(findSpot);
+// 	}
+// 	// res.json({ message: `ownerId is: ${req.user.id}` });
+// 	// res.json({ message: `spotId is: ${req.params.spotId}`});
+// });
+
+
 module.exports = router;

@@ -673,6 +673,36 @@ router.post(
 	}
 );
 
+router.get('/:spotIdForBooking/bookings', requireAuth, async (req, res) => {
+	const findBooking = await Booking.findAll({
+		where: { spotId: req.params.spotIdForBooking },
+		// attributes: ['spotId', 'startDate', 'endDate'],
+		include: [{ model: User, attributes: ['id', 'firstName', 'lastName'] }],
+	});
+
+	const findSpot = await Spot.findAll({
+		where: { id: req.params.spotIdForBooking },
+	});
+	// return res.json(findSpot[0]);
+
+	if (findBooking.length && findSpot[0].ownerId === req.user.id) {
+		const findBookingNotOwner = await Booking.findAll({
+			where: { spotId: req.params.spotIdForBooking },
+			attributes: ['spotId', 'startDate', 'endDate'],
+		});
+
+		res.status(200).json({
+			Bookings: findBookingNotOwner,
+		});
+	} else if (findBooking.length) {
+		res.status(200).json({
+			Bookings: findBooking,
+		});
+	} else {
+		res.status(404).json(statusCode404);
+	}
+});
+
 module.exports = router;
 
 // "XSRF-Token":"XlMibXoV-s-U9NurOoF4ypskHe2BUXzFELC8"
