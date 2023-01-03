@@ -101,15 +101,15 @@ router.get('/current', requireAuth, async (req, res) => {
 			{ model: User, attributes: ['id', 'firstName', 'lastName'] },
 			{
 				model: Spot,
-				attributes: { exclude: ['description'] },
+				attributes: ['id', 'ownerId', 'address', 'city', 'state', 'country', 'lat', 'lng'],
 				include: [
 					{
 						model: SpotImage,
-						attributes: ['url'],
-						where: { preview: true },
+						attributes: ['url']
 					},
 				],
 			},
+
 			{ model: ReviewImage, attributes: ['id', 'url'] },
 		],
 	});
