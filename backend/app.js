@@ -130,6 +130,19 @@ app.use((err, _req, res, _next) => {
 			statusCode: 403,
 			errors: ["User with that email already exists"],
 		});
+
+	} else if (
+		err.errors.toString() ==
+		[
+			"username must be unique"
+		]
+	) {
+		res.json({
+			message:
+			"User already exists",
+			statusCode: 403,
+			errors: ["User with that username already exists"],
+		});
 	} else if (err.status === 400) {
 		res.json({
 			message: 'Validation Error',
