@@ -124,8 +124,84 @@ router.get('/', async (req, res) => {
 
 	// Status Code: 200
 
-	const allSpots = await Spot.findAll();
-	res.json(allSpots);
+	let { page, size } = req.query;
+
+	page = parseInt(page);
+	size = parseInt(size);
+
+	// res.status(200).json(page)
+
+	if (Number.isNaN(page)) page = 1;
+	if (Number.isNaN(size)) size = 20;
+
+	let limit;
+	let offset;
+
+	// Query Parameters
+	// page: integer, minimum: 0, maximum: 10, default: 0
+	// size: integer, minimum: 0, maximum: 20, default: 20
+
+	if (size === 0 || page === 0) {
+		size = null;
+		page = null;
+	} else if (page > 10) {
+		page = 10;
+	} else if (size > 20) {
+		size = 20;
+	} else {
+		limit = size;
+		offset = size * (page - 1);
+	}
+
+	const findSpots = await Spot.findAll({
+		include: [
+			{ model: SpotImage },
+			{ model: User },
+			{ model: Review, attributes: ['spotId', 'stars'] },
+		],
+		limit: limit,
+		offset: offset,
+	});
+
+	const spotsCopy = findSpots.map((el) => el.toJSON());
+
+	// res.json(spotsCopy);
+	spotsCopy.forEach((el) => {
+		let sum = 0;
+		let average = 0;
+		el.Reviews.forEach((ratings) => {
+			sum += ratings.stars;
+			average += 1;
+		});
+		el.avgRating = sum / average;
+		delete el.Reviews;
+		delete el.User;
+	});
+
+	spotsCopy.forEach((el) => {
+		el.previewImage = [];
+		el.SpotImages.forEach((spotImage) => {
+			if (spotImage.url) {
+				el.previewImage = spotImage.url;
+			}
+		});
+		delete el.SpotImages;
+	});
+
+	// res.json(req.query.page)
+	if(req.query.page || req.query.size) {
+		res.status(200).json({
+			Spots: spotsCopy,
+			page: page,
+			size: size,
+		});
+	} else {
+		res.status(200).json({
+			Spots: spotsCopy,
+		});
+	}
+	// const findSpots = await Spot.findAll();
+	// res.json(findSpots);
 });
 
 // Create a Spot
