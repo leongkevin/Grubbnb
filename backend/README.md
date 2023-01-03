@@ -75,7 +75,7 @@ Returns the information about the current user that is logged in.
 -   Request
 
     -   Method: GET
-    -   URL: /user
+    -   URL: /sessions
     -   Body: none
 
 -   Successful Response when there is a logged in user
@@ -698,7 +698,7 @@ Returns all the reviews written by the current user.
 -   Request
 
     -   Method: GET
-    -   URL: /api/review/current
+    -   URL: /api/reviews/current
     -   Body: none
 
 -   Successful Response
@@ -901,7 +901,7 @@ Create and return a new image for a review specified by id.
 -   Request
 
     -   Method: POST
-    -   URL: /api/spots/:spotId/reviews
+    -   URL: /api/reviews/images
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -1077,7 +1077,7 @@ Return all the bookings that the current user has made.
 -   Request
 
     -   Method: GET
-    -   URL: /api/user/bookings
+    -   URL: /api/bookings/current
     -   Body: none
 
 -   Successful Response
@@ -1282,7 +1282,7 @@ Update and return an existing booking.
 -   Request
 
     -   Method: PUT
-    -   URL: /api/spots/:spotId/bookings/:bookingId
+    -   URL: /api/bookings/:bookingId
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -1384,7 +1384,7 @@ Delete an existing booking.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/spots/:spotId/bookings/:bookingId
+    -   URL: /api/bookings/:bookingId
     -   Body: none
 
 -   Successful Response
@@ -1440,7 +1440,7 @@ Delete an existing image for a Spot.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/images/:imageId
+    -   URL: /api/spot-image/:spotImageId
     -   Body: none
 
 -   Successful Response
@@ -1480,7 +1480,7 @@ Delete an existing image for a Review.
 -   Request
 
     -   Method: DELETE
-    -   URL: /api/images/:imageId
+    -   URL: /api/review-images/:reviewImageId
     -   Body: none
 
 -   Successful Response
