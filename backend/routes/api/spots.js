@@ -189,7 +189,7 @@ router.get('/', async (req, res) => {
 	});
 
 	// res.json(req.query.page)
-	if(req.query.page || req.query.size) {
+	if (req.query.page || req.query.size) {
 		res.status(200).json({
 			Spots: spotsCopy,
 			page: page,
@@ -541,21 +541,36 @@ router.post(
 	'/:spotId/images',
 	[requireAuth, validateSpotImage],
 	async (req, res) => {
-		const { url, spotId, preview } = req.body;
+		const { url, preview } = req.body;
 		const spot = req.params;
-
+		// res.json(spot);
 		const findSpot = await Spot.findAll({
 			where: { id: spot.spotId },
-			attributes: { exclude: ['updatedAt', 'createdAt'] },
+			// attributes: ['id', 'url', 'preview'],
 		});
+		// res.json(findSpot[0])
 
-		if (findSpot[0]) {
+		// res.json(findSpot[0])
+
+		// res.json(findSpot[0].ownerId)
+		// res.json(req.user.id === findSpot[0].ownerId)
+
+		if (findSpot[0] && req.user.id === findSpot[0].ownerId) {
 			const createSpotImage = await SpotImage.create({
-				url,
 				spotId: spot.spotId,
+				url,
 				preview,
 			});
-			res.status(200).json(createSpotImage);
+			res.status(200).json({
+				id: createSpotImage.id,
+				url: createSpotImage.url,
+				preview: createSpotImage.preview,
+			});
+		} else if (req.user.id !== findSpot[0].ownerId) {
+			res.status(403).json({
+				message: 'Forbidden',
+				statusCode: 403,
+			});
 		} else {
 			res.status(404).json(statusCode404);
 		}

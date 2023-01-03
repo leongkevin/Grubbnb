@@ -119,7 +119,7 @@ information.
 -   Request
 
     -   Method: POST
-    -   URL: /login
+    -   URL: /session
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -189,7 +189,7 @@ user's information.
 -   Request
 
     -   Method: POST
-    -   URL: /sign-up
+    -   URL: /users
     -   Headers:
         -   Content-Type: application/json
     -   Body:
@@ -437,7 +437,7 @@ Creates and returns a new spot.
 -   Request
 
     -   Method: POST
-    -   URL: /api/spots/new
+    -   URL: /api/spots
     -   Headers:
         -   Content-Type: application/json
     -   Body:
