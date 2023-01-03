@@ -79,10 +79,25 @@ router.get('/current', requireAuth, async (req, res) => {
 // // Status Code: 200
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
+
+	const { endDate, startDate, createdAt } = req.body;
+
 	const findBooking = await Booking.findByPk(req.params.bookingId);
-	// res.json(Boolean(findBooking));
+
+	// new Date(startDate)
+	const date = new Date();
+
 	if (!findBooking) {
 		res.status(404).json(statusCode404);
+
+	} else if(date <= date) {
+		// return res.json(date)
+		// return res.json(startDate)
+		// return res.json(new Date(startDate) > date)
+			return res.status(403).json({
+				message: "Bookings that have been started can't be deleted",
+				statusCode: 403,
+			});
 	} else if (findBooking.userId === req.user.id) {
 		await findBooking.destroy();
 		res.status(200).json({
@@ -127,6 +142,16 @@ router.put(
 		// const id = req.params.spotId;
 		// const id = req.user.id;
 		const { endDate, createdAt } = req.body;
+
+		const date = new Date();
+		// return res.json(date)
+		// return res.json(new Date(endDate) > date)
+		if (new Date(endDate) > date || new Date(startDate) > date) {
+			return res.status(403).json({
+				message: "Past bookings can't be modified",
+				statusCode: 403,
+			});
+		}
 
 		const findBooking = await Booking.findByPk(req.params.bookingId);
 		// res.json(findBooking)
