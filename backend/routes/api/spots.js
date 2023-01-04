@@ -352,15 +352,82 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
 // Status Code: 200
 
 router.get('/current', requireAuth, async (req, res) => {
-	const currentSpotsOfUser = await Spot.findAll({
+	const { user } = req;
+	// return res.json(req.user.id );
+	const findSpots = await Spot.findAll({
 		where: { ownerId: req.user.id },
+		include: [
+			{ model: SpotImage },
+			{ model: Review, attributes: ['spotId', 'stars'] },
+		],
 	});
-	// console.log(currentSpot.ownerId);
-	if (!currentSpotsOfUser[0]) {
-		res.status(404).json(statusCode404);
-	} else {
-		res.status(200).json(currentSpotsOfUser);
-	}
+
+	const spotsCopy = findSpots.map((el) => el.toJSON());
+
+	// spotsCopy.forEach((el) => {
+	// 	let sum = 0;
+	// 	let count = 0;
+	// 	el.Reviews.forEach((ratings) => {
+	// 		// return res.json(ratings)
+	// 		sum += ratings.stars;
+	// 		count += 1;
+	// 	});
+	// 	el.previewImage = "";
+	// 	el.SpotImages.forEach((image) => {
+	// 		// return res.json(image.url);
+	// 		el.previewImage.push(image.url)
+	// 	});
+	// 	el.avgStarRating = sum / count;
+	// 	delete el.Reviews;
+	// 	delete el.SpotImages;
+	// });
+
+
+
+	spotsCopy.forEach((el) => {
+		let sum = 0;
+		let count = 0;
+		el.Reviews.forEach((ratings) => {
+			// return res.json(ratings)
+			sum += ratings.stars;
+			count += 1;
+		});
+		el.avgStarRating = sum / count;
+		delete el.Reviews;
+	});
+
+
+	spotsCopy.forEach((el) => {
+		el.previewImage = "";
+		el.SpotImages.forEach((image) => {
+			// return res.json(image.url);
+			// el.previewImage.push(image.url)
+			el.previewImage = image.url
+		});
+
+		delete el.SpotImages;
+	});
+
+	// const spot = await Spot.findByPk(req.params.spotId);
+	// if (spot === null) {
+	// 	res.status(404).json(statusCode404);
+	// } else {
+	// 	res.status(200).json({
+	// 		Spots: spotsCopy,
+	// 	});
+	// }
+
+	res.json(spotsCopy);
+
+	// const currentSpotsOfUser = await Spot.findAll({
+	// 	where: { ownerId: req.user.id },
+	// });
+	// // console.log(currentSpot.ownerId);
+	// if (!currentSpotsOfUser[0]) {
+	// 	res.status(404).json(statusCode404);
+	// } else {
+	// 	res.status(200).json(currentSpotsOfUser);
+	// }
 });
 
 // Get details of a Spot from an id
@@ -587,9 +654,9 @@ router.post(
 		// return res.json(spot.spotId)
 
 		const findSpotByPK = await Spot.findByPk(spot.spotId);
-				// res.json(findSpotByPK)
-		if(!findSpotByPK) {
-			res.status(404).json(statusCode404)
+		// res.json(findSpotByPK)
+		if (!findSpotByPK) {
+			res.status(404).json(statusCode404);
 		}
 
 		if (findSpot[0] && req.user.id === findSpot[0].ownerId) {
@@ -713,8 +780,6 @@ router.post(
 		return true;
 	}),
 
-
-
 	handleValidationErrors,
 	async (req, res) => {
 		let { startDate, endDate } = req.body;
@@ -726,11 +791,11 @@ router.post(
 
 		// }
 
-		if(startDate > endDate) {
+		if (startDate > endDate) {
 			return res.status(400).json({
 				message: 'Validation error',
 				statusCode: 401,
-				errors: ["endDate cannot be on or before startDate"]
+				errors: ['endDate cannot be on or before startDate'],
 			});
 		}
 
