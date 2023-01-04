@@ -417,17 +417,17 @@ router.get('/current', requireAuth, async (req, res) => {
 	// 	});
 	// }
 
-	res.json(spotsCopy);
 
-	// const currentSpotsOfUser = await Spot.findAll({
-	// 	where: { ownerId: req.user.id },
-	// });
-	// // console.log(currentSpot.ownerId);
-	// if (!currentSpotsOfUser[0]) {
-	// 	res.status(404).json(statusCode404);
-	// } else {
-	// 	res.status(200).json(currentSpotsOfUser);
-	// }
+
+	const currentSpotsOfUser = await Spot.findAll({
+		where: { ownerId: req.user.id },
+	});
+	// return res.json(currentSpotsOfUser[0] === undefined);
+	if (currentSpotsOfUser[0] === undefined) {
+		res.status(404).json(statusCode404);
+	} else {
+		res.status(200).json(spotsCopy);
+	}
 });
 
 // Get details of a Spot from an id
