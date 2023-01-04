@@ -49,16 +49,37 @@ router.get('/current', requireAuth, async (req, res) => {
 		where: { userId: req.user.id },
 		include: [
 			{
-				model: User,
-				attributes: ['id', 'firstName', 'lastName'],
+				model: Spot,
+				attributes: [
+					'id',
+					'ownerId',
+					'address',
+					'city',
+					'state',
+					'country',
+					'lat',
+					'lng',
+					'name',
+					'price',
+					'price',
+				],
+				include: { model: SpotImage, attributes: ['url'] },
 			},
 		],
 	});
 
-	const bookingsCopy = findBooking.map((el) => el.toJSON());
+	// res.json(findBooking);
+	let copy = findBooking.map((el) => el.toJSON());
+
+	// res.json(copy);
+	copy.forEach((el) => {
+		// res.json(el.Spot.SpotImages)
+		el.Spot.previewImage = el.Spot.SpotImages;
+		delete el.Spot.SpotImages;
+	});
 
 	res.status(200).json({
-		Bookings: bookingsCopy,
+		Bookings: copy,
 	});
 });
 
@@ -79,7 +100,6 @@ router.get('/current', requireAuth, async (req, res) => {
 // // Status Code: 200
 
 router.delete('/:bookingId', requireAuth, async (req, res) => {
-
 	const { endDate, startDate, createdAt } = req.body;
 
 	const findBooking = await Booking.findByPk(req.params.bookingId);
@@ -89,15 +109,14 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 
 	if (!findBooking) {
 		res.status(404).json(statusCode404);
-
-	} else if(new Date(startDate) <= date) {
+	} else if (new Date(startDate) <= date) {
 		// return res.json(date)
 		// return res.json(startDate)
 		// return res.json(new Date(startDate) > date)
-			return res.status(403).json({
-				message: "Bookings that have been started can't be deleted",
-				statusCode: 403,
-			});
+		return res.status(403).json({
+			message: "Bookings that have been started can't be deleted",
+			statusCode: 403,
+		});
 	} else if (findBooking.userId === req.user.id) {
 		await findBooking.destroy();
 		res.status(200).json({

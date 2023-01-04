@@ -392,7 +392,7 @@ router.get('/current', requireAuth, async (req, res) => {
 			sum += ratings.stars;
 			count += 1;
 		});
-		el.avgStarRating = sum / count;
+		el.avgRating = sum / count;
 		delete el.Reviews;
 	});
 
