@@ -6,40 +6,47 @@ import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
+import DemoUserButton from '../DemoUserButton';
 
-function Navigation({ isLoaded }){
-  const sessionUser = useSelector(state => state.session.user);
+function Navigation({ isLoaded }) {
+	const sessionUser = useSelector((state) => state.session.user);
 
-  let sessionLinks;
-  if (sessionUser) {
-    sessionLinks = (
-      <li>
-        <ProfileButton user={sessionUser} />
-      </li>
-    );
-  } else {
-    sessionLinks = (
-      <li>
-        <OpenModalButton
-          buttonText="Log In"
-          modalComponent={<LoginFormModal />}
-        />
-        <OpenModalButton
-          buttonText="Sign Up"
-          modalComponent={<SignupFormModal />}
-        />
-      </li>
-    );
-  }
+	let sessionLinks;
+	if (sessionUser) {
+		sessionLinks = (
+			<li>
+				<ProfileButton user={sessionUser} />
+			</li>
+		);
+	} else {
+		sessionLinks = (
+			<li>
+				<OpenModalButton
+					buttonText="Log In"
+					modalComponent={<LoginFormModal />}
+				/>
+				<OpenModalButton
+					buttonText="Sign Up"
+					modalComponent={<SignupFormModal />}
+				/>
+				<OpenModalButton
+					buttonText="Demo"
+					modalComponent={<DemoUserButton />}
+				/>
+			</li>
+		);
+	}
 
-  return (
-    <ul>
-      <li>
-        <NavLink exact to="/">Home</NavLink>
-      </li>
-      {isLoaded && sessionLinks}
-    </ul>
-  );
+	return (
+		<ul>
+			<li>
+				<NavLink exact to="/">
+					Home
+				</NavLink>
+			</li>
+			{isLoaded && sessionLinks}
+		</ul>
+	);
 }
 
 export default Navigation;
