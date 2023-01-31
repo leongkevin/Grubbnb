@@ -1,3 +1,4 @@
+/* TODO Add site wide styles */
 html,
 body,
 form,
@@ -47,6 +48,7 @@ input {
     border-radius: 8px;
     height: 50px;
     width: 25%;
+
 }
 
 
