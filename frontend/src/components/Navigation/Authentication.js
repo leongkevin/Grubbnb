@@ -1,8 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import OpenModalButton from '../OpenModalButton';
+import SignupFormModal from '../SignupFormModal';
+import LoginFormModal from '../LoginFormModal';
+import DemoUserButton from '../DemoUserButton';
 
-function ProfileButton({ user }) {
+function Authentication({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 	const ulRef = useRef();
@@ -41,14 +45,21 @@ function ProfileButton({ user }) {
 			</button>
 			<ul className={ulClassName} ref={ulRef}>
 				<div className="user-action-dropdown">
-					<div className="profile">
-						{user.firstName} {user.lastName}
-					</div>
-					<div className="profile">{user.email}</div>
 					<div>
-						<button onClick={logout} className="profile">
-							Log out
-						</button>
+						<OpenModalButton
+							buttonText="Sign up"
+							modalComponent={<SignupFormModal />}
+						/>
+					</div>
+					<div>
+						<OpenModalButton
+							buttonText="Log in"
+							modalComponent={<LoginFormModal />}
+						/>
+					</div>
+					<hr></hr>
+					<div>
+						<DemoUserButton />
 					</div>
 				</div>
 			</ul>
@@ -56,4 +67,4 @@ function ProfileButton({ user }) {
 	);
 }
 
-export default ProfileButton;
+export default Authentication;

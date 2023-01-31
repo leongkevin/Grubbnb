@@ -34,6 +34,7 @@ function App() {
         <Switch>
         </Switch>
       )}
+      "Hello World"
     </>
   );
 }

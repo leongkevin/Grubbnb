@@ -7,6 +7,7 @@ import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import DemoUserButton from '../DemoUserButton';
+import Authentication from './Authentication';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -14,26 +15,33 @@ function Navigation({ isLoaded }) {
 	let sessionLinks;
 	if (sessionUser) {
 		sessionLinks = (
-			<li>
+			<div>
 				<ProfileButton user={sessionUser} />
-			</li>
+			</div>
 		);
 	} else {
 		sessionLinks = (
-			<li>
-				<OpenModalButton
-					buttonText="Log In"
-					modalComponent={<LoginFormModal />}
-				/>
-				<OpenModalButton
-					buttonText="Sign Up"
-					modalComponent={<SignupFormModal />}
-				/>
-				<OpenModalButton
-					buttonText="Demo"
-					modalComponent={<DemoUserButton />}
-				/>
-			</li>
+			// <li className='user-action-dropdown'>
+			// 	<div>
+			// 		<OpenModalButton
+			// 			buttonText="Sign up"
+			// 			modalComponent={<SignupFormModal />}
+			// 		/>
+			// 	</div>
+			// 	<div>
+			// 		<OpenModalButton
+			// 			buttonText="Log in"
+			// 			modalComponent={<LoginFormModal />}
+			// 		/>
+			// 	</div>
+			// 	<hr></hr>
+			// 	<div>
+			// 		<DemoUserButton/>
+			// 	</div>
+			// </li>
+			<div>
+				<Authentication user={sessionUser}/>
+			</div>
 		);
 	}
 
@@ -41,7 +49,7 @@ function Navigation({ isLoaded }) {
 		<ul>
 			<li>
 				<NavLink exact to="/">
-					Home
+					<div><h1>Bnb-hub</h1></div>
 				</NavLink>
 			</li>
 			{isLoaded && sessionLinks}
