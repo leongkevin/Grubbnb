@@ -40,18 +40,18 @@ function Navigation({ isLoaded }) {
 			// 	</div>
 			// </li>
 			<div>
-				<Authentication user={sessionUser}/>
+				<Authentication user={sessionUser} />
 			</div>
 		);
 	}
 
 	return (
 		<ul>
-			<li>
-				<NavLink exact to="/">
-					<div><h1>Bnb-hub</h1></div>
-				</NavLink>
-			</li>
+			<NavLink exact to="/">
+				<div>
+					<h1>Bnb-hub: an airbnb clone</h1>
+				</div>
+			</NavLink>
 			{isLoaded && sessionLinks}
 		</ul>
 	);
