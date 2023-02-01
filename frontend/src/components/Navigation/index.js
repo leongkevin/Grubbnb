@@ -8,6 +8,7 @@ import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import DemoUserButton from '../DemoUserButton';
 import Authentication from './Authentication';
+import HostingButton from './HostingButton';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -16,7 +17,12 @@ function Navigation({ isLoaded }) {
 	if (sessionUser) {
 		sessionLinks = (
 			<div>
-				<ProfileButton user={sessionUser} />
+				<div>
+					<HostingButton />
+				</div>
+				<div>
+					<ProfileButton user={sessionUser} />
+				</div>
 			</div>
 		);
 	} else {
@@ -40,7 +46,12 @@ function Navigation({ isLoaded }) {
 			// 	</div>
 			// </li>
 			<div>
-				<Authentication user={sessionUser} />
+				<div>
+					<HostingButton />
+				</div>
+				<div>
+					<Authentication user={sessionUser} />
+				</div>
 			</div>
 		);
 	}
@@ -49,7 +60,10 @@ function Navigation({ isLoaded }) {
 		<ul>
 			<NavLink exact to="/">
 				<div>
-					<h1>Bnb-hub: an airbnb clone</h1>
+					<img
+						src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
+						className="bnbhub-logo"
+					/>
 				</div>
 			</NavLink>
 			{isLoaded && sessionLinks}
