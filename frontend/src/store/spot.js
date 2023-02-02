@@ -1,134 +1,68 @@
-let initialSpots = [
-	{
-		ownerId: 1,
-		address: '1065 6th Ave',
-		city: 'New York',
-		state: 'New York',
-		country: 'United States',
-		lat: 40.75376,
-		lng: -73.98496,
-		name: '5 Bryant Park',
-		description: 'Contemporary',
-		price: 100,
-	},
-	{
-		ownerId: 2,
-		address: '555 E 90th St',
-		city: 'New York',
-		state: 'New York',
-		country: 'United States',
-		lat: 40.77771,
-		lng: -73.94331,
-		name: 'Asphalt Green UES',
-		description: 'Antiquated',
-		price: 100,
-	},
-	{
-		ownerId: 2,
-		address: '212 North End Ave',
-		city: 'New York',
-		state: 'New York',
-		country: 'United States',
-		lat: 40.71597,
-		lng: -74.01475,
-		name: 'Asphalt Green BPC',
-		description: 'Contemporary',
-		price: 100,
-	},
-]
+import { csrfFetch } from './csrf';
 
-const initialSpot = { spot: null }
+// fetch('/api/session', {
+// 	method: 'POST',
+// 	headers: {
+// 	  "Content-Type": "application/json",
+// 	  "XSRF-TOKEN": `r5usprm0-3GoSaJUfIQRuOJkNZBndrDb0Q38`
+// 	},
+// 	body: JSON.stringify({ credential: 'Demo-lition', password: 'password' })
+//   }).then(res => res.json()).then(data => console.log(data));
 
-initialSpots.forEach((spot) => {
-    initialSpot[spot.ownerId] = spot;
-});
+const initialState = {};
 
 const CREATE_SPOT = 'spots/create_spot';
-const createSpots = (spot) => {
+export const createSpots = (spot) => {
 	return {
-    type: CREATE_SPOT,
-    payload: spot,
+		type: CREATE_SPOT,
+		spot,
 	};
-}
+};
 
-export const spotReducer = (state = initialSpot, action) =>{
-
-	let newState;
-
-    switch(action.type){
-        case CREATE_SPOT:{
-			newState = Object.assign({}, state);
-			newState.spot = action.payload;
+export const spotReducer = (state = initialState, action) => {
+	switch (action.type) {
+		case CREATE_SPOT: {
+			const newState = { ...state };
+			newState[action.spot.id] = action.spot;
 			return newState;
-        }
-        default:
-            return state
-    }
-}
+		}
+		default:
+			return state;
+	}
+};
+
+export const publishSpot = (spot) => async (dispatch) => {
+	const {
+		address,
+		city,
+		state,
+		country,
+		lat,
+		lng,
+		name,
+		description,
+		price,
+	} = spot;
+	const response = await csrfFetch('/api/spots', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify({
+			address,
+			city,
+			state,
+			country,
+			lat,
+			lng,
+			name,
+			description,
+			price,
+		}),
+	});
+	const data = await response.json();
+	dispatch(createSpots(spot));
+	return data;
+};
 
 export default spotReducer;
-
-// let initialSpots = [
-// 	{
-// 		ownerId: 1,
-// 		address: '1065 6th Ave',
-// 		city: 'New York',
-// 		state: 'New York',
-// 		country: 'United States',
-// 		lat: 40.75376,
-// 		lng: -73.98496,
-// 		name: '5 Bryant Park',
-// 		description: 'Contemporary',
-// 		price: 100,
-// 	},
-// 	{
-// 		ownerId: 2,
-// 		address: '555 E 90th St',
-// 		city: 'New York',
-// 		state: 'New York',
-// 		country: 'United States',
-// 		lat: 40.77771,
-// 		lng: -73.94331,
-// 		name: 'Asphalt Green UES',
-// 		description: 'Antiquated',
-// 		price: 100,
-// 	},
-// 	{
-// 		ownerId: 2,
-// 		address: '212 North End Ave',
-// 		city: 'New York',
-// 		state: 'New York',
-// 		country: 'United States',
-// 		lat: 40.71597,
-// 		lng: -74.01475,
-// 		name: 'Asphalt Green BPC',
-// 		description: 'Contemporary',
-// 		price: 100,
-// 	},
-// ]
-
-// const initialSpot = {}
-
-// initialSpots.forEach((spot) => {
-//     initialSpot[spot.id] = spot;
-// });
-
-// const CREATE_SPOT = 'reports/create_spot';
-// export const createSpots = (spot) => ({
-//     type: CREATE_SPOT,
-//     spot
-// })
-
-// export const spotReducer = (state = initialSpot, action) =>{
-//     switch(action.type){
-//         case CREATE_SPOT:{
-//             const newState = {...state}
-//             newState[action.spot.id] = action.spot
-//             return newState
-//         }
-//         default:
-//             return state
-//     }
-// }
-
-// export default spotReducer;

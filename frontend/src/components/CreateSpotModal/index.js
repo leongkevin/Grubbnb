@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
-import * as sessionActions from '../../store/session';
-import './CreateSpots.css';
+import * as spotActions from '../../store/spot';
+import './CreateSpot.css';
 
-function CreateSpotsModal() {
+function CreateSpotModal() {
 	const dispatch = useDispatch();
 
 	const [address, setAddress] = useState('');
@@ -21,15 +21,20 @@ function CreateSpotsModal() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (password === confirmPassword) {
+		// if (1) {
 			setErrors([]);
-			return dispatch(
-				sessionActions.signup({
-					email,
-					username,
-					firstName,
-					lastName,
-					password,
+			// return dispatch(
+			dispatch(
+				spotActions.publishSpot({
+					address,
+					city,
+					state,
+					country,
+					lat,
+					lng,
+					name,
+					description,
+					price,
 				})
 			)
 				.then(closeModal)
@@ -37,15 +42,15 @@ function CreateSpotsModal() {
 					const data = await res.json();
 					if (data && data.errors) setErrors(data.errors);
 				});
-		}
-		return setErrors([
-			'Confirm Password field must be the same as the Password field',
-		]);
+		// }
+		// return setErrors([
+		// 	'Confirm Password field must be the same as the Password field',
+		// ]);
 	};
 
 	return (
 		<>
-			<h1 className="welcome-header">Welcome to Bnb-hub</h1>
+			<h1 className="welcome-header">Welcome to Grubbnb</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (
@@ -71,14 +76,6 @@ function CreateSpotsModal() {
 				<input
 					type="text"
 					value={state}
-					onChange={(e) => setAddress(e.target.value)}
-					required
-					placeholder="Address"
-					className="profile-input"
-				/>
-				<input
-					type="text"
-					value={address}
 					onChange={(e) => setState(e.target.value)}
 					required
 					placeholder="State"
@@ -94,7 +91,7 @@ function CreateSpotsModal() {
 				/>
 				<input
 					type="text"
-					value={address}
+					value={lat}
 					onChange={(e) => setLat(e.target.value)}
 					required
 					placeholder="Lat"
@@ -134,11 +131,11 @@ function CreateSpotsModal() {
 				/>
 
 				<button type="submit" className="profile-input submit">
-					Sign Up
+					Publish
 				</button>
 			</form>
 		</>
 	);
 }
 
-export default CreateSpotsModal;
+export default CreateSpotModal;
