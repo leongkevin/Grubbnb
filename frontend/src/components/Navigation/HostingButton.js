@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
+import OpenModalButton from '../OpenModalButton';
+import SignupFormModal from '../SignupFormModal';
 
 function HostingButton({ user }) {
 	const dispatch = useDispatch();
@@ -36,6 +38,12 @@ function HostingButton({ user }) {
 	return (
 		<>
 			<div>
+				<button className="hosting-button">Grubbnb your home</button>
+				{/* <OpenModalButton
+					buttonText="Grubbnb Setup"
+
+					modalComponent={<SignupFormModal />}
+				/> */}
 				<button className="hosting-button">Switch to hosting</button>
 			</div>
 		</>
