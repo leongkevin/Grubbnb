@@ -11,8 +11,8 @@ import { csrfFetch } from './csrf';
 
 const initialState = {};
 
-const CREATE_SPOT = 'spots/create_spot';
-export const createSpots = (spot) => {
+const CREATE_SPOT = 'spots/CREATE_SPOT';
+export const createSpot = (spot) => {
 	return {
 		type: CREATE_SPOT,
 		spot,
@@ -23,7 +23,12 @@ export const spotReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case CREATE_SPOT: {
 			const newState = { ...state };
-			newState[action.spot.id] = action.spot;
+
+			// newState[action.spot.id] = action.spot;
+			// console.log(newState[action.spot])
+			newState[action.spot] = action.spot;
+
+			// console.log(newState[action.spot])
 			return newState;
 		}
 		default:
@@ -61,7 +66,7 @@ export const publishSpot = (spot) => async (dispatch) => {
 		}),
 	});
 	const data = await response.json();
-	dispatch(createSpots(spot));
+	dispatch(createSpot(data.spot));
 	return data;
 };
 
