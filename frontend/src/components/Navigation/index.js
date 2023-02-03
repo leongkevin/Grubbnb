@@ -17,13 +17,27 @@ function Navigation({ isLoaded }) {
 	let sessionLinks;
 	if (sessionUser) {
 		sessionLinks = (
-			<div>
-				<div>
-					<SwitchToHostingButton />
+			<div id="wrapper">
+				<div id="wrapper-a"></div>
+				<div id="wrapper-b">
+					{' '}
+					<img
+						src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
+						className="bnbhub-logo"
+					/>
 				</div>
-				<div>
-					<ProfileButton user={sessionUser} />
+				<div id="wrapper-c"></div>
+				<div id="wrapper-d">
+					<div id="right-wrapper-2">
+						<ProfileButton user={sessionUser} />
+					</div>
+
+					<div id="right-wrapper-1">
+						<SwitchToHostingButton />
+					</div>
 				</div>
+
+				<div id="wrapper-e"></div>
 			</div>
 		);
 	} else {
@@ -58,17 +72,19 @@ function Navigation({ isLoaded }) {
 	}
 
 	return (
-		<ul>
-			<NavLink exact to="/">
-				<div>
-					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
-						className="bnbhub-logo"
-					/>
-				</div>
-			</NavLink>
+		// <ul>
+		// 	<NavLink exact to="/">
+		// 		<div>
+
+		// 		</div>
+		// 	</NavLink>
+		// 	{isLoaded && sessionLinks}
+		// </ul>
+
+		<div>
+			<NavLink exact to="/"></NavLink>
 			{isLoaded && sessionLinks}
-		</ul>
+		</div>
 	);
 }
 

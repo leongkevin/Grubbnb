@@ -34,7 +34,7 @@ function App() {
         <Switch>
         </Switch>
       )}
-      "Hello World"
+      {/* "Hello World" */}
     </>
   );
 }

@@ -44,4 +44,47 @@
 
 .hosting-button:hover {
     background-color: rgb(239, 239, 239);
-  }
+}
+
+
+#wrapper {
+    display: flex;
+    flex-wrap: wrap;
+
+    background-color: orange;
+}
+
+#wrapper-a {
+    flex: 5%;
+    background-color: red;
+}
+
+#wrapper-b {
+    flex: 30%;
+    background-color: pink;
+}
+
+#wrapper-c {
+    flex: 30%;
+    background-color:black;
+}
+
+#wrapper-d {
+    flex: 30%;
+    background-color:black;
+}
+
+#wrapper-e {
+    flex: 5%;
+    background-color:black;
+}
+
+
+#right-wrapper-1 {
+    float: right;
+}
+
+
+#right-wrapper-2 {
+    float: right;
+}
