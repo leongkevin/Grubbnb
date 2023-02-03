@@ -5,6 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import DemoUserButton from '../DemoUserButton';
+import GrubbnbYourHomeButton from './GrubbnbYourHomeButton';
 
 function Authentication({ user }) {
 	const dispatch = useDispatch();
@@ -58,6 +59,9 @@ function Authentication({ user }) {
 						/>
 					</div>
 					<hr></hr>
+					<div>
+						<GrubbnbYourHomeButton />
+					</div>
 					<div>
 						<DemoUserButton />
 					</div>

@@ -39,13 +39,10 @@ function GrubbnbYourHomeButton({ user }) {
 	return (
 		<>
 			<div>
-				{/* <button className="hosting-button">Grubbnb your home</button> */}
-				<OpenModalButton
+				<OpenModalButton className="hosting-button"
 					buttonText="Grubbnb your home"
-
 					modalComponent={<CreateSpotModal />}
 				/>
-				<button className="hosting-button">Switch to hosting</button>
 			</div>
 		</>
 	);

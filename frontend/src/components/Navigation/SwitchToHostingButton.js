@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
-import CreateSpotModal from '../CreateSpotModal';
-import OpenModalButton from '../OpenModalButton';
-import SignupFormModal from '../SignupFormModal';
 
 function SwitchToHostingButton({ user }) {
 	const dispatch = useDispatch();
@@ -39,12 +36,6 @@ function SwitchToHostingButton({ user }) {
 	return (
 		<>
 			<div>
-				{/* <button className="hosting-button">Grubbnb your home</button> */}
-				<OpenModalButton
-					buttonText="Grubbnb your home"
-
-					modalComponent={<CreateSpotModal />}
-				/>
 				<button className="hosting-button">Switch to hosting</button>
 			</div>
 		</>

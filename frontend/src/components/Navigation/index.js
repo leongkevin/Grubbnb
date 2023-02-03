@@ -9,6 +9,7 @@ import './Navigation.css';
 import DemoUserButton from '../DemoUserButton';
 import Authentication from './Authentication';
 import SwitchToHostingButton from './SwitchToHostingButton';
+import GrubbnbYourHomeButton from './GrubbnbYourHomeButton';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -47,7 +48,7 @@ function Navigation({ isLoaded }) {
 			// </li>
 			<div>
 				<div>
-					<SwitchToHostingButton />
+					<GrubbnbYourHomeButton />
 				</div>
 				<div>
 					<Authentication user={sessionUser} />
