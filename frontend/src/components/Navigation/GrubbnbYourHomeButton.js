@@ -5,7 +5,7 @@ import CreateSpotModal from '../CreateSpotModal';
 import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 
-function HostingButton({ user }) {
+function GrubbnbYourHomeButton({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
 	const ulRef = useRef();
@@ -41,7 +41,7 @@ function HostingButton({ user }) {
 			<div>
 				{/* <button className="hosting-button">Grubbnb your home</button> */}
 				<OpenModalButton
-					buttonText="Grubbnb Setup"
+					buttonText="Grubbnb your home"
 
 					modalComponent={<CreateSpotModal />}
 				/>
@@ -51,4 +51,4 @@ function HostingButton({ user }) {
 	);
 }
 
-export default HostingButton;
+export default GrubbnbYourHomeButton;

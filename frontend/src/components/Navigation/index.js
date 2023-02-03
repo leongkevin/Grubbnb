@@ -8,7 +8,7 @@ import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
 import DemoUserButton from '../DemoUserButton';
 import Authentication from './Authentication';
-import HostingButton from './HostingButton';
+import SwitchToHostingButton from './SwitchToHostingButton';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
@@ -18,7 +18,7 @@ function Navigation({ isLoaded }) {
 		sessionLinks = (
 			<div>
 				<div>
-					<HostingButton />
+					<SwitchToHostingButton />
 				</div>
 				<div>
 					<ProfileButton user={sessionUser} />
@@ -47,7 +47,7 @@ function Navigation({ isLoaded }) {
 			// </li>
 			<div>
 				<div>
-					<HostingButton />
+					<SwitchToHostingButton />
 				</div>
 				<div>
 					<Authentication user={sessionUser} />
