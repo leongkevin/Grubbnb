@@ -18,16 +18,15 @@ function Navigation({ isLoaded }) {
 	if (sessionUser) {
 		sessionLinks = (
 			<div id="wrapper">
-				<div id="wrapper-a"></div>
-				<div id="wrapper-b">
-					{' '}
+				<div id="wrapper-left">
+
 					<img
 						src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
 						className="bnbhub-logo"
 					/>
 				</div>
-				<div id="wrapper-c"></div>
-				<div id="wrapper-d">
+				<div id="wrapper-center"></div>
+				<div id="wrapper-right">
 					<div id="right-wrapper-2">
 						<ProfileButton user={sessionUser} />
 					</div>
@@ -36,8 +35,6 @@ function Navigation({ isLoaded }) {
 						<SwitchToHostingButton />
 					</div>
 				</div>
-
-				<div id="wrapper-e"></div>
 			</div>
 		);
 	} else {

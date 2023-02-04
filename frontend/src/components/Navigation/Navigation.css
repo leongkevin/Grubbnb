@@ -34,9 +34,6 @@
     /* 400 is same as normal, 700 is the same as bold */
     font-weight: 500;
 
-
-
-
     align-items: center;
     background-color: white;
 
@@ -49,41 +46,32 @@
 
 #wrapper {
     display: flex;
-    flex-wrap: wrap;
+    /* flex-wrap: wrap; */
 
     background-color: orange;
 }
 
-#wrapper-a {
-    flex: 5%;
-    background-color: red;
-}
-
-#wrapper-b {
-    flex: 30%;
+#wrapper-left {
+    flex: 10%;
+    padding: 0 80px;
     background-color: pink;
 }
 
-#wrapper-c {
-    flex: 30%;
-    background-color:black;
-}
-
-#wrapper-d {
-    flex: 30%;
-    background-color:black;
-}
-
-#wrapper-e {
+#wrapper-center {
     flex: 5%;
-    background-color:black;
+    background-color: black;
 }
 
+#wrapper-right {
+    flex: 10%;
+
+    padding: 0 80px;
+    background-color: blue;
+}
 
 #right-wrapper-1 {
     float: right;
 }
-
 
 #right-wrapper-2 {
     float: right;
