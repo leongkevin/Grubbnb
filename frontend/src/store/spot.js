@@ -21,10 +21,8 @@ export const createSpot = (spot) => {
 
 const REMOVE_SPOT = 'reports/remove_report';
 export const removeSpot = (id) => ({
-	return {
-		type: REMOVE_SPOT,
-		id,
-	}
+	type: REMOVE_SPOT,
+	id,
 });
 
 export const spotReducer = (state = initialState, action) => {
@@ -41,7 +39,7 @@ export const spotReducer = (state = initialState, action) => {
 		}
 		case REMOVE_SPOT: {
 			const newState = { ...state };
-            delete newState[action.id]
+			delete newState[action.id];
 			return newState;
 		}
 		default:
@@ -83,40 +81,11 @@ export const publishSpot = (spot) => async (dispatch) => {
 	return data;
 };
 
+export const deleteSpot = (id) => async (dispatch) => {
 
-export const deleteSpot = (spot) => async (dispatch) => {
-	const {
-		address,
-		city,
-		state,
-		country,
-		lat,
-		lng,
-		name,
-		description,
-		price,
-	} = spot;
-	const response = await csrfFetch('/api/spots', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json',
-		},
-		body: JSON.stringify({
-			address,
-			city,
-			state,
-			country,
-			lat,
-			lng,
-			name,
-			description,
-			price,
-		}),
-	});
-	const data = await response.json();
-	dispatch(createSpot(data.spot));
-	return data;
+
+	dispatch(createSpot());
+	return;
 };
-
 
 export default spotReducer;

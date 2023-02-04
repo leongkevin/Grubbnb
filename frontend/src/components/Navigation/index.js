@@ -2,28 +2,25 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import OpenModalButton from '../OpenModalButton';
-import LoginFormModal from '../LoginFormModal';
-import SignupFormModal from '../SignupFormModal';
 import './Navigation.css';
-import DemoUserButton from '../DemoUserButton';
 import Authentication from './Authentication';
 import SwitchToHostingButton from './SwitchToHostingButton';
 import GrubbnbYourHomeButton from './GrubbnbYourHomeButton';
+import logo from './imgs/logo.svg';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);
 
 	let sessionLinks;
+
+
 	if (sessionUser) {
 		sessionLinks = (
 			<div id="wrapper">
 				<div id="wrapper-left">
-
-					<img
-						src="https://upload.wikimedia.org/wikipedia/commons/6/69/Airbnb_Logo_B%C3%A9lo.svg"
-						className="bnbhub-logo"
-					/>
+					<NavLink to="/">
+						<img src={logo} className="grubbnb-logo" />
+					</NavLink>
 				</div>
 				<div id="wrapper-center"></div>
 				<div id="wrapper-right">
@@ -32,7 +29,9 @@ function Navigation({ isLoaded }) {
 					</div>
 
 					<div id="right-wrapper-1">
-						<SwitchToHostingButton />
+						<NavLink to="/">
+							<SwitchToHostingButton />
+						</NavLink>
 					</div>
 				</div>
 			</div>
@@ -69,15 +68,6 @@ function Navigation({ isLoaded }) {
 	}
 
 	return (
-		// <ul>
-		// 	<NavLink exact to="/">
-		// 		<div>
-
-		// 		</div>
-		// 	</NavLink>
-		// 	{isLoaded && sessionLinks}
-		// </ul>
-
 		<div>
 			<NavLink exact to="/"></NavLink>
 			{isLoaded && sessionLinks}

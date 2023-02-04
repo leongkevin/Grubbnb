@@ -14,29 +14,33 @@
 
 // export default App;
 
-import React, { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { Switch } from "react-router-dom";
-import * as sessionActions from "./store/session";
-import Navigation from "./components/Navigation";
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Route, Switch } from 'react-router-dom';
+import * as sessionActions from './store/session';
+import Navigation from './components/Navigation';
+import Home from './components/Home';
+import LoginFormModal from './components/LoginFormModal';
 
 function App() {
-  const dispatch = useDispatch();
-  const [isLoaded, setIsLoaded] = useState(false);
-  useEffect(() => {
-    dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
-  }, [dispatch]);
+	const dispatch = useDispatch();
+	const [isLoaded, setIsLoaded] = useState(false);
+	useEffect(() => {
+		dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true));
+	}, [dispatch]);
 
-  return (
-    <>
-      <Navigation isLoaded={isLoaded} />
-      {isLoaded && (
-        <Switch>
-        </Switch>
-      )}
-      {/* "Hello World" */}
-    </>
-  );
+	return (
+		<>
+			<Navigation isLoaded={isLoaded} />
+			{isLoaded && (
+				<Switch>
+					<Route exact path="/">
+						<Home />
+					</Route>
+				</Switch>
+			)}
+		</>
+	);
 }
 
 export default App;
