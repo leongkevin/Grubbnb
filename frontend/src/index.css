@@ -74,10 +74,19 @@ hr {
     margin-right: auto;
 }
 
-.all-spots {
+.grid-container {
     padding-left: 80px;
+    padding-right: 80px;
     margin-top: 16px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px;
 }
+
+.spot-component {
+    color: white;
+}
+
 
 .spot-thumbnail {
     width: 270.83px;
