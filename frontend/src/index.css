@@ -73,3 +73,36 @@ hr {
     margin-left: auto;
     margin-right: auto;
 }
+
+.all-spots {
+    padding-left: 80px;
+    margin-top: 16px;
+}
+
+.spot-thumbnail {
+    width: 270.83px;
+    height: 257.28px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.spot-address {
+    color: black;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 2px;
+    font-family: inherit;
+}
+
+.spot-description {
+    color: silver;
+    font-family: inherit;
+}
+
+.spot-price {
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-family: inherit;
+}
