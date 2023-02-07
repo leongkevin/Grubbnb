@@ -47,32 +47,36 @@
 #wrapper {
     display: flex;
     /* flex-wrap: wrap; */
-
-    background-color: orange;
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    /* Set the navbar to fixed position */
+    top: 0;
+    /* Position the navbar at the top of the page */
+    width: 100%;
+    /* Full width */
+    border-top: 1px solid silver;
+    border-bottom: 1px solid silver;
 }
 
 #wrapper-left {
     flex: 10%;
     padding: 0 80px;
-    background-color: pink;
 }
 
 #wrapper-center {
     flex: 5%;
-    background-color: black;
 }
 
 #wrapper-right {
     flex: 10%;
 
     padding: 0 80px;
-    background-color: blue;
-}
-
-#right-wrapper-1 {
-    float: right;
-}
-
-#right-wrapper-2 {
-    float: right;
+    /* background-color: pink; */
+    /* margin: 0px 0px 18px 0px; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: flex-end;
+    align-items: center;
 }

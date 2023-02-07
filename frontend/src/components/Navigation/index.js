@@ -13,7 +13,6 @@ function Navigation({ isLoaded }) {
 
 	let sessionLinks;
 
-
 	if (sessionUser) {
 		sessionLinks = (
 			<div id="wrapper">
@@ -24,14 +23,13 @@ function Navigation({ isLoaded }) {
 				</div>
 				<div id="wrapper-center"></div>
 				<div id="wrapper-right">
-					<div id="right-wrapper-2">
-						<ProfileButton user={sessionUser} />
-					</div>
-
 					<div id="right-wrapper-1">
 						<NavLink to="/">
-							<SwitchToHostingButton />
+							<SwitchToHostingButton className="host-button" />
 						</NavLink>
+					</div>
+					<div id="right-wrapper-2">
+						<ProfileButton user={sessionUser} />
 					</div>
 				</div>
 			</div>
