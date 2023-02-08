@@ -39,19 +39,19 @@ function ProfileButton({ user }) {
 				<i class="fa-solid fa-bars fa-lg" />
 				<i class="fa-regular fa-user fa-lg" />
 			</button>
-			<ul className={ulClassName} ref={ulRef}>
+			<div className={ulClassName} ref={ulRef}>
 				<div className="user-action-dropdown">
-					<div className="profile">
+					<div>
 						{user.firstName} {user.lastName}
 					</div>
-					<div className="profile">{user.email}</div>
+					<div>{user.email}</div>
 					<div>
-						<button onClick={logout} className="profile">
+						<button onClick={logout}>
 							Log out
 						</button>
 					</div>
 				</div>
-			</ul>
+			</div>
 		</>
 	);
 }

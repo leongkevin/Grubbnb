@@ -24,8 +24,8 @@ function Navigation({ isLoaded }) {
 				<div id="wrapper-center"></div>
 				<div id="wrapper-right">
 					<div id="right-wrapper-1">
-						<NavLink to="/">
-							<SwitchToHostingButton className="host-button" />
+						<NavLink to="/hosting">
+							<SwitchToHostingButton />
 						</NavLink>
 					</div>
 					<div id="right-wrapper-2">
@@ -36,30 +36,22 @@ function Navigation({ isLoaded }) {
 		);
 	} else {
 		sessionLinks = (
-			// <li className='user-action-dropdown'>
-			// 	<div>
-			// 		<OpenModalButton
-			// 			buttonText="Sign up"
-			// 			modalComponent={<SignupFormModal />}
-			// 		/>
-			// 	</div>
-			// 	<div>
-			// 		<OpenModalButton
-			// 			buttonText="Log in"
-			// 			modalComponent={<LoginFormModal />}
-			// 		/>
-			// 	</div>
-			// 	<hr></hr>
-			// 	<div>
-			// 		<DemoUserButton/>
-			// 	</div>
-			// </li>
-			<div>
-				<div>
-					<GrubbnbYourHomeButton />
+			<div id="wrapper">
+				<div id="wrapper-left">
+					<NavLink to="/">
+						<img src={logo} className="grubbnb-logo" />
+					</NavLink>
 				</div>
-				<div>
-					<Authentication user={sessionUser} />
+				<div id="wrapper-center"></div>
+				<div id="wrapper-right">
+					<div id="right-wrapper-1">
+						<NavLink to="/hosting">
+							<GrubbnbYourHomeButton />
+						</NavLink>
+					</div>
+					<div id="right-wrapper-2">
+						<Authentication />
+					</div>
 				</div>
 			</div>
 		);

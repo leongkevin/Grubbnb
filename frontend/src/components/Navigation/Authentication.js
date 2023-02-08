@@ -40,7 +40,7 @@ function Authentication({ user }) {
 
 	return (
 		<>
-			<button onClick={openMenu} className="profile-icon">
+			<button onClick={logout} className="profile-icon">
 				<i class="fa-solid fa-bars fa-lg" />
 				<i class="fa-regular fa-user fa-lg" />
 			</button>

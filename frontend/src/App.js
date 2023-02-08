@@ -21,6 +21,7 @@ import * as sessionActions from './store/session';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import LoginFormModal from './components/LoginFormModal';
+import Hosting from './components/Hosting';
 
 function App() {
 	const dispatch = useDispatch();
@@ -36,6 +37,9 @@ function App() {
 				<Switch>
 					<Route exact path="/">
 						<Home />
+					</Route>
+					<Route path="/hosting">
+						<Hosting />
 					</Route>
 				</Switch>
 			)}

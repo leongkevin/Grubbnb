@@ -9,7 +9,7 @@ function SwitchToHostingButton({ user }) {
 	return (
 		<>
 			<div>
-				<NavLink exact to="/host">
+				<NavLink exact to="/hosting">
 					<button
 						className="hosting-button"
 						// onClick={}
