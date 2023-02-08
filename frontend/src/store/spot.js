@@ -81,11 +81,14 @@ export const publishSpot = (spot) => async (dispatch) => {
 	return data;
 };
 
-export const deleteSpot = (id) => async (dispatch) => {
-
-
-	dispatch(createSpot());
-	return;
+export const deleteSpot = (spotId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/spots/${spotId}`, {
+		method: "DELETE",
+	  });
+	  if (response.ok) {
+		const spot = await response.json();
+		dispatch(removeSpot(spotId));
+		return spot;
 };
 
 export default spotReducer;
