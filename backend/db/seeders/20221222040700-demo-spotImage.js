@@ -14,22 +14,22 @@ module.exports = {
 			[
 				{
 					spotId: 1,
-					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					url: 'https://a0.muscache.com/im/pictures/287ee9eb-73f1-437f-b861-8decac866c2e.jpg?im_w=720',
 					preview: true,
 				},
 				{
 					spotId: 1,
-					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					url: 'https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720',
 					preview: true,
 				},
 				{
 					spotId: 2,
-					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					url: 'https://a0.muscache.com/im/pictures/97c31459-2471-4261-806e-b274b077a3be.jpg?im_w=720',
 					preview: false,
 				},
 				{
 					spotId: 2,
-					url: 'https://www.applesfromny.com/wp-content/uploads/2020/06/SnapdragonNEW.png',
+					url: 'https://a0.muscache.com/im/pictures/287ee9eb-73f1-437f-b861-8decac866c2e.jpg?im_w=720',
 					preview: true,
 				},
 			],

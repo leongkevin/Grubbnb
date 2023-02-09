@@ -38,7 +38,7 @@ function App() {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route path="/hosting">
+					<Route path="/current">
 						<Hosting />
 					</Route>
 				</Switch>

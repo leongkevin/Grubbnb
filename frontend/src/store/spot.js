@@ -15,15 +15,24 @@ const CREATE_SPOT = 'spots/CREATE_SPOT';
 export const createSpot = (spot) => {
 	return {
 		type: CREATE_SPOT,
-		spot,
+		payload: spot,
 	};
 };
 
-const REMOVE_SPOT = 'reports/remove_report';
+const REMOVE_SPOT = 'spots/REMOVE_SPOT';
 export const removeSpot = (id) => ({
 	type: REMOVE_SPOT,
-	id,
+	payload: id,
 });
+
+const GET_SPOTS = 'spots/GET_SPOTS';
+export const getAllSpots = (spots) => {
+	// console.log(spots);
+	return {
+		type: GET_SPOTS,
+		payload: spots,
+	};
+};
 
 export const spotReducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -40,6 +49,16 @@ export const spotReducer = (state = initialState, action) => {
 		case REMOVE_SPOT: {
 			const newState = { ...state };
 			delete newState[action.id];
+			return newState;
+		}
+		case GET_SPOTS: {
+			const newState = { ...state };
+			newState[action.payload] = action.payload;
+			// console.log(`This is ${action.payload}`);
+			action.payload.Spots.forEach((spot) => {
+				newState[spot.id] = spot;
+			});
+			delete newState[action.payload];
 			return newState;
 		}
 		default:
@@ -81,21 +100,22 @@ export const publishSpot = (spot) => async (dispatch) => {
 	return data;
 };
 
-// export const deleteSpot = (id) => async (dispatch) => {
-
-// 	dispatch(createSpot());
-// 	return;
-// };
-
 export const deleteSpot = (spotId) => async (dispatch) => {
 	const response = await csrfFetch(`/api/spots/${spotId}`, {
 		method: 'DELETE',
 	});
-	if (response.ok) {
-		const spot = await response.json();
-		dispatch(removeSpot(spotId));
-		return spot;
-	}
+	const spot = await response.json();
+	dispatch(removeSpot(spotId));
+	return spot;
+};
+
+export const getSpots = () => async (dispatch) => {
+	const response = await csrfFetch('/api/spots');
+	const spots = await response.json();
+	// console.log(spots);
+	dispatch(getAllSpots(spots));
+	// console.log(spots);
+	return response;
 };
 
 export default spotReducer;

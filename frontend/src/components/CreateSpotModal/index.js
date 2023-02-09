@@ -21,9 +21,7 @@ function CreateSpotModal() {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// if (1) {
 			setErrors([]);
-			// return dispatch(
 			dispatch(
 				spotActions.publishSpot({
 					address,
@@ -42,10 +40,6 @@ function CreateSpotModal() {
 					const data = await res.json();
 					if (data && data.errors) setErrors(data.errors);
 				});
-		// }
-		// return setErrors([
-		// 	'Confirm Password field must be the same as the Password field',
-		// ]);
 	};
 
 	return (
