@@ -18,6 +18,7 @@ import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import * as sessionActions from './store/session';
+import SpotPage from "./components/SpotPage";
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import LoginFormModal from './components/LoginFormModal';
@@ -38,8 +39,11 @@ function App() {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route path="/current">
+					<Route exact path="/current">
 						<Hosting />
+					</Route>
+					<Route path="/spots/:spotId">
+						<SpotPage />
 					</Route>
 				</Switch>
 			)}
