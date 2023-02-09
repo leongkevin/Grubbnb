@@ -17,22 +17,26 @@ function Home() {
 			{spotComponent.map((spot) => {
 				return (
 					<div key={spot.id} className="spot-component">
-						<div className="spot-image">
-							<img
-								src={spot.previewImage}
-								className="spot-thumbnail"
-							></img>
-						</div>
-						<div className="spot-details">
-							<div className="spot-address">
-								{spot.city}, {spot.country}
+						<NavLink className="spot-route" to={`/spots/${spot.id}`}>
+							<div className="spot-image">
+								<img
+									src={spot.previewImage}
+									className="spot-thumbnail"
+								></img>
 							</div>
-							<div className="spot-rating">{spot.avgRating}</div>
-							<div className="spot-description">
-								{spot.description}
+							<div className="spot-details">
+								<div className="spot-address">
+									{spot.city}, {spot.country}
+								</div>
+								<div className="spot-rating">
+									☆ {spot.avgRating}
+								</div>
+								<div className="spot-description">
+									{spot.description}
+								</div>
+								<div className="spot-price">${spot.price}</div>
 							</div>
-							<div className="spot-price">${spot.price}</div>
-						</div>
+						</NavLink>
 					</div>
 				);
 			})}
@@ -337,7 +341,7 @@ function Home() {
 			<div className="spot-component">
 				<div className="spot-image">
 					<img
-						src="https://a0.muscache.com/im/pictures/miso/Hosting-53417893/original/63787420-6a55-4d88-b459-c65d0251ba31.jpeg?im_w=720"
+						src="https://a0.muscache.com/im/pictures/miso/Hosting-673753152039498122/original/b279ff57-201a-4990-9d47-69314a7213d2.jpeg?im_w=720"
 						className="spot-thumbnail"
 					></img>
 				</div>

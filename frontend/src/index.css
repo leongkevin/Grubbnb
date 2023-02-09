@@ -8,7 +8,8 @@ form {
     height: 100%;
 }
 
-.spot-rating {
+.spot-rating,
+.spot-route {
     color: black;
 }
 
