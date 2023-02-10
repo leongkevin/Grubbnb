@@ -27,17 +27,17 @@ function SpotPage() {
 
 			 {spotComponent.map((spot) => {
 
-console.log(`this is line 26: ${spotId} === ${spot.id}`)
-if(spotId == spot.id) {
+// console.log(`this is line 26: ${spotId} === ${spot.id}`)
+if(parseInt(spotId) === spot.id) {
 
 				return (
 
-					<div key={spot.id} className="spot-component">
-						<NavLink className="spot-route" to={`/spots/${spot.id}`}>
+					<div key={spot.id} className="spot-container">
+						{/* <NavLink className="spot-route" to={`/spots/${spot.id}`}> */}
 							<div className="spot-image">
 								<img
 									src={spot.previewImage}
-									className="spot-thumbnail"
+									className="spot-image-main"
 								></img>
 							</div>
 							<div className="spot-details">
@@ -52,7 +52,7 @@ if(spotId == spot.id) {
 								</div>
 								<div className="spot-price">${spot.price}</div>
 							</div>
-						</NavLink>
+						{/* </NavLink> */}
 					</div>
 				);
                 }

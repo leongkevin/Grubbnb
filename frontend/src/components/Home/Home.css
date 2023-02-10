@@ -1,13 +1,12 @@
 
-.spot-container {
+.spot-component {
     color: white;
-    background-color: red;
 }
 
 
-.spot-image-main {
-    width: 560px;
-    height: 368px;
+.spot-thumbnail {
+    width: 270.83px;
+    height: 257.28px;
     overflow: hidden;
     object-fit: cover;
     border-radius: 15px;

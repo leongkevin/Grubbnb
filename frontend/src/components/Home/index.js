@@ -2,6 +2,7 @@ import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
+import './Home.css'
 
 function Home() {
 	const dispatch = useDispatch();

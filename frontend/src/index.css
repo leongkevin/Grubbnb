@@ -88,36 +88,3 @@ hr {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
 }
-
-.spot-component {
-    color: white;
-}
-
-
-.spot-thumbnail {
-    width: 270.83px;
-    height: 257.28px;
-    overflow: hidden;
-    object-fit: cover;
-    border-radius: 15px;
-}
-
-.spot-address {
-    color: black;
-    font-weight: bold;
-    padding-top: 5px;
-    padding-bottom: 2px;
-    font-family: inherit;
-}
-
-.spot-description {
-    color: silver;
-    font-family: inherit;
-}
-
-.spot-price {
-    color: black;
-    padding-top: 10px;
-    padding-bottom: 5px;
-    font-family: inherit;
-}
