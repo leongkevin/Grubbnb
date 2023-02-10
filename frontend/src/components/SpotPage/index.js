@@ -26,29 +26,51 @@ function SpotPage() {
 								<div className="spot-title">
 									<h1>{spot.name}</h1>
 
-								<div className="spot-subtitle">
-									<div className="spot-subtitle-rating">
-										☆ {spot.avgRating}
+									<div className="spot-subtitle">
+										<div className="spot-subtitle-rating">
+											☆ {spot.avgRating}
+										</div>
+										<div className="spot-address">
+											{spot.city}, {spot.state},{' '}
+											{spot.country}
+										</div>
+										<div></div>
+										<div className="spot-actions">
+											<button>Edit</button>
+											<button>Delete</button>
+											<button>Leave a review</button>
+											<button>Edit a review</button>
+										</div>
 									</div>
-									<div className="spot-address">
-										{spot.city}, {spot.state}, {spot.country}
-									</div>
-                                    <div></div>
-                                    <div className="spot-actions">
-                                        <button>Edit</button>
-                                        <button>Delete</button>
-                                        <button>Leave a review</button>
-                                        <button>Edit a review</button>
-                                    </div>
 								</div>
-                                </div>
 								<div className="spot-image">
-									<img
-										src={spot.previewImage}
-										className="spot-image-main"
-									></img>
+									<div className="spot-image-divider">
+										<div className="spot-image-divider-left">
+											<img
+												src={spot.previewImage}
+												className="spot-image-main"
+											></img>
+										</div>
+										<div className="spot-image-divider-right">
+											<img
+												src={spot.previewImage}
+												className="spot-image-secondary"
+											></img>
+											<img
+												src={spot.previewImage}
+												className="spot-image-third"
+											></img>
+											<img
+												src={spot.previewImage}
+												className="spot-image-fourth"
+											></img>
+											<img
+												src={spot.previewImage}
+												className="spot-image-fifth"
+											></img>
+										</div>
+									</div>
 								</div>
-
 								<div className="spot-description">
 									{spot.description}
 								</div>

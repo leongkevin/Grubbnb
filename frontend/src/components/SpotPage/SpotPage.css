@@ -7,13 +7,18 @@
     margin-right: 312.50px;
     margin-left: 312.50px;
     color: black;
-    background-color: pink;
+}
+
+h1.spot-title {
+    font-size: 26px;
+    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
 }
 
 .spot-subtitle {
     display: grid;
     grid-template-columns: 1fr 2fr 2fr 2fr;
     grid-gap: 20px;
+    margin-top: 4px;
 }
 
 .spot-subtitle-rating {
@@ -25,14 +30,6 @@
     text-align: right;
 }
 
-.spot-image-main {
-    width: 560px;
-    height: 368px;
-    overflow: hidden;
-    object-fit: cover;
-    border-radius: 15px 0px 0px 15px;
-}
-
 .spot-address {
     color: black;
     font-weight: bold;
@@ -42,8 +39,47 @@
 }
 
 .spot-actions {
-    
+    background-color: white;
 }
+
+.spot-image-divider {
+    justify-content: space-between;
+}
+
+.spot-image-divider-left,
+.spot-image-main {
+    padding-top: 24px;
+    width: 560px;
+    height: 368px;
+    overflow: hidden;
+    object-fit: cover;
+    border-radius: 15px 0px 0px 15px;
+    justify-content: start;
+    align-content: start;
+}
+
+.spot-image-divider-right {
+    display: grid;
+    grid-template-columns: 272px 272px;
+    grid-template-rows: 225.59px 225.59px;
+    grid-gap: 14px;
+    /* grid-template-areas:
+    "middle right"
+    "middle right"; */
+    justify-content: end;
+    align-content: end;
+  }
+
+  .spot-image-secondary,
+  .spot-image-third,
+  .spot-image-fourth,
+  .spot-image-fifth {
+      width: 272px;
+      height: 225.59px;
+      padding: 4px;
+  }
+
+
 
 .spot-description {
     color: silver;
