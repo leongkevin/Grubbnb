@@ -33,7 +33,6 @@ module.exports = {
 					username: 'FakeUser2',
 					hashedPassword: bcrypt.hashSync('password3'),
 				},
-				,
 				{
 					firstName: 'Kevin',
 					lastName: 'Leong',
@@ -41,7 +40,6 @@ module.exports = {
 					username: 'kleong',
 					hashedPassword: bcrypt.hashSync('password3'),
 				},
-				,
 				{
 					firstName: 'Ahmed',
 					lastName: 'Dev',
@@ -49,14 +47,13 @@ module.exports = {
 					username: 'ahmeddev',
 					hashedPassword: bcrypt.hashSync('password3'),
 				},
-				,
 				{
 					firstName: 'Ken',
 					lastName: 'Ming',
 					email: 'kminguser2@user.io',
 					username: 'FakeUser210',
 					hashedPassword: bcrypt.hashSync('password3'),
-				}, // not owners after this (7)
+				},
 				{
 					firstName: 'Jane',
 					lastName: 'Smith',
