@@ -29,11 +29,13 @@ function Home() {
 								></img>
 							</div>
 							<div className="spot-details">
-								<div className="spot-address">
-									{spot.city}, {spot.country}
-								</div>
-								<div className="spot-rating">
-									☆ {spot.avgRating}
+								<div className="spot-details-title">
+									<div className="spot-city-country">
+										{spot.city}, {spot.country}
+									</div>
+									<div className="spot-rating">
+										☆{spot.avgRating}
+									</div>
 								</div>
 								<div className="spot-description">
 									{spot.description}
