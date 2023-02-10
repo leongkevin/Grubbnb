@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 import './SpotPage.css';
+import DeleteSpotButton from '../DeleteSpotButton';
 
 function SpotPage() {
 	const dispatch = useDispatch();
@@ -10,30 +11,20 @@ function SpotPage() {
 
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 
-	// useEffect(() => {
-	// 	dispatch(spotActions.getTargetSpot(spotId));
-	// }, [dispatch, spotId]);
-
-    useEffect(() => {
+	useEffect(() => {
 		dispatch(spotActions.getSpots());
 	}, []);
 
 	return (
 		<div className="spot-page-container">
-			<h1>Grubbnb</h1>
-			<h1>Grubbnb</h1>
-			<h1>Grubbnb</h1>
-			<h1>Grubbnb</h1>
+			{spotComponent.map((spot) => {
+				// console.log(`this is line 26: ${spotId} === ${spot.id}`)
+				if (parseInt(spotId) === spot.id) {
+					return (
+						<div key={spot.id} className="spot-page-result">
+							<h1>Grubbnb</h1>
 
-			 {spotComponent.map((spot) => {
-
-// console.log(`this is line 26: ${spotId} === ${spot.id}`)
-if(parseInt(spotId) === spot.id) {
-
-				return (
-
-					<div key={spot.id} className="spot-container">
-						{/* <NavLink className="spot-route" to={`/spots/${spot.id}`}> */}
+							{/* <NavLink className="spot-route" to={`/spots/${spot.id}`}> */}
 							<div className="spot-image">
 								<img
 									src={spot.previewImage}
@@ -52,16 +43,15 @@ if(parseInt(spotId) === spot.id) {
 								</div>
 								<div className="spot-price">${spot.price}</div>
 							</div>
-						{/* </NavLink> */}
-					</div>
-				);
-                }
+							{/* </NavLink> */}
+						</div>
+					);
+				}
 			})}
 
-
 			<div className="spot-page-container">
+				<DeleteSpotButton />
 				<h3>This is {spotId}</h3>
-
 			</div>
 		</div>
 	);

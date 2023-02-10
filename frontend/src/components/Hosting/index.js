@@ -11,11 +11,6 @@ function Hosting() {
 	return (
 		<>
 			<h1 className="welcome-header">Welcome to Grubbnb</h1>
-			<h1 className="welcome-header">Welcome to Grubbnb</h1>
-			<h1 className="welcome-header">Welcome to Grubbnb</h1>
-			<h1 className="welcome-header">Welcome to Grubbnb</h1>
-			<h1 className="welcome-header">Welcome to Grubbnb</h1>
-			<h1 className="welcome-header">Welcome to Grubbnb</h1>
 			<OpenModalButton
 				buttonText="Create a new listing"
 				modalComponent={<CreateSpotModal />}
