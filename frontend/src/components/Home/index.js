@@ -40,7 +40,7 @@ function Home() {
 								<div className="spot-description">
 									{spot.description}
 								</div>
-								<div className="spot-price">${spot.price}</div>
+								<div className="spot-price">${spot.price} night</div>
 							</div>
 						</NavLink>
 					</div>

@@ -22,37 +22,43 @@ function SpotPage() {
 				if (parseInt(spotId) === spot.id) {
 					return (
 						<div key={spot.id} className="spot-page-result">
-							<h1>Grubbnb</h1>
+							<div className="spot-header">
+								<div className="spot-title">
+									<h1>{spot.name}</h1>
 
-							{/* <NavLink className="spot-route" to={`/spots/${spot.id}`}> */}
-							<div className="spot-image">
-								<img
-									src={spot.previewImage}
-									className="spot-image-main"
-								></img>
-							</div>
-							<div className="spot-details">
-								<div className="spot-address">
-									{spot.city}, {spot.country}
+								<div className="spot-subtitle">
+									<div className="spot-subtitle-rating">
+										☆ {spot.avgRating}
+									</div>
+									<div className="spot-address">
+										{spot.city}, {spot.state}, {spot.country}
+									</div>
+                                    <div></div>
+                                    <div className="spot-actions">
+                                        <button>Edit</button>
+                                        <button>Delete</button>
+                                        <button>Leave a review</button>
+                                        <button>Edit a review</button>
+                                    </div>
 								</div>
-								<div className="spot-rating">
-									☆ {spot.avgRating}
+                                </div>
+								<div className="spot-image">
+									<img
+										src={spot.previewImage}
+										className="spot-image-main"
+									></img>
 								</div>
+
 								<div className="spot-description">
 									{spot.description}
 								</div>
 								<div className="spot-price">${spot.price}</div>
 							</div>
-							{/* </NavLink> */}
 						</div>
 					);
 				}
 			})}
-
-			<div className="spot-page-container">
-				<DeleteSpotButton />
-				<h3>This is {spotId}</h3>
-			</div>
+			<DeleteSpotButton />
 		</div>
 	);
 }

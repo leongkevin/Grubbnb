@@ -3,24 +3,34 @@
     padding-right: 80px;
     padding-top: 80px;
     margin-top: 16px;
+    width: 1120px;
+    margin-right: 312.50px;
+    margin-left: 312.50px;
+    color: black;
+    background-color: pink;
+}
+
+.spot-subtitle {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 2fr 2fr 2fr;
     grid-gap: 20px;
 }
 
-
-.spot-page-container {
-    color: white;
-    background-color: red;
+.spot-subtitle-rating {
+    font-size: 15px;
+    font-family: monospace;
+    width: 6ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
 }
-
 
 .spot-image-main {
     width: 560px;
     height: 368px;
     overflow: hidden;
     object-fit: cover;
-    border-radius: 15px;
+    border-radius: 15px 0px 0px 15px;
 }
 
 .spot-address {
@@ -29,6 +39,10 @@
     padding-top: 5px;
     padding-bottom: 2px;
     font-family: inherit;
+}
+
+.spot-actions {
+    
 }
 
 .spot-description {
