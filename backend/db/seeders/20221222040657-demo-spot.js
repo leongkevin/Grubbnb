@@ -213,7 +213,7 @@ module.exports = {
 					country: 'United States',
 					lat: 32.75058,
 					lng: -97.32974,
-					name: 'Globe Life Park',
+					name: 'Red Deal Park',
 					description: 'Rangers-themed',
 					price: 100,
 				},

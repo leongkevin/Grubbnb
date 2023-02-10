@@ -89,7 +89,7 @@ module.exports = {
 				},
 				{
 					spotId: 15,
-					url: 'https://a0.muscache.com/im/pictures/prohost-api/Hosting-53452954/original/fd0e58e4-9c95-4b2d-ab92-ac3ab9c66461.jpeg?im_w=720',
+					url: 'https://a0.muscache.com/im/pictures/miso/Hosting-51732896/original/81185e49-06ed-441f-8a9c-82f700e6079b.jpeg?im_w=720',
 					preview: true,
 				},
 				{
@@ -122,6 +122,11 @@ module.exports = {
 					url: 'https://a0.muscache.com/im/pictures/miso/Hosting-632559338333153225/original/886d2e58-fcf9-4956-9a1a-730ae4147aa7.jpeg?im_w=720',
 					preview: true,
 				},
+				{
+					spotId: 21,
+					url: 'https://a0.muscache.com/im/pictures/miso/Hosting-53661656/original/890bb7a9-782d-49fd-a154-649f357d4bbb.jpeg?im_w=720',
+					preview: false,
+				},
 			],
 			{}
 		);
@@ -136,7 +141,7 @@ module.exports = {
 				spotId: {
 					[Op.in]: [
 						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
-						17, 18, 19, 20, 21, 22, 23,
+						17, 18, 19, 20, 21, 22, 23, 24,
 					],
 				},
 			},
