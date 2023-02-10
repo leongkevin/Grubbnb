@@ -122,8 +122,6 @@ module.exports = {
 					url: 'https://a0.muscache.com/im/pictures/miso/Hosting-632559338333153225/original/886d2e58-fcf9-4956-9a1a-730ae4147aa7.jpeg?im_w=720',
 					preview: true,
 				},
-
-
 			],
 			{}
 		);
@@ -136,7 +134,10 @@ module.exports = {
 			options,
 			{
 				spotId: {
-					[Op.in]: [1, 2],
+					[Op.in]: [
+						1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16,
+						17, 18, 19, 20, 21, 22, 23,
+					],
 				},
 			},
 			{}
