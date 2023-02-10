@@ -1,26 +1,39 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
+import './SpotPage.css';
 
 function SpotPage() {
 	const dispatch = useDispatch();
+	const { spotId } = useParams();
 
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 
-	useEffect(() => {
+	// useEffect(() => {
+	// 	dispatch(spotActions.getTargetSpot(spotId));
+	// }, [dispatch, spotId]);
+
+    useEffect(() => {
 		dispatch(spotActions.getSpots());
 	}, []);
 
 	return (
 		<div className="spot-page-container">
-			{/* {spotComponent.map((spot) => {
+			<h1>Grubbnb</h1>
+			<h1>Grubbnb</h1>
+			<h1>Grubbnb</h1>
+			<h1>Grubbnb</h1>
+
+			 {spotComponent.map((spot) => {
+
+console.log(`this is line 26: ${spotId} === ${spot.id}`)
+if(spotId == spot.id) {
+
 				return (
+
 					<div key={spot.id} className="spot-component">
-						<NavLink
-							className="spot-route"
-							to={`/spots/${spot.id}`}
-						>
+						<NavLink className="spot-route" to={`/spots/${spot.id}`}>
 							<div className="spot-image">
 								<img
 									src={spot.previewImage}
@@ -42,46 +55,15 @@ function SpotPage() {
 						</NavLink>
 					</div>
 				);
-			})} */}
+                }
+			})}
+
 
 			<div className="spot-page-container">
+				<h3>This is {spotId}</h3>
 
-
-
-
-
-
-            <div className="spot-image">
-								<img
-									src={spot.previewImage}
-									className="spot-thumbnail"
-								></img>
-							</div>
-							<div className="spot-details">
-								<div className="spot-address">
-									{spot.city}, {spot.country}
-								</div>
-								<div className="spot-rating">
-									☆ {spot.avgRating}
-								</div>
-								<div className="spot-description">
-									{spot.description}
-								</div>
-								<div className="spot-price">${spot.price}</div>
-							</div>
-				<div className="spot-image">
-					<img
-						src="https://a0.muscache.com/im/pictures/287ee9eb-73f1-437f-b861-8decac866c2e.jpg?im_w=720"
-						className="spot-thumbnail"
-					></img>
-				</div>
-				<div className="spot-address">New York, NY</div>
-				<div className="spot-description">The best house ever</div>
-				<div className="spot-price">$199</div>
 			</div>
 		</div>
-
-
 	);
 }
 
