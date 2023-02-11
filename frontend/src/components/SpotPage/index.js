@@ -6,6 +6,7 @@ import './SpotPage.css';
 import OpenModalButton from '../OpenModalButton';
 import DeleteSpotButton from '../DeleteSpotButton';
 import EditSpotModal from '../EditSpotModal';
+import ReviewsPage from '../ReviewsGetAll';
 
 function SpotPage() {
 	const dispatch = useDispatch();
@@ -94,6 +95,7 @@ function SpotPage() {
 											{' '}
 											<EditSpotModal />
 										</div>
+                                        <ReviewsPage />
 									</div>
 								</div>
 							</div>

@@ -50,16 +50,6 @@ export const editSpot = (spotId) => ({
 
 export const spotReducer = (state = initialState, action) => {
 	switch (action.type) {
-		// case CREATE_SPOT: {
-		// 	const newState = { ...state };
-		// 	// newState[action.spot.id] = action.spot;
-		// 	// console.log(newState[action.spot])
-		// 	newState[action.payload] = action.spot;
-		// 	// console.log(newState[action.spot])
-		// 	return newState;
-		// }
-
-
 		case CREATE_SPOT: {
 			const newState = { ...state };
 			// newState[action.spot.id] = action.spot;
