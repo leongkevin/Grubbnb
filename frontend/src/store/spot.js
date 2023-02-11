@@ -11,11 +11,19 @@ import { csrfFetch } from './csrf';
 
 const initialState = {};
 
+// const CREATE_SPOT = 'spots/CREATE_SPOT';
+// export const createSpot = (spot) => {
+// 	return {
+// 		type: CREATE_SPOT,
+// 		payload: spot,
+// 	};
+// };
+
 const CREATE_SPOT = 'spots/CREATE_SPOT';
-export const createSpot = (spot) => {
+export const createSpot = (spotId) => {
 	return {
 		type: CREATE_SPOT,
-		payload: spot,
+		payload: spotId,
 	};
 };
 
@@ -42,11 +50,19 @@ export const editSpot = (spotId) => ({
 
 export const spotReducer = (state = initialState, action) => {
 	switch (action.type) {
+		// case CREATE_SPOT: {
+		// 	const newState = { ...state };
+		// 	// newState[action.spot.id] = action.spot;
+		// 	// console.log(newState[action.spot])
+		// 	newState[action.payload] = action.spot;
+		// 	// console.log(newState[action.spot])
+		// 	return newState;
+		// }
 		case CREATE_SPOT: {
 			const newState = { ...state };
 			// newState[action.spot.id] = action.spot;
 			// console.log(newState[action.spot])
-			newState[action.spot] = action.spot;
+			newState[action.spotId] = action.spotId;
 			// console.log(newState[action.spot])
 			return newState;
 		}
@@ -130,16 +146,17 @@ export const deleteSpotAction = (spotId) => async (dispatch) => {
 	return spot;
 };
 
-export const updateSpotAction = (spotId) => async (dispatch) => {
-	const response = await csrfFetch(`/api/spots/${spotId}`, {
+export const updateSpotAction = (spot) => async (dispatch) => {
+	console.log(spot)
+	const response = await csrfFetch(`/api/spots/${spot.id}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(spotId),
+		body: JSON.stringify(spot),
 	});
-	const spot = await response.json();
-	dispatch(editSpot(spotId));
+	const newSpot = await response.json(response);
+	dispatch(editSpot(newSpot));
 	return spot;
 };
 

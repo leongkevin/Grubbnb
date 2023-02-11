@@ -7,7 +7,7 @@ import './EditSpotModal.css';
 function EditSpotModal() {
 	const dispatch = useDispatch();
 	const { spotId } = useParams();
-	const spot = useSelector((state) => state.spot);
+	const spot = useSelector((state) => state.spot[spotId]);
 	const [name, setName] = useState(spot.name);
 	const [description, setDescription] = useState(spot.description);
 	const [price, setPrice] = useState(spot.price);
@@ -30,11 +30,12 @@ function EditSpotModal() {
 				id: spotId,
 			})
 		)
-		// .catch(async (res) => {
+		.catch(async (res) => {
 
-		// 	const data = await res.json();
-		// 	if (data && data.errors) setErrors(data.errors);
-		// });
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		})
+		.then(() => window.location.reload(true));
 	};
 
 	return (

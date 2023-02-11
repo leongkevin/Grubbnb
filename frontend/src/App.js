@@ -1,24 +1,8 @@
-// import React from 'react';
-// import { Route, Switch } from 'react-router-dom';
-// import LoginFormPage from './components/LoginFormPage';
-
-// function App() {
-//   return (
-//     <Switch>
-//       <Route path="/login">
-//         <LoginFormPage />
-//       </Route>
-//     </Switch>
-//   );
-// }
-
-// export default App;
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import * as sessionActions from './store/session';
-import SpotPage from "./components/SpotPage";
+import SpotPage from './components/SpotPage';
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Hosting from './components/CurrentPage';
