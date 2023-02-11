@@ -29,16 +29,22 @@ function SpotPage() {
 										<div className="spot-subtitle-rating">
 											☆ {spot.avgRating}
 										</div>
+										<div className="spot-subtitle-reviews">
+											· Reviews
+										</div>
 										<div className="spot-address">
 											{spot.city}, {spot.state},{' '}
 											{spot.country}
 										</div>
 										<div></div>
 										<div className="spot-actions">
-											<button>Edit</button>
-											<button>Leave a review</button>
-											<button>Edit a review</button>
-                                            <DeleteSpotButton />
+											<div className="spot-actions-edit">
+												{/* <button>Edit</button>
+											</div>
+
+											<div className="spot-actions-edit"> */}
+												<DeleteSpotButton />
+											</div>
 										</div>
 									</div>
 								</div>

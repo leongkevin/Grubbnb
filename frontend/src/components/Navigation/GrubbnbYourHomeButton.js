@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import * as sessionActions from '../../store/session';
 import CreateSpotModal from '../CreateSpotModal';
 import OpenModalButton from '../OpenModalButton';
-import SignupFormModalCopy from '../SignupFormModalCopy';
+import ReviewCount from '../ReviewCount';
 
 function GrubbnbYourHomeButton({ user }) {
 	const dispatch = useDispatch();
@@ -50,7 +50,8 @@ function GrubbnbYourHomeButton({ user }) {
 					buttonText="Grubbnb your home"
 					// modalComponent={<CreateSpotModal />}
 
-					modalComponent={<SignupFormModalCopy />}
+					// modalComponent={<SignupFormModalCopy />}
+					modalComponent={<ReviewCount />}
 				/>
 			</div>
 		</>

@@ -14,14 +14,15 @@
 
 h1.spot-title {
     font-size: 26px;
-    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
 }
 
 .spot-subtitle {
     display: grid;
-    grid-template-columns: 1fr 2fr 2fr 2fr;
+    grid-template-columns: 1fr 3fr 4fr 6fr 2fr;
     grid-gap: 20px;
     margin-top: 4px;
+    background-color: pink;
 }
 
 .spot-subtitle-rating {
@@ -31,8 +32,10 @@ h1.spot-title {
     overflow: hidden;
     white-space: nowrap;
     text-align: right;
+    color: black;
 }
 
+.spot-subtitle-reviews,
 .spot-address {
     color: black;
     font-weight: bold;
@@ -71,16 +74,16 @@ h1.spot-title {
     "middle right"; */
     justify-content: end;
     align-content: end;
-  }
+}
 
-  .spot-image-secondary,
-  .spot-image-third,
-  .spot-image-fourth,
-  .spot-image-fifth {
-      width: 272px;
-      height: 225.59px;
-      padding: 4px;
-  }
+.spot-image-secondary,
+.spot-image-third,
+.spot-image-fourth,
+.spot-image-fifth {
+    width: 272px;
+    height: 225.59px;
+    padding: 4px;
+}
 
 
 

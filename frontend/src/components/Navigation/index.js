@@ -24,7 +24,7 @@ function Navigation({ isLoaded }) {
 				<div id="wrapper-center"></div>
 				<div id="wrapper-right">
 					<div id="right-wrapper-1">
-						<NavLink to="/hosting">
+						<NavLink to="/current">
 							<SwitchToHostingButton />
 						</NavLink>
 					</div>
@@ -45,7 +45,7 @@ function Navigation({ isLoaded }) {
 				<div id="wrapper-center"></div>
 				<div id="wrapper-right">
 					<div id="right-wrapper-1">
-						<NavLink to="/hosting">
+						<NavLink to="/current">
 							<GrubbnbYourHomeButton />
 						</NavLink>
 					</div>
