@@ -20,10 +20,10 @@ const initialState = {};
 // };
 
 const CREATE_SPOT = 'spots/CREATE_SPOT';
-export const createSpot = (spotId) => {
+export const createSpot = (spot) => {
 	return {
 		type: CREATE_SPOT,
-		payload: spotId,
+		payload: spot,
 	};
 };
 
@@ -58,11 +58,13 @@ export const spotReducer = (state = initialState, action) => {
 		// 	// console.log(newState[action.spot])
 		// 	return newState;
 		// }
+
+
 		case CREATE_SPOT: {
 			const newState = { ...state };
 			// newState[action.spot.id] = action.spot;
 			// console.log(newState[action.spot])
-			newState[action.spotId] = action.spotId;
+			newState[action.payload.id] = action.payload
 			// console.log(newState[action.spot])
 			return newState;
 		}
@@ -95,6 +97,7 @@ export const spotReducer = (state = initialState, action) => {
 };
 
 export const publishSpot = (spot) => async (dispatch) => {
+	console.log(spot)
 	const {
 		address,
 		city,
@@ -123,9 +126,9 @@ export const publishSpot = (spot) => async (dispatch) => {
 			price,
 		}),
 	});
-	const data = await response.json();
-	dispatch(createSpot(data.spot));
-	return data;
+	const newSpot = await response.json(response);
+	dispatch(createSpot(newSpot));
+	return newSpot.id;
 };
 
 export const getSpots = () => async (dispatch) => {
@@ -147,7 +150,7 @@ export const deleteSpotAction = (spotId) => async (dispatch) => {
 };
 
 export const updateSpotAction = (spot) => async (dispatch) => {
-	console.log(spot)
+	// console.log(spot)
 	const response = await csrfFetch(`/api/spots/${spot.id}`, {
 		method: 'PUT',
 		headers: {
