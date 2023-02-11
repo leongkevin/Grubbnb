@@ -13,6 +13,7 @@ function Home() {
 		dispatch(spotActions.getSpots());
 	}, []);
 
+
 	return (
 		<div className="grid-container">
 			{spotComponent.map((spot) => {

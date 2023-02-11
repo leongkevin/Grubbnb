@@ -85,6 +85,8 @@ hr {
     padding-top: 80px;
     margin-top: 16px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; */
     grid-gap: 20px;
 }

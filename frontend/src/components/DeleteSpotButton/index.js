@@ -13,12 +13,14 @@ const DeleteSpotButton = () => {
 	const deleteSpot = async (e) => {
 		e.preventDefault();
 		dispatch(spotActions.deleteSpotAction(spotId))
-		.then(() => history.push("/"));
+		.then(() => history.push("/"))
+		// .then(() => window.location.reload(true));
+
+		// write a filter
 	};
 
 	return (
 		<div>
-			<h1>DeleteSpotButton</h1>
 			<button onClick={deleteSpot}>Delete</button>
 		</div>
 	);

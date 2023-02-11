@@ -4,8 +4,11 @@
     padding-top: 80px;
     margin-top: 16px;
     width: 1120px;
-    margin-right: 312.50px;
-    margin-left: 312.50px;
+    /* margin-right: 312.50px;
+    margin-left: 312.50px; */
+
+    margin-right: 200px;
+    margin-left: 200px;
     color: black;
 }
 

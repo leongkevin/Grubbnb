@@ -25,7 +25,6 @@ function SpotPage() {
 							<div className="spot-header">
 								<div className="spot-title">
 									<h1>{spot.name}</h1>
-
 									<div className="spot-subtitle">
 										<div className="spot-subtitle-rating">
 											☆ {spot.avgRating}
@@ -37,9 +36,9 @@ function SpotPage() {
 										<div></div>
 										<div className="spot-actions">
 											<button>Edit</button>
-											<button>Delete</button>
 											<button>Leave a review</button>
 											<button>Edit a review</button>
+                                            <DeleteSpotButton />
 										</div>
 									</div>
 								</div>
@@ -80,7 +79,6 @@ function SpotPage() {
 					);
 				}
 			})}
-			<DeleteSpotButton />
 		</div>
 	);
 }

@@ -45,13 +45,13 @@ export const spotReducer = (state = initialState, action) => {
 			return newState;
 		}
 		case GET_SPOTS: {
-			const newState = { ...state };
-			newState[action.payload] = action.payload;
+			const newState = {}; //
+			// newState[action.payload] = action.payload; //
 			// console.log(`This is ${action.payload}`);
 			action.payload.Spots.forEach((spot) => {
 				newState[spot.id] = spot;
 			});
-			delete newState[action.payload];
+			// delete newState[action.payload];
 			return newState;
 		}
 		case REMOVE_SPOT: {
