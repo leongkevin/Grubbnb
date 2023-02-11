@@ -41,7 +41,7 @@ function SignupFormModal() {
 
 	return (
 		<>
-			<h1 className='welcome-header'>Welcome to Bnb-hub</h1>
+			<h1 className='welcome-header'>Welcome to Grubbnb</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>
 					{errors.map((error, idx) => (

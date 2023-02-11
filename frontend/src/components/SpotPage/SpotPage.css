@@ -10,16 +10,18 @@
     margin-right: 200px;
     margin-left: 200px;
     color: black;
+    background-color: pink;
 }
 
 h1.spot-title {
     font-size: 26px;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+
 }
 
 .spot-subtitle {
     display: grid;
-    grid-template-columns: 1fr 3fr 4fr 6fr 2fr;
+    grid-template-columns: 1fr 3fr 4fr 6fr 1fr;
     grid-gap: 20px;
     margin-top: 4px;
     background-color: pink;
@@ -46,6 +48,7 @@ h1.spot-title {
 
 .spot-actions {
     background-color: white;
+    text-align: right;
 }
 
 .spot-image-divider {

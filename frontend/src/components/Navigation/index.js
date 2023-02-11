@@ -5,7 +5,6 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import Authentication from './Authentication';
 import SwitchToHostingButton from './SwitchToHostingButton';
-import GrubbnbYourHomeButton from './GrubbnbYourHomeButton';
 import logo from './imgs/logo.svg';
 
 function Navigation({ isLoaded }) {
@@ -45,9 +44,6 @@ function Navigation({ isLoaded }) {
 				<div id="wrapper-center"></div>
 				<div id="wrapper-right">
 					<div id="right-wrapper-1">
-						<NavLink to="/current">
-							<GrubbnbYourHomeButton />
-						</NavLink>
 					</div>
 					<div id="right-wrapper-2">
 						<Authentication />

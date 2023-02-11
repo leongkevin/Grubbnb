@@ -3,7 +3,9 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 import './SpotPage.css';
+import OpenModalButton from '../OpenModalButton';
 import DeleteSpotButton from '../DeleteSpotButton';
+import EditSpotModal from '../EditSpotModal';
 
 function SpotPage() {
 	const dispatch = useDispatch();
@@ -30,7 +32,8 @@ function SpotPage() {
 											☆ {spot.avgRating}
 										</div>
 										<div className="spot-subtitle-reviews">
-											· Reviews
+											{/* · */}
+											Reviews
 										</div>
 										<div className="spot-address">
 											{spot.city}, {spot.state},{' '}
@@ -39,11 +42,14 @@ function SpotPage() {
 										<div></div>
 										<div className="spot-actions">
 											<div className="spot-actions-edit">
-												{/* <button>Edit</button>
-											</div>
-
-											<div className="spot-actions-edit"> */}
 												<DeleteSpotButton />
+												{/* <OpenModalButton
+													className="edit-button"
+													buttonText="Edit Spot"
+													modalComponent={
+														<EditSpotModal />
+													}
+												/> */}
 											</div>
 										</div>
 									</div>
@@ -56,7 +62,7 @@ function SpotPage() {
 												className="spot-image-main"
 											></img>
 										</div>
-										<div className="spot-image-divider-right">
+										{/* <div className="spot-image-divider-right">
 											<img
 												src={spot.previewImage}
 												className="spot-image-secondary"
@@ -73,13 +79,23 @@ function SpotPage() {
 												src={spot.previewImage}
 												className="spot-image-fifth"
 											></img>
+										</div> */}
+									</div>
+								</div>
+								<div className="spot-page-details">
+									<div className="spot-page-details-left">
+										{' '}
+										Entire home hosted by ownerId:{' '}
+										{spot.ownerId}
+										<div className="spot-description">
+											{spot.description}
+										</div>
+										<div className="spot-page-details-right">
+											{' '}
+											<EditSpotModal />
 										</div>
 									</div>
 								</div>
-								<div className="spot-description">
-									{spot.description}
-								</div>
-								<div className="spot-price">${spot.price}</div>
 							</div>
 						</div>
 					);

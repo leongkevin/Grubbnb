@@ -15,8 +15,6 @@ const DeleteSpotButton = () => {
 		dispatch(spotActions.deleteSpotAction(spotId))
 		.then(() => history.push("/"))
 		// .then(() => window.location.reload(true));
-
-		// write a filter
 	};
 
 	return (

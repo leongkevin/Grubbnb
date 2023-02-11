@@ -21,9 +21,7 @@ import * as sessionActions from './store/session';
 import SpotPage from "./components/SpotPage";
 import Navigation from './components/Navigation';
 import Home from './components/Home';
-import LoginFormModal from './components/LoginFormModal';
 import Hosting from './components/CurrentPage';
-import GrubbnbYourHomeButton from './components/Navigation/GrubbnbYourHomeButton';
 
 function App() {
 	const dispatch = useDispatch();
@@ -42,9 +40,6 @@ function App() {
 					</Route>
 					<Route exact path="/current">
 						<Hosting />
-					</Route>
-					<Route exact path="/current">
-						<GrubbnbYourHomeButton />
 					</Route>
 					<Route path="/spots/:spotId">
 						<SpotPage />
