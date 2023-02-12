@@ -105,4 +105,19 @@ h1.spot-title {
 
 .review-page-container {
     display: grid;
+
+}
+
+.spot-page-details {
+    /* background: red; */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+}
+
+.spot-page-details-right {
+    width: 450px;
+}
+.spot-page-details-left {
+
+
 }

@@ -19,7 +19,7 @@ const DeleteSpotButton = () => {
 
 	return (
 		<div>
-			<button onClick={deleteSpot}>Delete</button>
+			<button onClick={deleteSpot}  className="profile-input submit">Delete Spot</button>
 		</div>
 	);
 };

@@ -41,18 +41,6 @@ function SpotPage() {
 											{spot.country}
 										</div>
 										<div></div>
-										<div className="spot-actions">
-											<div className="spot-actions-edit">
-												<DeleteSpotButton />
-												{/* <OpenModalButton
-													className="edit-button"
-													buttonText="Edit Spot"
-													modalComponent={
-														<EditSpotModal />
-													}
-												/> */}
-											</div>
-										</div>
 									</div>
 								</div>
 								<div className="spot-image">
@@ -85,17 +73,30 @@ function SpotPage() {
 								</div>
 								<div className="spot-page-details">
 									<div className="spot-page-details-left">
-										{' '}
+										{/* {' '}
 										Entire home hosted by ownerId:{' '}
-										{spot.ownerId}
+										{spot.ownerId} */}
 										<div className="spot-description">
 											{spot.description}
 										</div>
-										<div className="spot-page-details-right">
-											{' '}
-											<EditSpotModal />
+									</div>
+									<div className="spot-page-details-right">
+										<div className="spot-actions">
+											<DeleteSpotButton />
+											<div className="spot-actions-edit">
+												<EditSpotModal />
+
+												{/* <OpenModalButton
+													className="edit-button"
+													buttonText="Edit Spot"
+													modalComponent={
+														<EditSpotModal />
+													}
+												/> */}
+											</div>
 										</div>
-                                        <ReviewsPage />
+
+										<ReviewsPage />
 									</div>
 								</div>
 							</div>
