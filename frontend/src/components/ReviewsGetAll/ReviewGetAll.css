@@ -1,0 +1,35 @@
+.review-page-container {
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+}
+
+.review-title {
+    font-family: monospace;
+    width: 9ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+}
+
+.review-details {
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.review-review {
+    color: black;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.review-timestamp {
+    color: silver;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: monospace;
+    width: 15ch;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+
+}

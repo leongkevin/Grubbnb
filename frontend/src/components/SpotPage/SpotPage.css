@@ -10,7 +10,7 @@
     margin-right: 200px;
     margin-left: 200px;
     color: black;
-    background-color: pink;
+
 }
 
 h1.spot-title {
@@ -100,4 +100,9 @@ h1.spot-title {
     padding-top: 10px;
     padding-bottom: 5px;
     font-family: inherit;
+}
+
+
+.review-page-container {
+    display: grid;
 }
