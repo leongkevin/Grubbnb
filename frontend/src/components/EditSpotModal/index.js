@@ -30,24 +30,25 @@ function EditSpotModal() {
 				id: spotId,
 			})
 		)
-		.catch(async (res) => {
-
-			const data = await res.json();
-			if (data && data.errors) setErrors(data.errors);
-		})
-		.then(() => window.location.reload(true));
+			.catch(async (res) => {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			})
+			.then(() => window.location.reload(true));
 	};
 
 	return (
 		<>
-			<div className="Spot">
-				<form onSubmit={handleSubmit} >
+			<div className="edit-spot-container">
+				<form onSubmit={handleSubmit}>
 					<ul>
 						{errors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-					<h1 className="welcome-header">Publish Edits for spot #{spotId}</h1>
+					<h1 className="welcome-header">
+					Publish Edits for spot #{spotId}
+					</h1>
 
 
 					<input
@@ -58,6 +59,7 @@ function EditSpotModal() {
 						placeholder="Name"
 						className="profile-input"
 					/>
+
 					<input
 						type="text"
 						value={description}
@@ -66,6 +68,7 @@ function EditSpotModal() {
 						placeholder="Description"
 						className="profile-input"
 					/>
+
 					<input
 						type="decimal"
 						value={price}
@@ -76,7 +79,7 @@ function EditSpotModal() {
 					/>
 
 					<button type="submit" className="profile-input submit">
-						Edit
+						Edit Spot
 					</button>
 				</form>
 			</div>
