@@ -40,7 +40,7 @@ function ReviewCreate() {
 	return (
 		<>
 			<h1 className="welcome-header">
-				Leave a review, as {sessionUser.firstName}.
+				Leave a review.
 			</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>

@@ -28,8 +28,7 @@ function SpotPage() {
 	return (
 		<div className="spot-page-container">
 			{spotComponent.map((spot) => {
-
-                //  console.log(`this is userId: ${sessionUser.id}`)
+                // console.log(`this is userId: ${sessionUser.id}`)
 				// console.log(`this is line 26: ${spotId} === ${spot.id}`)
                 let rating = spot.avgRating;
                 if(rating === null) {
@@ -65,7 +64,8 @@ function SpotPage() {
 										</div>
 										<div className="spot-image-divider-right">
 											<img
-												src="https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720"
+                                            src={spot.previewImage}
+												// src="https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720"
 												className="spot-image-secondary"
 											></img>
 											<img
@@ -73,7 +73,8 @@ function SpotPage() {
 												className="spot-image-third"
 											></img>
 											<img
-												src="https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720"
+                                            src={spot.previewImage}
+												// src="https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720"
 												className="spot-image-fourth"
 											></img>
 											<img
@@ -88,15 +89,15 @@ function SpotPage() {
 										{/* {' '}
 										Entire home hosted by ownerId:{' '}
 										{spot.ownerId} */}
+
 										<div className="spot-description">
 											{spot.description}
 										</div>
 
 
                                         <ReviewsPage />
-                                        <DeleteReview />
-                                        <ReviewCreate />
-                                        
+                                       <ReviewCreate />
+
 
 
 									</div>
@@ -118,7 +119,7 @@ function SpotPage() {
 								</div>
 							</div>
 						</div>
-					);
+					)
 				}
 			})}
 		</div>

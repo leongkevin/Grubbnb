@@ -6,6 +6,7 @@ import * as reviewActions from '../../store/review';
 import OpenModalButton from '../OpenModalButton';
 import './ReviewGetAll.css';
 import EditReview from '../EditReview';
+import DeleteReview from '../DeleteReview';
 
 function ReviewsGetAll() {
 	const dispatch = useDispatch();
@@ -16,7 +17,7 @@ function ReviewsGetAll() {
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 	const reviewComponent = useSelector((state) => Object.values(state.review));
 	const reviewMyReview = useSelector((state) => state.review[23]);
-	console.log(`This is rc: ${JSON.stringify(reviewMyReview)}`);
+	// console.log(`This is rc: ${JSON.stringify(reviewMyReview)}`);
 
 	const sessionUser = useSelector((state) => state.session.user);
 	// const reviewSelector = useSelector((state) => state.review[reviewId]);
@@ -41,8 +42,8 @@ function ReviewsGetAll() {
 		e.preventDefault();
 		setErrors([]);
 		// console.log({myReview})
-		console.log(`this is reviewcomp ${review}`);
-		console.log(`this is stars ${stars}`);
+		// console.log(`this is reviewcomp ${review}`);
+		// console.log(`this is stars ${stars}`);
 		dispatch(
 			reviewActions.updateReviewAction({
 				review,
@@ -68,7 +69,6 @@ function ReviewsGetAll() {
 	return (
 		<div className="review-page-container">
 			{/* <h1> {spot.avgRating} </h1> */}
-
 			{spotComponent.map((spot) => {
 				if (spot.id === parseInt(spotId)) {
 					// console.log(`this is ${parseInt(spotId)}`);
@@ -85,112 +85,76 @@ function ReviewsGetAll() {
 					);
 				}
 			})}
-
-			{reviewComponent.map((currentReview) => {
-				return (
-					<>
-						<EditReview review={currentReview} />;
-					</>
-				);
-			})}
-
+			<div>
+				<button
+					onClick={deleteReview}
+					// className="profile-input submit"
+				>
+					Delete Review
+				</button>
+			</div>
 			{reviewComponent.map((currentReview) => {
 				myReview = parseInt(currentReview.id);
-				// console.log(`this is it ${review.id}`);
-				// console.log(`this is it myReview ${myReview}`);
-				if (
-					parseInt(currentReview.userId) === parseInt(sessionUser.id)
-				) {
+				if (!sessionUser) {
 					return (
 						<>
-							Your Review: {currentReview.stars} Stars
-							<div>{currentReview.review}</div>
 							<div>
-								{/* className="edit-spot-container" */}
-								<form onSubmit={handleSubmit}>
-									<ul>
-										{errors.map((error, idx) => (
-											<li key={idx}>{error}</li>
-										))}
-									</ul>
-									<h1 className="welcome-header">
-										Edit your review
-									</h1>
-
-									<input
-										type="text"
-										value={currentReview.review}
-										onChange={(e) =>
-											setReview(e.target.value)
-										}
-										required
-										placeholder="Review"
-										// className="profile-input"
-									/>
-
-									{/* <input
-						type="number"
-						value={stars}
-						onChange={(e) => setStars(e.target.value)}
-						required
-						placeholder="Stars"
-						// className="profile-input"
-					/> */}
-
-									<select
-										// className="profile-input"
-										onChange={(e) =>
-											setStars(e.target.value)
-										}
-										value={currentReview.stars}
-									>
-										<option value="">Star Rating</option>
-										<option value={1}>1 Star</option>
-										<option value={2}>2 Stars</option>
-										<option value={3}>3 Stars</option>
-										<option value={4}>4 Stars</option>
-										<option value={5}>5 Stars</option>
-									</select>
-
-									<button type="submit">
-										{/* className="profile-input submit" */}
-										Edit Review
-									</button>
-								</form>
+								<div className="review-details">
+									{currentReview.stars} Stars - Anonymous User
+								</div>
+								<div className="review-timestamp">
+									{Date(currentReview.updatedAt)}
+								</div>
+								<div className="review-review">
+									{currentReview.review}
+								</div>
 							</div>
-							<button
-								onClick={deleteReview}
-								// className="profile-input submit"
-							>
-								Delete Review
-							</button>
 						</>
 					);
-				} else {
+				}
+				// } else if (
+
+				// parseInt(currentReview.id) !== parseInt(sessionUser.user.id)
+				// )
+				else {
 					return (
 						<div>
 							<div className="review-details">
-								{review.stars} Stars - Anonymous User
-								{/* {review.User.firstName} */}
-								{/* error      TypeError: Cannot read properties of undefined (reading 'firstName')
-    at index.js:45:1
-    at Array.map (<anonymous>)
-    at ReviewsGetAll (index.js:40:1)
-    at renderWithHooks (react-dom.development.js:16305:1)
-    at updateFunctionComponent (react-dom.development.js:19588:1)
-    at beginWork (react-dom.development.js:21601:1)
-    at beginWork$1 (react-dom.development.js:27426:1)
-    at performUnitOfWork (react-dom.development.js:26557:1)
-    at workLoopSync (react-dom.development.js:26466:1)
-    at renderRootSync (react-dom.development.js:26434:1) */}
-								{/* error due to firstName being undefined because */}
+								{currentReview.stars} Stars - Anonymous User
 							</div>
 							<div className="review-timestamp">
-								{Date(review.updatedAt)}
+								{Date(currentReview.updatedAt)}
 							</div>
-							<div className="review-review">{review.review}</div>
+							<div className="review-review">
+								{currentReview.review}
+							</div>
+							{reviewComponent.map((currReview) => {
+								if (
+									currReview.userId ===
+									parseInt(sessionUser.id)
+								) {
+									return (
+										<>
+											<EditReview review={currReview} />
+										</>
+									);
+								}
+							})}
 						</div>
 					);
+					{
+						reviewComponent.map((currReview) => {
+							if (
+								currReview.userId === parseInt(sessionUser.id)
+							) {
+								return (
+									<>
+										<EditReview review={currReview} />
+									</>
+								);
+							}
+						});
+					}
 				}
 			})}
 		</div>
