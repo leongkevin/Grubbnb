@@ -96,7 +96,7 @@ function SpotPage() {
                                         <ReviewsPage />
                                         <DeleteReview />
                                         <ReviewCreate />
-
+                                        
 
 
 									</div>

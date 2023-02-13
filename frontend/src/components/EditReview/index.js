@@ -5,15 +5,16 @@ import * as spotActions from '../../store/spot';
 import * as reviewActions from '../../store/review';
 import * as sessionActions from '../../store/session';
 
-function EditReview() {
+function EditReview(props) {
 	const dispatch = useDispatch();
-	const { spotId, reviewId } = useParams();
 	// const spot = useSelector((state) => state.spot[spotId]);
-	const reviewSelector = useSelector((state) => state.review[reviewId]);
+	const reviewSelector = useSelector((state) => state.review[props.review.id]);
 	const sessionUser = useSelector((state) => state.session.user);
-	const [review, setReview] = useState('');
-	const [stars, setStars] = useState('');
+	const [review, setReview] = useState(reviewSelector.review);
+	const [stars, setStars] = useState(reviewSelector.stars);
 	const [errors, setErrors] = useState([]);
+
+    console.log(`this is edit review props ${JSON.stringify(props)}`)
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -23,7 +24,9 @@ function EditReview() {
 				review,
 				stars,
 				userId: sessionUser.id,
-				spotId: parseInt(spotId),
+				spotId: props.spotId,
+                id: props.review.id
+
 			})
 		).catch(async (res) => {
 			// console.log({review})
