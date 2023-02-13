@@ -5,6 +5,7 @@ import * as spotActions from '../../store/spot';
 import * as reviewActions from '../../store/review';
 import OpenModalButton from '../OpenModalButton';
 import './ReviewGetAll.css';
+import EditReview from '../EditReview';
 
 function ReviewsGetAll() {
 	const dispatch = useDispatch();
@@ -12,6 +13,7 @@ function ReviewsGetAll() {
 
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 	const reviewComponent = useSelector((state) => Object.values(state.review));
+	const sessionUser = useSelector((state) => state.session.user);
 
 	useEffect(() => {
 		dispatch(reviewActions.getReviewAction(spotId));
@@ -28,9 +30,9 @@ function ReviewsGetAll() {
 					// console.log(`this is ${parseInt(spot.id)}`);
 					return (
 						<div>
-                            <div className="review-total">
-							{reviewComponent.length} Reviews
-                            </div>
+							<div className="review-total">
+								{reviewComponent.length} Reviews
+							</div>
 							<div className="review-title">
 								☆ {spot.avgRating}
 							</div>
@@ -40,12 +42,23 @@ function ReviewsGetAll() {
 			})}
 
 			{reviewComponent.map((review) => {
-				return (
-					<div>
-						<div className="review-details">
-							{review.stars} Stars - Anonymous User
-							{/* {review.User.firstName} */}
-							{/* error      TypeError: Cannot read properties of undefined (reading 'firstName')
+				// console.log(parseInt(review.userId) === parseInt(sessionUser.id))
+				<>
+					<EditReview />
+				</>;
+				if (parseInt(review.userId) === parseInt(sessionUser.id)) {
+					return (
+						<>
+							<EditReview />
+						</>
+					);
+				} else {
+					return (
+						<div>
+							<div className="review-details">
+								{review.stars} Stars - Anonymous User
+								{/* {review.User.firstName} */}
+								{/* error      TypeError: Cannot read properties of undefined (reading 'firstName')
     at index.js:45:1
     at Array.map (<anonymous>)
     at ReviewsGetAll (index.js:40:1)
@@ -56,14 +69,15 @@ function ReviewsGetAll() {
     at performUnitOfWork (react-dom.development.js:26557:1)
     at workLoopSync (react-dom.development.js:26466:1)
     at renderRootSync (react-dom.development.js:26434:1) */}
-	{/* error due to firstName being undefined because */}
+								{/* error due to firstName being undefined because */}
+							</div>
+							<div className="review-timestamp">
+								{Date(review.updatedAt)}
+							</div>
+							<div className="review-review">{review.review}</div>
 						</div>
-						<div className="review-timestamp">
-							{Date(review.updatedAt)}
-						</div>
-						<div className="review-review">{review.review}</div>
-					</div>
-				);
+					);
+				}
 			})}
 		</div>
 	);

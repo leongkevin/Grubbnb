@@ -4,7 +4,7 @@ const initialState = {};
 
 const GET_REVIEWS = 'spots/GET_REVIEWS';
 export const getAllReviews = (reviews) => {
-	console.log(reviews);
+	// console.log(reviews);
 	return {
 		type: GET_REVIEWS,
 		payload: reviews,
@@ -94,37 +94,20 @@ export const publishReview = (data, review, stars) => async (dispatch) => {
 };
 
 export const updateReviewAction = (review) => async (dispatch) => {
-	// console.log(spot)
-	const response = await csrfFetch(`/api/spots/${review.id}`, {
+	console.log({ review });
+	const response = await csrfFetch(`/api/reviews/${review.reviewId}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 		},
-		body: JSON.stringify(review),
+		body: JSON.stringify({
+			review: review.review,
+			stars: review.stars,
+		}),
 	});
 	const newSpot = await response.json(response);
 	dispatch(editReview(newSpot));
 	return review;
 };
-
-// export const createNewReview = (spotId, review) => async (dispatch) => {
-// 	const addReview = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-// 	  method: "POST",
-// 	  body: JSON.stringify(review),
-// 	});
-
-// 	const newReview = await addReview.json();
-// 	const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
-// 	const reviews = await res.json();
-
-// 	let spotReviews = {};
-// 	reviews.Reviews.forEach((e) => {
-// 	  spotReviews[e.id] = e;
-// 	});
-
-// 	dispatch(addNewReview(spotReviews[newReview.id]));
-
-// 	return res;
-//   };
 
 export default reviewReducer;

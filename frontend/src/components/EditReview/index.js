@@ -7,10 +7,12 @@ import * as sessionActions from '../../store/session';
 
 function EditReview() {
 	const dispatch = useDispatch();
-	const { spotId } = useParams();
-	const spot = useSelector((state) => state.spot[spotId]);
-	const [review, setReview] = useState(review.review);
-	const [stars, setStars] = useState(review.stars);
+	const { spotId, reviewId } = useParams();
+	// const spot = useSelector((state) => state.spot[spotId]);
+    const reviewSelector = useSelector((state) => state.review[reviewId]);
+    const sessionUser = useSelector((state) => state.session.user);
+	const [review, setReview] = useState('');
+	const [stars, setStars] = useState('');
 	const [errors, setErrors] = useState([]);
 
 	const handleSubmit = (e) => {
@@ -18,23 +20,25 @@ function EditReview() {
 		setErrors([]);
 		dispatch(
 			reviewActions.updateReviewAction({
-				review: review.review,
-				review: review.stars,
-				// userId: sessionUser.user.id,
-				spotId: spotId,
-				id: review.id,
+				review,
+				stars,
+				userId: sessionUser.id,
+				spotId: parseInt(spotId),
 			})
 		)
 			.catch(async (res) => {
+                // console.log({review})
+                // console.log(res)
 				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
 			})
-			.then(() => window.location.reload(true));
+			// .then(() => window.location.reload(true));
 	};
 
 	return (
 		<>
-			<div className="edit-spot-container">
+			<div >
+                {/* className="edit-spot-container" */}
 				<form onSubmit={handleSubmit}>
 					<ul>
 						{errors.map((error, idx) => (
@@ -51,11 +55,11 @@ function EditReview() {
 						onChange={(e) => setReview(e.target.value)}
 						required
 						placeholder="Review"
-						className="profile-input"
+						// className="profile-input"
 					/>
 
 					<select
-						className="profile-input"
+						// className="profile-input"
 						onChange={(e) => setStars(e.target.value)}
 						value={stars}
 					>
@@ -67,7 +71,8 @@ function EditReview() {
 						<option value={5}>5 Stars</option>
 					</select>
 
-					<button type="submit" className="profile-input submit">
+					<button type="submit" >
+                    {/* className="profile-input submit" */}
 						Edit Review
 					</button>
 				</form>
