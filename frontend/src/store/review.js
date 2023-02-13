@@ -20,9 +20,9 @@ export const createReview = (review) => {
 };
 
 const UPDATE_REVIEW = 'review/UPDATE_REVIEW';
-export const editReview = (reviewId) => ({
+export const editReview = (review) => ({
 	type: UPDATE_REVIEW,
-	payload: reviewId,
+	payload: review.id,
 });
 
 const REMOVE_REVIEW = 'review/REMOVE_REVIEW';
@@ -107,21 +107,21 @@ export const publishReview = (data, review, stars) => async (dispatch) => {
 	return newReview;
 };
 
-export const updateReviewAction = (reviewId) => async (dispatch) => {
-	// console.log( reviewId[reviewId] );
-	// const response = await csrfFetch(`/api/reviews/${reviewId.id}`, {
+export const updateReviewAction = (review) => async (dispatch) => {
+	console.log( review);
+	const response = await csrfFetch(`/api/reviews/${review.id}`, {
 	// { ${review[31].id}
 
-	const response = await csrfFetch(`/api/reviews/12`, {
+	// const response = await csrfFetch(`/api/reviews/12`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			// review: review.review,
-			// stars: parseInt(review.stars),
-			review: reviewId.review,
-			stars: parseInt(reviewId.stars),
+			review: review.review,
+			stars: parseInt(review.stars),
+			// review,
+			// stars,
 		}),
 	});
 	const newReview = await response.json(response);
