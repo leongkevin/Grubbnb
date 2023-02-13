@@ -28,9 +28,11 @@ function ReviewsGetAll() {
 					// console.log(`this is ${parseInt(spot.id)}`);
 					return (
 						<div>
-							<h2>{reviewComponent.length} Reviews</h2>
+                            <div className="review-total">
+							{reviewComponent.length} Reviews
+                            </div>
 							<div className="review-title">
-								<h2>☆ {spot.avgRating} </h2>
+								☆ {spot.avgRating}
 							</div>
 						</div>
 					);

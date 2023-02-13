@@ -22,25 +22,26 @@ function SpotPage() {
 		<div className="spot-page-container">
 			{spotComponent.map((spot) => {
 				// console.log(`this is line 26: ${spotId} === ${spot.id}`)
+                let rating = spot.avgRating;
+                if(rating === null) {
+                    console.log(rating)
+                    rating = "none"
+                }
 				if (parseInt(spotId) === spot.id) {
 					return (
 						<div key={spot.id} className="spot-page-result">
 							<div className="spot-header">
 								<div className="spot-title">
-									<h1>{spot.name}</h1>
+									{spot.name}
 									<div className="spot-subtitle">
 										<div className="spot-subtitle-rating">
-											☆ {spot.avgRating}
+                                         ☆ {rating}
 										</div>
-										<div className="spot-subtitle-reviews">
-											{/* · */}
-											{/* Reviews */}
-										</div>
+                                        <div>·</div>
 										<div className="spot-address">
 											{spot.city}, {spot.state},{' '}
 											{spot.country}
 										</div>
-										<div></div>
 									</div>
 								</div>
 								<div className="spot-image">
