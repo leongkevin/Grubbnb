@@ -22,7 +22,7 @@ function App() {
 					<Route exact path="/">
 						<Home />
 					</Route>
-					<Route exact path="/current">
+					<Route exact path="/spots/current">
 						<Hosting />
 					</Route>
 					<Route path="/spots/:spotId">

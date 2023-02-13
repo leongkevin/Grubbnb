@@ -41,12 +41,12 @@ function ProfileButton({ user }) {
 			</button>
 			<div className={ulClassName} ref={ulRef}>
 				<div className="user-action-dropdown">
-					<div>
+					<div className="profile">
 						{user.firstName} {user.lastName}
 					</div>
-					<div>{user.email}</div>
+					<div className="profile">{user.email}</div>
 					<div>
-						<button onClick={logout}>
+						<button onClick={logout} className="profile">
 							Log out
 						</button>
 					</div>
