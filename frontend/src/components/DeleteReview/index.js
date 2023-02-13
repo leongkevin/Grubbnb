@@ -16,9 +16,9 @@ const DeleteReview = () => {
 		e.preventDefault();
 		// dispatch(reviewActions.deleteReviewAction(spotId))
 		// dispatch(reviewActions.deleteReviewAction(reviewId))
-		dispatch(reviewActions.deleteReviewAction(31))
+		dispatch(reviewActions.deleteReviewAction(24))
 		.then(() => history.push("/"))
-		// .then(() => window.location.reload(true));
+		.then(() => window.location.reload(true));
 	};
 
 	return (
