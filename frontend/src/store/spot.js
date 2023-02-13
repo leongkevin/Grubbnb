@@ -87,7 +87,7 @@ export const spotReducer = (state = initialState, action) => {
 };
 
 export const publishSpot = (spot) => async (dispatch) => {
-	console.log(spot)
+	// console.log(spot)
 	const {
 		address,
 		city,

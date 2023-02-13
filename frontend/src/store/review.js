@@ -19,11 +19,17 @@ export const createReview = (review) => {
 	};
 };
 
+const UPDATE_REVIEW = 'review/UPDATE_REVIEW';
+export const editReview = (spotId) => ({
+	type: UPDATE_REVIEW,
+	payload: spotId,
+});
+
 const reviewReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_REVIEWS: {
 			const newState = {};
-			console.log(`This is ${action.payload}`);
+			// console.log(`This is review ${action.payload}`);
 			action.payload.Reviews.forEach((review) => {
 				newState[review.id] = review;
 			});
@@ -34,8 +40,17 @@ const reviewReducer = (state = initialState, action) => {
 			const newState = { ...state };
 			// newState[action.spot.id] = action.spot;
 			// console.log(newState[action.spot])
+			console.log(`This is review ${action.payload}`);
 			newState[action.payload.id] = action.payload;
 			// console.log(newState[action.spot])
+			return newState;
+		}
+
+		case UPDATE_REVIEW: {
+			const newState = {
+				...state,
+				...action.payload,
+			};
 			return newState;
 		}
 
@@ -51,23 +66,65 @@ export const getReviewAction = (spotId) => async (dispatch) => {
 	return response;
 };
 
-export const publishReview = (review) => async (dispatch) => {
-	console.log(review);
-	const { spotId } = review;
-	const { review, stars } = review;
-	const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+// export const publishReview = (spotId, review, stars) => async (dispatch) => {
+export const publishReview = (data, review, stars) => async (dispatch) => {
+	// console.log(review);
+	// const { spotId } = review;
+	// const { review, stars } = review;
+	// console.log(spotId)
+	// console.log({spotId})
+	// console.log({data})
+	// console.log({review})
+	// console.log({stars})
+	const response = await csrfFetch(`/api/spots/${data.spotId}/reviews`, {
+		// const response = await csrfFetch(`/api/spots/2/reviews`, {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
-			review,
-			stars,
+			review: data.review,
+			stars: data.stars,
 		}),
 	});
-	const newReview = await response.json(response);
+	console.log(response);
+	const newReview = await response.json();
 	dispatch(createReview(newReview));
-	return newReview.id;
+	return newReview;
 };
+
+export const updateReviewAction = (review) => async (dispatch) => {
+	// console.log(spot)
+	const response = await csrfFetch(`/api/spots/${review.id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(review),
+	});
+	const newSpot = await response.json(response);
+	dispatch(editReview(newSpot));
+	return review;
+};
+
+// export const createNewReview = (spotId, review) => async (dispatch) => {
+// 	const addReview = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+// 	  method: "POST",
+// 	  body: JSON.stringify(review),
+// 	});
+
+// 	const newReview = await addReview.json();
+// 	const res = await csrfFetch(`/api/spots/${spotId}/reviews`);
+// 	const reviews = await res.json();
+
+// 	let spotReviews = {};
+// 	reviews.Reviews.forEach((e) => {
+// 	  spotReviews[e.id] = e;
+// 	});
+
+// 	dispatch(addNewReview(spotReviews[newReview.id]));
+
+// 	return res;
+//   };
 
 export default reviewReducer;

@@ -35,7 +35,7 @@ function Hosting() {
 				</div>
 				<div className="grid-container current-page-grid">
 					{spotComponent.map((spot) => {
-						console.log(spot.ownerId);
+						// console.log(spot.ownerId);
 						if (spot.ownerId === sessionUser.id) {
 							return (
 								<div key={spot.id} className="spot-component">

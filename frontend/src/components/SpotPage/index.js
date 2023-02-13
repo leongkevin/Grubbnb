@@ -7,7 +7,9 @@ import OpenModalButton from '../OpenModalButton';
 import DeleteSpotButton from '../DeleteSpotButton';
 import EditSpotModal from '../EditSpotModal';
 import ReviewsPage from '../ReviewsGetAll';
+import ReviewCreate from '../ReviewCreate';
 import * as sessionActions from '../../store/session';
+import EditReview from '../EditReview';
 
 function SpotPage() {
 	const dispatch = useDispatch();
@@ -26,7 +28,7 @@ function SpotPage() {
 				// console.log(`this is line 26: ${spotId} === ${spot.id}`)
                 let rating = spot.avgRating;
                 if(rating === null) {
-                    console.log(rating)
+                    // console.log(rating)
                     rating = "none"
                 }
 				if (parseInt(spotId) === spot.id) {
@@ -54,9 +56,9 @@ function SpotPage() {
 												className="spot-image-main"
 											></img>
 										</div>
-										{/* <div className="spot-image-divider-right">
+										<div className="spot-image-divider-right">
 											<img
-												src={spot.previewImage}
+												src="https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720"
 												className="spot-image-secondary"
 											></img>
 											<img
@@ -64,14 +66,14 @@ function SpotPage() {
 												className="spot-image-third"
 											></img>
 											<img
-												src={spot.previewImage}
+												src="https://a0.muscache.com/im/pictures/d5529c23-133b-4a60-a815-5d8ed75ccb5b.jpg?im_w=720"
 												className="spot-image-fourth"
 											></img>
 											<img
 												src={spot.previewImage}
 												className="spot-image-fifth"
 											></img>
-										</div> */}
+										</div>
 									</div>
 								</div>
 								<div className="spot-page-details">
@@ -82,7 +84,12 @@ function SpotPage() {
 										<div className="spot-description">
 											{spot.description}
 										</div>
+
+
                                         <ReviewsPage />
+                                        <ReviewCreate />
+                                        <EditReview />
+
 									</div>
 									<div className="spot-page-details-right">
 										<div className="spot-actions">
@@ -90,13 +97,6 @@ function SpotPage() {
 											<div className="spot-actions-edit">
 												<EditSpotModal />
 
-												{/* <OpenModalButton
-													className="edit-button"
-													buttonText="Edit Spot"
-													modalComponent={
-														<EditSpotModal />
-													}
-												/> */}
 											</div>
 										</div>
 
@@ -118,7 +118,7 @@ function SpotPage() {
 				// console.log(`this is line 26: ${spotId} === ${spot.id}`)
                 let rating = spot.avgRating;
                 if(rating === null) {
-                    console.log(rating)
+                    // console.log(rating)
                     rating = "none"
                 }
 				if (parseInt(spotId) === spot.id) {
@@ -146,24 +146,11 @@ function SpotPage() {
 												className="spot-image-main"
 											></img>
 										</div>
-										{/* <div className="spot-image-divider-right">
-											<img
-												src={spot.previewImage}
-												className="spot-image-secondary"
-											></img>
-											<img
-												src={spot.previewImage}
-												className="spot-image-third"
-											></img>
-											<img
-												src={spot.previewImage}
-												className="spot-image-fourth"
-											></img>
-											<img
-												src={spot.previewImage}
-												className="spot-image-fifth"
-											></img>
-										</div> */}
+										{/*
+
+                                        Add adjustments
+
+                                        */}
 									</div>
 								</div>
 								<div className="spot-page-details">

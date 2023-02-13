@@ -2,32 +2,27 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
-import './EditSpotModal.css';
+import * as reviewActions from '../../store/review';
+import * as sessionActions from '../../store/session';
 
-function EditSpotModal() {
+function EditReview() {
 	const dispatch = useDispatch();
 	const { spotId } = useParams();
 	const spot = useSelector((state) => state.spot[spotId]);
-	const [name, setName] = useState(spot.name);
-	const [description, setDescription] = useState(spot.description);
-	const [price, setPrice] = useState(spot.price);
+	const [review, setReview] = useState(review.review);
+	const [stars, setStars] = useState(review.stars);
 	const [errors, setErrors] = useState([]);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		setErrors([]);
 		dispatch(
-			spotActions.updateSpotAction({
-				address: spot.address,
-				city: spot.city,
-				state: spot.state,
-				country: spot.country,
-				lat: spot.lat,
-				lng: spot.lng,
-				name,
-				description,
-				price,
-				id: spotId,
+			reviewActions.updateReviewAction({
+				review: review.review,
+				review: review.stars,
+				// userId: sessionUser.user.id,
+				spotId: spotId,
+				id: review.id,
 			})
 		)
 			.catch(async (res) => {
@@ -47,39 +42,33 @@ function EditSpotModal() {
 						))}
 					</ul>
 					<h1 className="welcome-header">
-					Publish Edits For Spot Id # {spotId}
+                    Edit your review
 					</h1>
 
-
 					<input
 						type="text"
-						value={name}
-						onChange={(e) => setName(e.target.value)}
+						value={review}
+						onChange={(e) => setReview(e.target.value)}
 						required
-						placeholder="Name"
+						placeholder="Review"
 						className="profile-input"
 					/>
 
-					<input
-						type="text"
-						value={description}
-						onChange={(e) => setDescription(e.target.value)}
-						required
-						placeholder="Description"
+					<select
 						className="profile-input"
-					/>
-
-					<input
-						type="decimal"
-						value={price}
-						onChange={(e) => setPrice(e.target.value)}
-						required
-						placeholder="Price"
-						className="profile-input"
-					/>
+						onChange={(e) => setStars(e.target.value)}
+						value={stars}
+					>
+						<option value="">Star Rating</option>
+						<option value={1}>1 Star</option>
+						<option value={2}>2 Stars</option>
+						<option value={3}>3 Stars</option>
+						<option value={4}>4 Stars</option>
+						<option value={5}>5 Stars</option>
+					</select>
 
 					<button type="submit" className="profile-input submit">
-						Edit Spot
+						Edit Review
 					</button>
 				</form>
 			</div>
@@ -87,4 +76,4 @@ function EditSpotModal() {
 	);
 }
 
-export default EditSpotModal;
+export default EditReview;

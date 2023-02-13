@@ -43,7 +43,20 @@ function ReviewsGetAll() {
 				return (
 					<div>
 						<div className="review-details">
-							{review.User.firstName} - {review.stars} Stars
+							{review.stars} Stars - Anonymous User
+							{/* {review.User.firstName} */}
+							{/* error      TypeError: Cannot read properties of undefined (reading 'firstName')
+    at index.js:45:1
+    at Array.map (<anonymous>)
+    at ReviewsGetAll (index.js:40:1)
+    at renderWithHooks (react-dom.development.js:16305:1)
+    at updateFunctionComponent (react-dom.development.js:19588:1)
+    at beginWork (react-dom.development.js:21601:1)
+    at beginWork$1 (react-dom.development.js:27426:1)
+    at performUnitOfWork (react-dom.development.js:26557:1)
+    at workLoopSync (react-dom.development.js:26466:1)
+    at renderRootSync (react-dom.development.js:26434:1) */}
+	{/* error due to firstName being undefined because */}
 						</div>
 						<div className="review-timestamp">
 							{Date(review.updatedAt)}
