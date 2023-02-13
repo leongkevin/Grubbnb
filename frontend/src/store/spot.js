@@ -70,7 +70,7 @@ export const spotReducer = (state = initialState, action) => {
 		}
 		case REMOVE_SPOT: {
 			const newState = { ...state };
-			console.log(`${action.spotId}`);
+			// console.log(`${action.spotId}`);
 			delete newState[action.spotId];
 			return newState;
 		}

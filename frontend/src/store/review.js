@@ -25,6 +25,12 @@ export const editReview = (spotId) => ({
 	payload: spotId,
 });
 
+const REMOVE_REVIEW = 'review/REMOVE_REVIEW';
+export const removeReview = (reviewId) => ({
+	type: REMOVE_REVIEW,
+	payload: reviewId,
+});
+
 const reviewReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_REVIEWS: {
@@ -40,7 +46,7 @@ const reviewReducer = (state = initialState, action) => {
 			const newState = { ...state };
 			// newState[action.spot.id] = action.spot;
 			// console.log(newState[action.spot])
-			console.log(`This is review ${action.payload}`);
+			// console.log(`This is review ${action.payload}`);
 			newState[action.payload.id] = action.payload;
 			// console.log(newState[action.spot])
 			return newState;
@@ -51,6 +57,13 @@ const reviewReducer = (state = initialState, action) => {
 				...state,
 				...action.payload,
 			};
+			return newState;
+		}
+
+		case REMOVE_REVIEW: {
+			const newState = { ...state };
+			// console.log(`${action.reviewId}`);
+			delete newState[action.reviewId];
 			return newState;
 		}
 
@@ -94,20 +107,32 @@ export const publishReview = (data, review, stars) => async (dispatch) => {
 };
 
 export const updateReviewAction = (review) => async (dispatch) => {
-	console.log({ review });
-	const response = await csrfFetch(`/api/reviews/${review.reviewId}`, {
+	// console.log({ review });
+	// const response = await csrfFetch(`/api/reviews/${review.id}`, { ${review[31].id}
+
+	const response = await csrfFetch(`/api/reviews/31`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
 		},
 		body: JSON.stringify({
 			review: review.review,
-			stars: review.stars,
+			stars: parseInt(review.stars),
 		}),
 	});
-	const newSpot = await response.json(response);
-	dispatch(editReview(newSpot));
+	const newReview = await response.json(response);
+	dispatch(editReview(newReview));
+	return newReview;
+};
+
+export const deleteReviewAction = (reviewId) => async (dispatch) => {
+	const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+		method: 'DELETE',
+	});
+	const review = await response.json();
+	dispatch(removeReview(reviewId));
 	return review;
 };
+
 
 export default reviewReducer;

@@ -20,7 +20,7 @@ function Home() {
 			{spotComponent.map((spot) => {
 			let rating = spot.avgRating;
 			if(rating === null) {
-				console.log(rating)
+				// console.log(rating)
 				rating = "none"
 			}
 				return (

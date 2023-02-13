@@ -9,8 +9,8 @@ function EditReview() {
 	const dispatch = useDispatch();
 	const { spotId, reviewId } = useParams();
 	// const spot = useSelector((state) => state.spot[spotId]);
-    const reviewSelector = useSelector((state) => state.review[reviewId]);
-    const sessionUser = useSelector((state) => state.session.user);
+	const reviewSelector = useSelector((state) => state.review[reviewId]);
+	const sessionUser = useSelector((state) => state.session.user);
 	const [review, setReview] = useState('');
 	const [stars, setStars] = useState('');
 	const [errors, setErrors] = useState([]);
@@ -25,29 +25,26 @@ function EditReview() {
 				userId: sessionUser.id,
 				spotId: parseInt(spotId),
 			})
-		)
-			.catch(async (res) => {
-                // console.log({review})
-                // console.log(res)
-				const data = await res.json();
-				if (data && data.errors) setErrors(data.errors);
-			})
-			// .then(() => window.location.reload(true));
+		).catch(async (res) => {
+			// console.log({review})
+			// console.log(res)
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+		// .then(() => window.location.reload(true));
 	};
 
 	return (
 		<>
-			<div >
-                {/* className="edit-spot-container" */}
+			<div>
+				{/* className="edit-spot-container" */}
 				<form onSubmit={handleSubmit}>
 					<ul>
 						{errors.map((error, idx) => (
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-					<h1 className="welcome-header">
-                    Edit your review
-					</h1>
+					<h1 className="welcome-header">Edit your review</h1>
 
 					<input
 						type="text"
@@ -57,6 +54,15 @@ function EditReview() {
 						placeholder="Review"
 						// className="profile-input"
 					/>
+
+					{/* <input
+						type="number"
+						value={stars}
+						onChange={(e) => setStars(e.target.value)}
+						required
+						placeholder="Stars"
+						// className="profile-input"
+					/> */}
 
 					<select
 						// className="profile-input"
@@ -71,8 +77,8 @@ function EditReview() {
 						<option value={5}>5 Stars</option>
 					</select>
 
-					<button type="submit" >
-                    {/* className="profile-input submit" */}
+					<button type="submit">
+						{/* className="profile-input submit" */}
 						Edit Review
 					</button>
 				</form>
