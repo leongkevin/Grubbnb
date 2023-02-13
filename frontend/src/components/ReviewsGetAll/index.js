@@ -1,4 +1,4 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
@@ -14,6 +14,20 @@ function ReviewsGetAll() {
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 	const reviewComponent = useSelector((state) => Object.values(state.review));
 	const sessionUser = useSelector((state) => state.session.user);
+
+	const history = useHistory();
+
+	let myReview = 0;
+
+	const deleteReview = async (e) => {
+		e.preventDefault();
+		// console.log(reviewId)
+		// dispatch(reviewActions.deleteReviewAction(spotId))
+		dispatch(reviewActions.deleteReviewAction(myReview))
+		// dispatch(reviewActions.deleteReviewAction(10))
+		// .then(() => history.push("/"))
+		.then(() => window.location.reload(true));
+	};
 
 	useEffect(() => {
 		dispatch(reviewActions.getReviewAction(spotId));
@@ -42,14 +56,23 @@ function ReviewsGetAll() {
 			})}
 
 			{reviewComponent.map((review) => {
-				// console.log(parseInt(review.userId) === parseInt(sessionUser.id))
-				<>
-					<EditReview />
-				</>;
+
+				myReview = parseInt(review.id);
+				// console.log(`this is it ${review.id}`);
+				// console.log(`this is it myReview ${myReview}`);
 				if (parseInt(review.userId) === parseInt(sessionUser.id)) {
 					return (
 						<>
+						Your Review: {review.stars} Stars
+						<div>{review.review}</div>
 							<EditReview />
+
+							<button
+								onClick={deleteReview}
+								// className="profile-input submit"
+							>
+								Delete Review
+							</button>
 						</>
 					);
 				} else {

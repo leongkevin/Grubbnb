@@ -5,7 +5,7 @@ import ProfileButton from './ProfileButton';
 import './Navigation.css';
 import Authentication from './Authentication';
 import SwitchToHostingButton from './SwitchToHostingButton';
-import logo from './imgs/logo.svg';
+import logo from './imgs/logo.png';
 
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector((state) => state.session.user);

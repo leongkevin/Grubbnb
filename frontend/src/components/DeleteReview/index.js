@@ -14,19 +14,20 @@ const DeleteReview = () => {
 
 	const deleteReview = async (e) => {
 		e.preventDefault();
+		// console.log(reviewId)
 		// dispatch(reviewActions.deleteReviewAction(spotId))
-		// dispatch(reviewActions.deleteReviewAction(reviewId))
-		dispatch(reviewActions.deleteReviewAction(24))
-		.then(() => history.push("/"))
-		.then(() => window.location.reload(true));
+		dispatch(reviewActions.deleteReviewAction(1000))
+		// dispatch(reviewActions.deleteReviewAction(10))
+		// .then(() => history.push("/"))
+		// .then(() => window.location.reload(true));
 	};
 
 	return (
 		<div>
-			<button onClick={deleteReview}
+			{/* <button onClick={deleteReview}
 			// className="profile-input submit"
 
-			>Delete Review</button>
+			>Delete Review</button> */}
 		</div>
 	);
 };
