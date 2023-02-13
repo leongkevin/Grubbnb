@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as spotActions from '../../store/spot';
-import './CreateSpot.css';
 
 function CreateSpotModal() {
 	const dispatch = useDispatch();

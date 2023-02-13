@@ -16,6 +16,7 @@
 .spot-title {
     font-size: 26px;
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+
 }
 
 .spot-subtitle {
@@ -24,6 +25,7 @@
     grid-gap: 20px;
     /* background-color: pink; */
     border-top: 10px;
+
 }
 
 .spot-subtitle-rating {
