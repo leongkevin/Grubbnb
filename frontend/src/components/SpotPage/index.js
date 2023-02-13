@@ -34,7 +34,7 @@ function SpotPage() {
 										</div>
 										<div className="spot-subtitle-reviews">
 											{/* · */}
-											Reviews
+											{/* Reviews */}
 										</div>
 										<div className="spot-address">
 											{spot.city}, {spot.state},{' '}
@@ -79,6 +79,7 @@ function SpotPage() {
 										<div className="spot-description">
 											{spot.description}
 										</div>
+                                        <ReviewsPage />
 									</div>
 									<div className="spot-page-details-right">
 										<div className="spot-actions">
@@ -96,7 +97,7 @@ function SpotPage() {
 											</div>
 										</div>
 
-										<ReviewsPage />
+
 									</div>
 								</div>
 							</div>

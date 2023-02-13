@@ -24,7 +24,7 @@ h1.spot-title {
     grid-template-columns: 1fr 3fr 4fr 6fr 1fr;
     grid-gap: 20px;
     margin-top: 4px;
-    background-color: pink;
+    /* background-color: pink; */
 }
 
 .spot-subtitle-rating {
@@ -115,9 +115,10 @@ h1.spot-title {
 }
 
 .spot-page-details-right {
+    padding-top: 20px;
     width: 450px;
 }
 .spot-page-details-left {
-
+    padding-top: 20px;
 
 }

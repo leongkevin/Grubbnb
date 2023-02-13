@@ -14,9 +14,15 @@ function Home() {
 	}, []);
 
 
+
 	return (
 		<div className="grid-container">
 			{spotComponent.map((spot) => {
+			let rating = spot.avgRating;
+			if(rating === null) {
+				console.log(rating)
+				rating = "none"
+			}
 				return (
 					<div key={spot.id} className="spot-component">
 						<NavLink
@@ -35,13 +41,15 @@ function Home() {
 										{spot.city}, {spot.country}
 									</div>
 									<div className="spot-rating">
-										☆{spot.avgRating}
+										☆{rating}
 									</div>
 								</div>
 								<div className="spot-description">
 									{spot.description}
 								</div>
-								<div className="spot-price">${spot.price} night</div>
+								<div className="spot-price">
+									${spot.price} night
+								</div>
 							</div>
 						</NavLink>
 					</div>
