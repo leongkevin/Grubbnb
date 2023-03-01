@@ -68,7 +68,7 @@ function ReviewsGetAll() {
 
 	return (
 		<div className="review-page-container">
-			
+
 			{/* <h1> {spot.avgRating} </h1> */}
 			{spotComponent.map((spot) => {
 				if (spot.id === parseInt(spotId)) {
@@ -102,6 +102,7 @@ function ReviewsGetAll() {
 							<div>
 								<div className="review-details">
 									{currentReview.stars} Stars - Anonymous User
+									{/* {currentReview.User.firstName} Stars - Anonymous User */}
 								</div>
 								<div className="review-timestamp">
 									{Date(currentReview.updatedAt)}
@@ -121,7 +122,8 @@ function ReviewsGetAll() {
 					return (
 						<div>
 							<div className="review-details">
-								{currentReview.stars} Stars - Anonymous User
+								{/* {currentReview.stars} Stars */ /* No stars in airbnb */}
+								{currentReview.User.firstName}
 							</div>
 							<div className="review-timestamp">
 								{Date(currentReview.updatedAt)}
