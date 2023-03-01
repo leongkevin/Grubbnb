@@ -68,6 +68,7 @@ function ReviewsGetAll() {
 
 	return (
 		<div className="review-page-container">
+			
 			{/* <h1> {spot.avgRating} </h1> */}
 			{spotComponent.map((spot) => {
 				if (spot.id === parseInt(spotId)) {

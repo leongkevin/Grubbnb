@@ -101,7 +101,7 @@
     object-fit: cover;
     padding-left: 4px;
     padding-right: 2px;
-    padding-top: 2px;
+    /* padding-top: 1px; */
 
 }
 
@@ -112,6 +112,7 @@
     object-fit: cover;
     border-radius: 0px 15px 0px 0px;
     padding-bottom: 2px;
+    padding-left: 4px;
 }
 
 .spot-image-fifth {
@@ -120,7 +121,8 @@
     overflow: hidden;
     object-fit: cover;
     border-radius: 0px 0px 15px 0px;
-    padding-top: 2px;
+    /* padding-top: 1px; */
+    padding-left: 4px;
 }
 
 .spot-description {
