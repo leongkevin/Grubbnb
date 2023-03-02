@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
-import './EditSpotModal.css';
+
 
 function EditSpotModal() {
 	const dispatch = useDispatch();

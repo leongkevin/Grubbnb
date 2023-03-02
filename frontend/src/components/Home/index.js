@@ -13,16 +13,14 @@ function Home() {
 		dispatch(spotActions.getSpots());
 	}, []);
 
-
-
 	return (
 		<div className="grid-container">
 			{spotComponent.map((spot) => {
-			let rating = spot.avgRating;
-			if(rating === null) {
-				// console.log(rating)
-				rating = "none"
-			}
+				let rating = spot.avgRating;
+				if (rating === null) {
+					// console.log(rating)
+					rating = 'none';
+				}
 				return (
 					<div key={spot.id} className="spot-component">
 						<NavLink
@@ -40,9 +38,7 @@ function Home() {
 									<div className="spot-city-country">
 										{spot.city}, {spot.country}
 									</div>
-									<div className="spot-rating">
-										☆{rating}
-									</div>
+									<div className="spot-rating">☆{rating}</div>
 								</div>
 								<div className="spot-description">
 									{spot.description}
