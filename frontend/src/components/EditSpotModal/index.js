@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
-
 
 function EditSpotModal() {
 	const dispatch = useDispatch();
@@ -12,6 +11,7 @@ function EditSpotModal() {
 	const [description, setDescription] = useState(spot.description);
 	const [price, setPrice] = useState(spot.price);
 	const [errors, setErrors] = useState([]);
+	const history = useHistory();
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -29,12 +29,12 @@ function EditSpotModal() {
 				price,
 				id: spotId,
 			})
-		)
-			.catch(async (res) => {
-				const data = await res.json();
-				if (data && data.errors) setErrors(data.errors);
-			})
-			.then(() => window.location.reload(true));
+		).catch(async (res) => {
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+		// .then(() => window.location.reload(true)); // Doesn't load update
+		history.push(`/spots/current`);
 	};
 
 	return (
@@ -47,9 +47,8 @@ function EditSpotModal() {
 						))}
 					</ul>
 					<h1 className="welcome-header">
-					Publish Edits For Spot Id # {spotId}
+						Publish Edits For Spot Id # {spotId}
 					</h1>
-
 
 					<input
 						type="text"
