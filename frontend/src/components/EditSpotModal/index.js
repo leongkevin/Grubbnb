@@ -33,7 +33,6 @@ function EditSpotModal() {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
 		});
-		// .then(() => window.location.reload(true)); // Doesn't load update
 		history.push(`/spots/current`);
 	};
 
@@ -46,9 +45,7 @@ function EditSpotModal() {
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-					<h1 className="welcome-header">
-						Publish Edits For Spot Id # {spotId}
-					</h1>
+					<h1 className="welcome-header"></h1>
 
 					<input
 						type="text"
@@ -78,7 +75,7 @@ function EditSpotModal() {
 					/>
 
 					<button type="submit" className="profile-input submit">
-						Edit Spot
+						Publish Changes For Spot Id # {spotId}
 					</button>
 				</form>
 			</div>

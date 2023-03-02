@@ -1,17 +1,13 @@
-import { NavLink, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 import './SpotPage.css';
-import OpenModalButton from '../OpenModalButton';
+// import OpenModalButton from '../OpenModalButton';
 import DeleteSpotButton from '../DeleteSpotButton';
 import EditSpotModal from '../EditSpotModal';
 import ReviewsPage from '../ReviewsGetAll';
 import ReviewCreate from '../ReviewCreate';
-import DeleteReview from '../DeleteReview';
-
-import * as sessionActions from '../../store/session';
-import EditReview from '../EditReview';
 
 function SpotPage() {
 	const dispatch = useDispatch();
@@ -24,7 +20,6 @@ function SpotPage() {
 	useEffect(() => {
 		dispatch(spotActions.getSpots());
 	}, []);
-	// if (parseInt(sessionUser.id) === spotOwnerId.ownerId) {
 
 	let spotOwnerActions;
 
@@ -103,11 +98,22 @@ function SpotPage() {
 										{' '}
 										Entire home hosted by ownerId:{' '}
 										{spot.ownerId}
+										<hr />
+										<img
+											src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
+											width="30%"
+										/>
+										<div>
+											Every booking includes free
+											protection from Host cancellations,
+											listing inaccuracies, and other
+											issues like trouble checking in.
+										</div>
+										<hr />
 										<div className="spot-description">
 											{spot.description}
 										</div>
-										<ReviewsPage />
-										<ReviewCreate />
+										<hr />
 									</div>
 									<div className="spot-page-details-right">
 										<div className="spot-actions">
@@ -115,6 +121,9 @@ function SpotPage() {
 										</div>
 									</div>
 								</div>
+								<hr />
+								<ReviewsPage />
+								<ReviewCreate />
 							</div>
 						</div>
 					);
