@@ -85,27 +85,25 @@ function ReviewComponenet() {
 					);
 				}
 			})}
-			{/* <div>
+			<div>
 				<button
 					onClick={deleteReview}
 					className="review-component submit"
 				>
 					Delete Your Review
 				</button>
-			</div> */}
+			</div>
 			{reviewComponent.map((currentReview) => {
 				myReview = parseInt(currentReview.id);
-				console.log(`myReview: ${myReview.userId}`)
-				console.log(`sessionUserId: ${sessionUser.id}`)
-				if (!sessionUser && myReview.userId === sessionUser.id) {
+				if (!sessionUser) {
 					return (
 						<>
 							<div>
-							<div className="review-details">
-								<i class="fa-solid fa-star" />{' '}
-								{currentReview.stars}{' '}·{' '}
-								{currentReview.User.firstName}
-							</div>
+								<div className="review-details">
+									{currentReview.stars} Stars - Anonymous User
+									{currentReview.User.firstName} Stars -
+									Anonymous User
+								</div>
 								<div className="review-timestamp">
 									{Date(currentReview.updatedAt)}
 								</div>
@@ -148,19 +146,19 @@ function ReviewComponenet() {
 							})}
 						</div>
 					);
-					// {
-					// 	reviewComponent.map((currReview) => {
-					// 		if (
-					// 			currReview.userId === parseInt(sessionUser.id)
-					// 		) {
-					// 			return (
-					// 				<>
-					// 					<EditReview review={currReview} />
-					// 				</>
-					// 			);
-					// 		}
-					// 	});
-					// }
+					{
+						reviewComponent.map((currReview) => {
+							if (
+								currReview.userId === parseInt(sessionUser.id)
+							) {
+								return (
+									<>
+										<EditReview review={currReview} />
+									</>
+								);
+							}
+						});
+					}
 				}
 			})}
 		</div>
