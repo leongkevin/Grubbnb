@@ -13,6 +13,7 @@ function SpotModalEdit() {
 	const [errors, setErrors] = useState([]);
 	const [updatedAt, setUpdatedAt] = useState(spot.updatedAt);
 	const history = useHistory();
+	const [hasSubmitted, setHasSubmitted] = useState(false);
 
 	const sessionUser = useSelector((state) => state.session.user);
 	const spotComponent = useSelector((state) => Object.values(state.spot));
@@ -35,49 +36,49 @@ function SpotModalEdit() {
 			})
 		).catch(async (res) => {
 			const data = await res.json();
-			if (data && data.errors) setErrors(data.errors);
+			if (data && data.errors) {
+				setErrors(data.errors);
+			} else {
+				history.push(`/spots/current`);
+			}
 		});
-		history.push(`/spots/current`);
 	};
 
 	return (
 		<>
 			<div className="edit-spot-container">
 				<form onSubmit={handleSubmit}>
-					<ul>
-						{errors.map((error, idx) => (
-							<li key={idx}>{error}</li>
-						))}
-					</ul>
 					<div className="spot-greeting">
 						Welcome back, {sessionUser.firstName}
 					</div>
-						{spotComponent.map((spot) => {
-							const timestamp = updatedAt; // Replace this with your own timestamp
-							const date = new Date(timestamp); // Creates a new Date object from the timestamp
+					{spotComponent.map((spot) => {
+						const timestamp = updatedAt; // Replace this with your own timestamp
+						const date = new Date(timestamp); // Creates a new Date object from the timestamp
 
-							const options = {
-								year: 'numeric',
-								month: 'long',
-								day: 'numeric',
-								hour: 'numeric',
-								minute: 'numeric',
-								timeZone: 'America/New_York',
-								timeZoneName: 'short',
-							};
-							const newFormat = date.toLocaleDateString(
-								'en-US',
-								options
+						const options = {
+							year: 'numeric',
+							month: 'long',
+							day: 'numeric',
+							hour: 'numeric',
+							minute: 'numeric',
+							timeZone: 'America/New_York',
+							timeZoneName: 'short',
+						};
+						const newFormat = date.toLocaleDateString(
+							'en-US',
+							options
+						);
+
+						if (parseInt(spotId) === spot.id) {
+							return (
+								<>
+									<div className="spot-timestamp">
+										Last updated on {newFormat}
+									</div>
+								</>
 							);
-
-							if (parseInt(spotId) === spot.id) {
-								return (
-									<>
-										<div className='spot-timestamp'>Last updated on {newFormat}</div>
-									</>
-								);
-							}
-						})}
+						}
+					})}
 
 					<input
 						type="text"
@@ -106,13 +107,20 @@ function SpotModalEdit() {
 						className="profile-input"
 					/>
 
-					<button type="submit" className="profile-input submit">
+<>
+						{errors.map((error, idx) => (
+							<div className="spot-errors" key={idx}>{error}</div>
+						))}
+					</>
 
-				{spotComponent.map((spot) => {
+					<button type="submit" className="profile-input submit">
+						{spotComponent.map((spot) => {
 							if (parseInt(spotId) === spot.id) {
 								return (
 									<>
-										<div className='spot-owner-action-button'>Publish Changes to {spot.name}</div>
+										<div className="spot-owner-action-button">
+											Publish Changes to {spot.name}
+										</div>
 									</>
 								);
 							}

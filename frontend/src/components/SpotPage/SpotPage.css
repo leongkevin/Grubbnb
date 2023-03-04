@@ -188,3 +188,11 @@
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.spot-errors {
+    font-size: 14px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    color: black;
+    text-align: left;
+    padding-left: 20px;
+}

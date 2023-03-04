@@ -19,10 +19,10 @@ function CreateSpotModal() {
 	const [hasSubmitted, setHasSubmitted] = useState(false);
 	const { closeModal } = useModal();
 
-	useEffect(() => {
-		const errors = [];
-		if (!name.length) errors.push('Please enter your Name');
-	}, [name]);
+	// useEffect(() => {
+	// 	const errors = [];
+	// 	if (!name.length) errors.push('Please enter your Name');
+	// }, [name]);
 
 	// const onSubmit = e => {
 	//   e.preventDefault();
