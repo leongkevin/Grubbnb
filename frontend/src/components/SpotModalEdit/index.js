@@ -11,9 +11,11 @@ function SpotModalEdit() {
 	const [description, setDescription] = useState(spot.description);
 	const [price, setPrice] = useState(spot.price);
 	const [errors, setErrors] = useState([]);
-
 	const [updatedAt, setUpdatedAt] = useState(spot.updatedAt);
 	const history = useHistory();
+
+	const sessionUser = useSelector((state) => state.session.user);
+	const spotComponent = useSelector((state) => Object.values(state.spot));
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -36,12 +38,6 @@ function SpotModalEdit() {
 			if (data && data.errors) setErrors(data.errors);
 		});
 		history.push(`/spots/current`);
-
-		const timestamp = updatedAt; // Replace this with your own timestamp
-
-		const date = new Date(timestamp); // Creates a new Date object from the timestamp
-
-		console.log(date.toDateString()); // Outputs the date in a human-readable format (e.g. "Tue May 25 2021")
 	};
 
 	return (
@@ -53,42 +49,36 @@ function SpotModalEdit() {
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-					<h1 className="welcome-header">
-						Welcome back, {spot.ownerId}
-					</h1>
-					<h7 className="welcome-header">
-						{/* Last updated at {spot.updatedAt.toDateString()} */}
-						Last updated at {spot.date}
+					<div className="spot-greeting">
+						Welcome back, {sessionUser.firstName}
+					</div>
+						{spotComponent.map((spot) => {
+							const timestamp = updatedAt; // Replace this with your own timestamp
+							const date = new Date(timestamp); // Creates a new Date object from the timestamp
 
+							const options = {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric',
+								hour: 'numeric',
+								minute: 'numeric',
+								timeZone: 'America/New_York',
+								timeZoneName: 'short',
+							};
+							const newFormat = date.toLocaleDateString(
+								'en-US',
+								options
+							);
 
+							if (parseInt(spotId) === spot.id) {
+								return (
+									<>
+										<div className='spot-timestamp'>Last updated on {newFormat}</div>
+									</>
+								);
+							}
+						})}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					</h7>
 					<input
 						type="text"
 						value={name}
@@ -117,7 +107,16 @@ function SpotModalEdit() {
 					/>
 
 					<button type="submit" className="profile-input submit">
-						Publish Changes For Spot Id # {spotId}
+
+				{spotComponent.map((spot) => {
+							if (parseInt(spotId) === spot.id) {
+								return (
+									<>
+										<div className='spot-owner-action-button'>Publish Changes to {spot.name}</div>
+									</>
+								);
+							}
+						})}
 					</button>
 				</form>
 			</div>

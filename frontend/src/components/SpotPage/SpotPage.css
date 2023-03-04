@@ -153,9 +153,38 @@
 .spot-page-details-right {
     padding-top: 20px;
     width: 450px;
+
 }
 
 .spot-page-details-left {
     padding-top: 20px;
+        padding-right: 100px;
 
+}
+
+.spot-greeting {
+    font-size: 20px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    color: black;
+
+}
+
+
+.spot-timestamp {
+    font-size: 10px;
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    color: gray;
+}
+
+.spot-timestamp,
+.spot-greeting {
+    padding-right: 20px;
+}
+
+
+
+.spot-owner-action-button {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
