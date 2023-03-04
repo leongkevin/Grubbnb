@@ -1,12 +1,11 @@
 import { useParams, useHistory } from 'react-router-dom';
-import React, { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
-import { useModal } from '../../context/Modal';
-import * as spotActions from '../../store/spot';
-import * as reviewActions from '../../store/review';
-import * as sessionActions from '../../store/session';
 
-const DeleteReview = () => {
+import * as reviewActions from '../../store/review';
+
+
+const ReviewButtonDelete = () => {
 	const dispatch = useDispatch();
 	const { reviewId } = useParams();
 	const history = useHistory();
@@ -32,4 +31,4 @@ const DeleteReview = () => {
 	);
 };
 
-export default DeleteReview;
+export default ReviewButtonDelete;

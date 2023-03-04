@@ -26,7 +26,7 @@ function Hosting() {
 			<>
 				<div className="current-page-title">Manage Your Spots</div>
 				<div className="current-page-menu">
-					<div className="current-page-create-spot spot-thumbnail ">
+					<div className="current-page-create-spot">
 						<OpenModalButton
 							buttonText="+ Create a new spot"
 							modalComponent={<SpotModalCreate />}
@@ -36,6 +36,16 @@ function Hosting() {
 				<div className="grid-container current-page-grid">
 					{spotComponent.map((spot) => {
 						// console.log(spot.ownerId);
+
+						let mainImage = [spot.previewImage[0]];
+						console.log(`mainImage ${mainImage}`);
+						if (!spot.previewImage.length) {
+							mainImage =
+								'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
+						} else {
+							mainImage = spot.previewImage;
+						}
+
 						if (spot.ownerId === sessionUser.id) {
 							return (
 								<div key={spot.id} className="spot-component">
@@ -45,7 +55,7 @@ function Hosting() {
 									>
 										<div className="spot-image">
 											<img
-												src={spot.previewImage}
+												src={mainImage}
 												className="spot-thumbnail"
 											></img>
 										</div>
@@ -76,7 +86,9 @@ function Hosting() {
 	} else {
 		return (
 			<>
-				<div className="current-page-title">Authentication Required</div>
+				<div className="current-page-title">
+					Authentication Required
+				</div>
 				<div className="current-page-menu">
 					<div className="current-page-create-spot spot-thumbnail ">
 						<OpenModalButton

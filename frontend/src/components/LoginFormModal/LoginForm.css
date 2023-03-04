@@ -2,7 +2,7 @@
     border: 1px solid #CCC;
     box-sizing: border-box;
     cursor: pointer;
-    padding: .5em 10em;
+    /* padding: .5em 10em; */
 
     background: rgb(255, 56, 92);
 
@@ -39,5 +39,3 @@
     font-weight: 10;
 
 }
-
-

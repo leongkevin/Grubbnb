@@ -6,9 +6,9 @@ import * as reviewActions from '../../store/review';
 import OpenModalButton from '../OpenModalButton';
 import './ReviewGetAll.css';
 import EditReview from '../EditReview';
-import DeleteReview from '../DeleteReview';
+import DeleteReview from '../ReviewButtonDelete';
 
-function ReviewsGetAll() {
+function ReviewComponenet() {
 	const dispatch = useDispatch();
 	const { spotId } = useParams();
 
@@ -68,7 +68,6 @@ function ReviewsGetAll() {
 
 	return (
 		<div className="review-page-container">
-
 			{/* <h1> {spot.avgRating} </h1> */}
 			{spotComponent.map((spot) => {
 				if (spot.id === parseInt(spotId)) {
@@ -77,33 +76,36 @@ function ReviewsGetAll() {
 					return (
 						<div>
 							<div className="review-total">
-								{reviewComponent.length} Reviews
+
 							</div>
 							<div className="review-title">
-								☆ {spot.avgRating}
+								<i class="fa-solid fa-star" /> {spot.avgRating}{' '}·{' '}{reviewComponent.length} Reviews
 							</div>
 						</div>
 					);
 				}
 			})}
-			<div>
+			{/* <div>
 				<button
 					onClick={deleteReview}
-					// className="profile-input submit"
+					className="review-component submit"
 				>
-					Delete Review
+					Delete Your Review
 				</button>
-			</div>
+			</div> */}
 			{reviewComponent.map((currentReview) => {
 				myReview = parseInt(currentReview.id);
-				if (!sessionUser) {
+				console.log(`myReview: ${myReview.userId}`)
+				console.log(`sessionUserId: ${sessionUser.id}`)
+				if (!sessionUser && myReview.userId === sessionUser.id) {
 					return (
 						<>
 							<div>
-								<div className="review-details">
-									{currentReview.stars} Stars - Anonymous User
-									{/* {currentReview.User.firstName} Stars - Anonymous User */}
-								</div>
+							<div className="review-details">
+								<i class="fa-solid fa-star" />{' '}
+								{currentReview.stars}{' '}·{' '}
+								{currentReview.User.firstName}
+							</div>
 								<div className="review-timestamp">
 									{Date(currentReview.updatedAt)}
 								</div>
@@ -122,7 +124,8 @@ function ReviewsGetAll() {
 					return (
 						<div>
 							<div className="review-details">
-								{/* {currentReview.stars} Stars */ /* No stars in airbnb */}
+								<i class="fa-solid fa-star" />{' '}
+								{currentReview.stars}{' '}·{' '}
 								{currentReview.User.firstName}
 							</div>
 							<div className="review-timestamp">
@@ -145,23 +148,23 @@ function ReviewsGetAll() {
 							})}
 						</div>
 					);
-					{
-						reviewComponent.map((currReview) => {
-							if (
-								currReview.userId === parseInt(sessionUser.id)
-							) {
-								return (
-									<>
-										<EditReview review={currReview} />
-									</>
-								);
-							}
-						});
-					}
+					// {
+					// 	reviewComponent.map((currReview) => {
+					// 		if (
+					// 			currReview.userId === parseInt(sessionUser.id)
+					// 		) {
+					// 			return (
+					// 				<>
+					// 					<EditReview review={currReview} />
+					// 				</>
+					// 			);
+					// 		}
+					// 	});
+					// }
 				}
 			})}
 		</div>
 	);
 }
 
-export default ReviewsGetAll;
+export default ReviewComponenet;
