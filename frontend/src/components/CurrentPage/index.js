@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
-import CreateSpotModal from '../CreateSpotModal';
+import SpotModalCreate from '../SpotModalCreate';
 import OpenModalButton from '../OpenModalButton';
 import LoginFormModal from '../LoginFormModal';
 import SignupFormModal from '../SignupFormModal';
@@ -29,7 +29,7 @@ function Hosting() {
 					<div className="current-page-create-spot spot-thumbnail ">
 						<OpenModalButton
 							buttonText="+ Create a new spot"
-							modalComponent={<CreateSpotModal />}
+							modalComponent={<SpotModalCreate />}
 						/>
 					</div>
 				</div>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../context/Modal';
 import * as spotActions from '../../store/spot';
@@ -16,29 +16,52 @@ function CreateSpotModal() {
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState('');
 	const [errors, setErrors] = useState([]);
+	const [hasSubmitted, setHasSubmitted] = useState(false);
 	const { closeModal } = useModal();
+
+	useEffect(() => {
+		const errors = [];
+		if (!name.length) errors.push('Please enter your Name');
+	}, [name]);
+
+	// const onSubmit = e => {
+	//   e.preventDefault();
+
+	//   setHasSubmitted(true);
+	//   if (errors.length) return alert(`Cannot Submit`);
+
+	//   const contactUsInformation = {
+	// 	name,
+	// 	submittedOn: new Date()
+	//   };
+
+	//   console.log(contactUsInformation);
+	//   setName('');
+	//   setErrors([]);
+	//   setHasSubmitted(false);
+	// }
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-			setErrors([]);
-			dispatch(
-				spotActions.publishSpot({
-					address,
-					city,
-					state,
-					country,
-					lat,
-					lng,
-					name,
-					description,
-					price,
-				})
-			)
-				.then(closeModal)
-				.catch(async (res) => {
-					const data = await res.json();
-					if (data && data.errors) setErrors(data.errors);
-				});
+		setErrors([]);
+		dispatch(
+			spotActions.publishSpot({
+				address,
+				city,
+				state,
+				country,
+				lat,
+				lng,
+				name,
+				description,
+				price,
+			})
+		)
+			.then(closeModal)
+			.catch(async (res) => {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			});
 	};
 
 	return (

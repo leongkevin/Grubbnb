@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 import './SpotPage.css';
 // import OpenModalButton from '../OpenModalButton';
-import DeleteSpotButton from '../DeleteSpotButton';
+import SpotButtonDelete from '../SpotButtonDelete';
 import EditSpotModal from '../EditSpotModal';
 import ReviewsPage from '../ReviewsGetAll';
 import ReviewCreate from '../ReviewCreate';
@@ -33,7 +33,7 @@ function SpotPage() {
 						{parseInt(sessionUser.id) === spotOwnerId.ownerId && (
 							<div>
 								<EditSpotModal />
-								<DeleteSpotButton />
+								<SpotButtonDelete />
 							</div>
 						)}
 					</div>
