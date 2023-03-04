@@ -21,6 +21,15 @@ function Home() {
 					// console.log(rating)
 					rating = 'none';
 				}
+
+				let mainImage = [spot.previewImage[0]];
+				console.log(`mainImage ${mainImage}`);
+				if (!spot.previewImage.length) {
+					mainImage =
+						'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
+				} else {
+					mainImage = spot.previewImage;
+				}
 				return (
 					<div key={spot.id} className="spot-component">
 						<NavLink
@@ -29,7 +38,7 @@ function Home() {
 						>
 							<div className="spot-image">
 								<img
-									src={spot.previewImage}
+									src={mainImage}
 									className="spot-thumbnail"
 								></img>
 							</div>

@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { useParams, NavLink } from 'react-router-dom';
 import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
@@ -75,10 +75,12 @@ function SpotPage() {
 								<div className="spot-image">
 									<div className="spot-image-divider">
 										<div className="spot-image-divider-left">
-											<img
-												src={spot.previewImage}
-												className="spot-image-main"
-											></img>
+											{/* <NavLink to={{ pathname: spot.previewImage }} target="_blank"> */}
+												<img
+													src={spot.previewImage}
+													className="spot-image-main"
+												></img>
+											{/* </NavLink> */}
 										</div>
 										<div className="spot-image-divider-right">
 											<img
@@ -107,10 +109,6 @@ function SpotPage() {
 										{' '}
 										Entire home hosted by ownerId:{' '}
 										{spot.ownerId}
-
-
-
-
 										<hr />
 										<img
 											src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
