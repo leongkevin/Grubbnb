@@ -3,9 +3,8 @@ import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 import './SpotPage.css';
-// import OpenModalButton from '../OpenModalButton';
 import SpotButtonDelete from '../SpotButtonDelete';
-import EditSpotModal from '../EditSpotModal';
+import SpotModalEdit from '../SpotModalEdit';
 import ReviewsPage from '../ReviewsGetAll';
 import ReviewCreate from '../ReviewCreate';
 
@@ -32,7 +31,7 @@ function SpotPage() {
 					<div className="spot-actions-edit">
 						{parseInt(sessionUser.id) === spotOwnerId.ownerId && (
 							<div>
-								<EditSpotModal />
+								<SpotModalEdit />
 								<SpotButtonDelete />
 							</div>
 						)}

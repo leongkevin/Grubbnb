@@ -3,7 +3,7 @@ import { NavLink, useHistory, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 
-function EditSpotModal() {
+function SpotModalEdit() {
 	const dispatch = useDispatch();
 	const { spotId } = useParams();
 	const spot = useSelector((state) => state.spot[spotId]);
@@ -11,6 +11,8 @@ function EditSpotModal() {
 	const [description, setDescription] = useState(spot.description);
 	const [price, setPrice] = useState(spot.price);
 	const [errors, setErrors] = useState([]);
+
+	const [updatedAt, setUpdatedAt] = useState(spot.updatedAt);
 	const history = useHistory();
 
 	const handleSubmit = (e) => {
@@ -34,6 +36,12 @@ function EditSpotModal() {
 			if (data && data.errors) setErrors(data.errors);
 		});
 		history.push(`/spots/current`);
+
+		const timestamp = updatedAt; // Replace this with your own timestamp
+
+		const date = new Date(timestamp); // Creates a new Date object from the timestamp
+
+		console.log(date.toDateString()); // Outputs the date in a human-readable format (e.g. "Tue May 25 2021")
 	};
 
 	return (
@@ -45,8 +53,42 @@ function EditSpotModal() {
 							<li key={idx}>{error}</li>
 						))}
 					</ul>
-					<h1 className="welcome-header"></h1>
+					<h1 className="welcome-header">
+						Welcome back, {spot.ownerId}
+					</h1>
+					<h7 className="welcome-header">
+						{/* Last updated at {spot.updatedAt.toDateString()} */}
+						Last updated at {spot.date}
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+					</h7>
 					<input
 						type="text"
 						value={name}
@@ -83,4 +125,4 @@ function EditSpotModal() {
 	);
 }
 
-export default EditSpotModal;
+export default SpotModalEdit;
