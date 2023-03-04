@@ -162,7 +162,7 @@ router.get('/', async (req, res) => {
 		limit: limit,
 		offset: offset,
 	});
-
+	console.log(findSpots)
 	const spotsCopy = findSpots.map((el) => el.toJSON());
 
 	// res.json(spotsCopy);

@@ -29,7 +29,7 @@ export const createSpot = (spot) => {
 
 const GET_SPOTS = 'spots/GET_SPOTS';
 export const getAllSpots = (spots) => {
-	// console.log(spots);
+	console.log(spots);
 	return {
 		type: GET_SPOTS,
 		payload: spots,
@@ -54,7 +54,7 @@ export const spotReducer = (state = initialState, action) => {
 			const newState = { ...state };
 			// newState[action.spot.id] = action.spot;
 			// console.log(newState[action.spot])
-			newState[action.payload.id] = action.payload
+			newState[action.payload.id] = action.payload;
 			// console.log(newState[action.spot])
 			return newState;
 		}
@@ -79,6 +79,8 @@ export const spotReducer = (state = initialState, action) => {
 				...state,
 				...action.payload,
 			};
+			console.log(`${state}`);
+			console.log(`${action.payload}`);
 			return newState;
 		}
 		default:
@@ -124,7 +126,7 @@ export const publishSpot = (spot) => async (dispatch) => {
 export const getSpots = () => async (dispatch) => {
 	const response = await csrfFetch('/api/spots');
 	const spots = await response.json();
-	// console.log(spots);
+	console.log(spots);
 	dispatch(getAllSpots(spots));
 	// console.log(spots);
 	return response;
