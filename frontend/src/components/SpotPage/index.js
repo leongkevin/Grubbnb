@@ -18,7 +18,7 @@ function SpotPage() {
 
 	useEffect(() => {
 		dispatch(spotActions.getSpots());
-	}, []);
+	}, [dispatch]);
 
 	let spotOwnerActions;
 

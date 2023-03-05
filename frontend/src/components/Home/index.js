@@ -22,9 +22,9 @@ function Home() {
 					rating = 'none';
 				}
 
-				let mainImage = [spot.previewImage[0]];
+				let mainImage = [spot.previewImage];
 				console.log(`mainImage ${mainImage}`);
-				if (!spot.previewImage.length) {
+				if (!spot.previewImage) {
 					mainImage =
 						'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
 				} else {

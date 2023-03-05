@@ -95,7 +95,13 @@ function ReviewComponenet() {
 			</div>
 			{reviewComponent.map((currentReview) => {
 				myReview = parseInt(currentReview.id);
-				if (!sessionUser) {
+				// if (!sessionUser && currentReview.id) {
+
+				console.log(`this is ${currentReview.id} vs ${undefined}: ${currentReview.id !== undefined}`)
+				// console.log(parseInt(currentReview.userId) === parseInt(sessionUser.id))
+				// if ((currentReview.id !== undefined)) {
+					if ((parseInt(currentReview.userId) === parseInt(sessionUser.id))) {
+					// if ((currentReview.id !== undefined) && (parseInt(currentReview.userId) === parseInt(sessionUser.id))) {
 					return (
 						<>
 							<div>
@@ -118,7 +124,7 @@ function ReviewComponenet() {
 
 				// parseInt(currentReview.id) !== parseInt(sessionUser.user.id)
 				// )
-				else {
+				else if(parseInt(currentReview.userId) === parseInt(sessionUser.id)) {
 					return (
 						<div>
 							<div className="review-details">
