@@ -1,11 +1,34 @@
 import { NavLink } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as spotActions from '../../store/spot';
 import './Home.css';
 
 function Home() {
 	const dispatch = useDispatch();
+
+
+	// const [showMenu, setShowMenu] = useState(false);
+	// const ulRef = useRef();
+	// useEffect(() => {
+	// 	if (!showMenu) return;
+
+	// 	const closeMenu = (e) => {
+	// 		if (!ulRef.current.contains(e.target)) {
+	// 			setShowMenu(false);
+	// 		}
+	// 	};
+
+	// 	document.addEventListener('click', closeMenu);
+
+	// 	return () => document.removeEventListener('click', closeMenu);
+	// }, [showMenu]);
+
+	// const ulClassName = 'spot-rating' + (showMenu ? '' : ' display-none');
+
+
+
+
 
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 
@@ -18,9 +41,18 @@ function Home() {
 			{spotComponent.map((spot) => {
 				let rating = spot.avgRating;
 				if (rating === null) {
-					// console.log(rating)
-					rating = 'none';
+					rating = '+';
+					// const el = document.querySelector(".spot-rating")
+					// el.classList.add('display-none')
 				}
+
+				// if (rating === null) {
+				// 	return(
+				// 		<>
+				// 			<i class="fa-solid fa-star" />
+				// 		</>
+				// 	)
+				// }
 
 				let mainImage = [spot.previewImage];
 				console.log(`mainImage ${mainImage}`);
@@ -47,7 +79,11 @@ function Home() {
 									<div className="spot-city-country">
 										{spot.city}, {spot.country}
 									</div>
-									<div className="spot-rating">☆{rating}</div>
+									<div className="spot-rating"><i class="fa-solid fa-star" /> {rating}
+
+									</div>
+									{/* <div className={ulClassName} ref={ulRef}><i class="fa-solid fa-star" /> {rating}
+									</div> */}
 								</div>
 								<div className="spot-description">
 									{spot.description}

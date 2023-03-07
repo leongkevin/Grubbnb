@@ -30,11 +30,12 @@
 
 
 .spot-rating {
-    font-family: monospace;
-    width: 5ch;
-    overflow: hidden;
-    white-space: nowrap;
     text-align: right;
+    font-size: 12px;
+}
+
+.display-none {
+    display: none;
 }
 
 

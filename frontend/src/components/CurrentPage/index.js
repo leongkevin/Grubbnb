@@ -36,6 +36,20 @@ function Hosting() {
 				<div className="grid-container current-page-grid">
 					{spotComponent.map((spot) => {
 						// console.log(spot.ownerId);
+						let rating = spot.avgRating;
+						if (rating === null) {
+							rating = '';
+							// const el = document.querySelector(".spot-rating")
+							// el.classList.add('display-none')
+						}
+
+						if (rating === null) {
+							return(
+								<>
+									<i class="fa-solid fa-star" />
+								</>
+							)
+						}
 
 						let mainImage = [spot.previewImage];
 						console.log(`mainImage ${mainImage}`);
@@ -65,7 +79,9 @@ function Hosting() {
 													{spot.city}, {spot.country}
 												</div>
 												<div className="spot-rating">
-													☆{spot.avgRating}
+													<i class="fa-solid fa-star" />{' '}
+													{rating}
+													{/* {spot.rating} */}
 												</div>
 											</div>
 											<div className="spot-description">

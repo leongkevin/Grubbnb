@@ -5,7 +5,7 @@ import * as spotActions from '../../store/spot';
 import './SpotPage.css';
 import SpotButtonDelete from '../SpotButtonDelete';
 import SpotModalEdit from '../SpotModalEdit';
-import ReviewsPage from '../ReviewComponenet';
+import ReviewComponenet from '../ReviewComponenet';
 import ReviewCreate from '../ReviewCreate';
 
 function SpotPage() {
@@ -20,7 +20,7 @@ function SpotPage() {
 		dispatch(spotActions.getSpots());
 	}, [dispatch]);
 
-	let spotOwnerActions;
+	let spotOwnerActions = [];
 
 	if (sessionUser) {
 		spotOwnerActions = (
@@ -134,8 +134,9 @@ function SpotPage() {
 									</div>
 								</div>
 								<hr />
-								<ReviewsPage />
+
 								<ReviewCreate />
+								<ReviewComponenet />
 							</div>
 						</div>
 					);

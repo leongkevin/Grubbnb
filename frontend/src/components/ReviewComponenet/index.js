@@ -100,7 +100,7 @@ function ReviewComponenet() {
 				console.log(`this is ${currentReview.id} vs ${undefined}: ${currentReview.id !== undefined}`)
 				// console.log(parseInt(currentReview.userId) === parseInt(sessionUser.id))
 				// if ((currentReview.id !== undefined)) {
-					if ((parseInt(currentReview.userId) === parseInt(sessionUser.id))) {
+					if ((parseInt(currentReview.userId))) { //  === parseInt(sessionUser.id)
 					// if ((currentReview.id !== undefined) && (parseInt(currentReview.userId) === parseInt(sessionUser.id))) {
 					return (
 						<>
