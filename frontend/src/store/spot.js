@@ -81,14 +81,8 @@ export const spotReducer = (state = initialState, action) => {
 			};
 			// console.log(`${state}`);
 			// console.log(`${action.payload}`);
-			newState[action.payload.id] = action.payload
+			newState[action.payload.id] = action.payload;
 			return newState;
-			// const newState = {};
-			// console.log(`updateSpot newState: ${[...state]}`);
-			// state.forEach((spot) => {
-			// 	state[spot.id] = spot;
-			// });
-			// return newState;
 		}
 		default:
 			return state;

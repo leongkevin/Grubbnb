@@ -86,14 +86,94 @@ hr {
     margin-right: auto;
 }
 
+
 .grid-container {
     padding-left: 80px;
     padding-right: 80px;
     padding-top: 80px;
     margin-top: 16px;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr; */
 
-    /* grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr; */
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
+}
+
+
+
+@media (max-width: 1920px) and (min-width: 1761px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media (max-width: 1700px) and (min-width: 1561px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media (max-width: 1560px) and (min-width: 1200px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media (max-width: 1159px) and (min-width: 1101px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media (max-width: 1060px) and (min-width: 901px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media (max-width: 900px) and (min-width: 651px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 10px;
+    }
+}
+
+@media (max-width: 650px) and (min-width: 401px) {
+    .grid-container {
+        padding-left: 80px;
+        padding-right: 80px;
+        padding-top: 80px;
+        margin-top: 16px;
+        grid-template-columns: 1fr;
+        grid-gap: 10px;
+    }
 }
