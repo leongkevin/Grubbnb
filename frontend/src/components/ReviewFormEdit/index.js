@@ -5,7 +5,7 @@ import * as spotActions from '../../store/spot';
 import * as reviewActions from '../../store/review';
 import * as sessionActions from '../../store/session';
 
-function EditReview(props) {
+function ReviewFormEdit(props) {
 	const dispatch = useDispatch();
 	// const spot = useSelector((state) => state.spot[spotId]);
 	const reviewSelector = useSelector(
@@ -49,13 +49,12 @@ function EditReview(props) {
 					))}
 				</ul>
 				<div className="review-page-container">
-					<h2 className="welcome-header">Edit your review</h2>
-					Your Rating: {props.review.stars} Stars
-					<div>
-						<h3>Your Review: {props.review.review}</h3>
+					<div className="welcome-header">
+						Update your <i class="fa-solid fa-star" />{' '}
+						{props.review.stars} review
 					</div>
 				</div>
-
+				<label>Your Review:</label>
 				<input
 					type="text"
 					value={review}
@@ -64,16 +63,7 @@ function EditReview(props) {
 					placeholder="Review"
 					className="profile-input"
 				/>
-
-				{/* <input
-						type="number"
-						value={stars}
-						onChange={(e) => setStars(e.target.value)}
-						required
-						placeholder="Stars"
-						// className="profile-input"
-					/> */}
-
+				<label>Your Rating:</label>
 				<select
 					className="profile-input"
 					onChange={(e) => setStars(e.target.value)}
@@ -86,16 +76,15 @@ function EditReview(props) {
 					<option value={4}>4 Stars</option>
 					<option value={5}>5 Stars</option>
 				</select>
-
 				<button type="submit" className="profile-input submit">
-					Edit Review
+					Edit Your Review
 				</button>
 			</form>
 		</div>
-	)
+	);
 }
 
-export default EditReview;
+export default ReviewFormEdit;
 
 {
 	/*
@@ -214,21 +203,3 @@ export default EditReview;
 // </div>
 
 // myReview = parseInt(currentReview.id);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

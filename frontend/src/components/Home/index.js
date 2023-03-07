@@ -6,30 +6,6 @@ import './Home.css';
 
 function Home() {
 	const dispatch = useDispatch();
-
-
-	// const [showMenu, setShowMenu] = useState(false);
-	// const ulRef = useRef();
-	// useEffect(() => {
-	// 	if (!showMenu) return;
-
-	// 	const closeMenu = (e) => {
-	// 		if (!ulRef.current.contains(e.target)) {
-	// 			setShowMenu(false);
-	// 		}
-	// 	};
-
-	// 	document.addEventListener('click', closeMenu);
-
-	// 	return () => document.removeEventListener('click', closeMenu);
-	// }, [showMenu]);
-
-	// const ulClassName = 'spot-rating' + (showMenu ? '' : ' display-none');
-
-
-
-
-
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 
 	useEffect(() => {
@@ -39,23 +15,25 @@ function Home() {
 	return (
 		<div className="grid-container">
 			{spotComponent.map((spot) => {
-				let rating = spot.avgRating;
-				if (rating === null) {
-					rating = '+';
-					// const el = document.querySelector(".spot-rating")
+				let ratings = spot.avgRating;
+				if (!ratings) {
+					ratings = null;
+					// const el = document.querySelectorAll(".spot-rating")
+					// el.forEach((element) =>
+
+					// console.log(`Hello ${element.classList.add('display-none')}`)
+
+					// )
 					// el.classList.add('display-none')
+				} else if (!(ratings % 1 === 0 )) {
+					let newNum = ratings;
+					// console.log(typeof newNum);
+					// console.log(newNum.toFixed(2))
+					ratings = newNum.toFixed(2);
 				}
 
-				// if (rating === null) {
-				// 	return(
-				// 		<>
-				// 			<i class="fa-solid fa-star" />
-				// 		</>
-				// 	)
-				// }
-
 				let mainImage = [spot.previewImage];
-				console.log(`mainImage ${mainImage}`);
+				// console.log(`mainImage ${mainImage}`);
 				if (!spot.previewImage) {
 					mainImage =
 						'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';
@@ -79,8 +57,8 @@ function Home() {
 									<div className="spot-city-country">
 										{spot.city}, {spot.country}
 									</div>
-									<div className="spot-rating"><i class="fa-solid fa-star" /> {rating}
-
+									<div className="spot-rating">
+										<i class="fa-solid fa-star" /> {ratings}
 									</div>
 									{/* <div className={ulClassName} ref={ulRef}><i class="fa-solid fa-star" /> {rating}
 									</div> */}

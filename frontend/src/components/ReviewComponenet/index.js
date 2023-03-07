@@ -5,7 +5,7 @@ import * as spotActions from '../../store/spot';
 import * as reviewActions from '../../store/review';
 import OpenModalButton from '../OpenModalButton';
 import './ReviewGetAll.css';
-import EditReview from '../EditReview';
+import ReviewFormEdit from '../ReviewFormEdit';
 import DeleteReview from '../ReviewButtonDelete';
 
 function ReviewComponenet() {
@@ -66,49 +66,53 @@ function ReviewComponenet() {
 		dispatch(spotActions.getSpots(spotId));
 	}, []);
 
+	// console.log(sessionUser)
+
 	return (
 		<div className="review-page-container">
-			{/* <h1> {spot.avgRating} </h1> */}
 			{spotComponent.map((spot) => {
 				if (spot.id === parseInt(spotId)) {
 					// console.log(`this is ${parseInt(spotId)}`);
 					// console.log(`this is ${parseInt(spot.id)}`);
 					return (
 						<div>
-							<div className="review-total">
-
-							</div>
+							<div className="review-total"></div>
 							<div className="review-title">
-								<i class="fa-solid fa-star" /> {spot.avgRating}{' '}·{' '}{reviewComponent.length} Reviews
+								<i class="fa-solid fa-star" /> {spot.avgRating}{' '}
+								· {reviewComponent.length} Reviews
 							</div>
 						</div>
 					);
 				}
 			})}
-			<div>
-				<button
-					onClick={deleteReview}
-					className="review-component submit"
-				>
-					Delete Your Review
-				</button>
-			</div>
+			<div></div>
 			{reviewComponent.map((currentReview) => {
 				myReview = parseInt(currentReview.id);
 				// if (!sessionUser && currentReview.id) {
 
-				console.log(`this is ${currentReview.id} vs ${undefined}: ${currentReview.id !== undefined}`)
+				// console.log(`this is ${currentReview.id} vs ${undefined}: ${currentReview.id !== undefined}`)
 				// console.log(parseInt(currentReview.userId) === parseInt(sessionUser.id))
 				// if ((currentReview.id !== undefined)) {
-					if ((parseInt(currentReview.userId))) { //  === parseInt(sessionUser.id)
+				// console.log(sessionUser)
+
+				// if(sessionUser) {
+				// 	sessionUser.id = 0;
+				// }
+				// if ((parseInt(currentReview.userId))) { //  === parseInt(sessionUser.id)
+				// if ((parseInt(currentReview.userId))) { //  === parseInt(sessionUser.id)
+				if (
+					sessionUser &&
+					sessionUser.id === parseInt(currentReview.userId)
+				) {
 					// if ((currentReview.id !== undefined) && (parseInt(currentReview.userId) === parseInt(sessionUser.id))) {
+
 					return (
 						<>
 							<div>
 								<div className="review-details">
-									{currentReview.stars} Stars - Anonymous User
-									{currentReview.User.firstName} Stars -
-									Anonymous User
+									<i class="fa-solid fa-star" />{' '}
+									{currentReview.stars} ·{' '}
+									{currentReview.User.firstName}
 								</div>
 								<div className="review-timestamp">
 									{Date(currentReview.updatedAt)}
@@ -116,20 +120,44 @@ function ReviewComponenet() {
 								<div className="review-review">
 									{currentReview.review}
 								</div>
+								{/* <EditReview review={currentReview} /> */}
+								{reviewComponent.map((currReview) => {
+									console.log(currReview);
+									console.log(
+										sessionUser &&
+											sessionUser.id ===
+												parseInt(currReview.userId)
+									);
+
+									if (
+										sessionUser &&
+										sessionUser.id ===
+											parseInt(currReview.userId)
+									) {
+										return (
+											<>
+												<ReviewFormEdit
+													review={currReview}
+												/>
+												<button
+													onClick={deleteReview}
+													className="review-component submit"
+												>
+													Delete Your Review
+												</button>
+											</>
+										);
+									}
+								})}
 							</div>
 						</>
 					);
-				}
-				// } else if (
-
-				// parseInt(currentReview.id) !== parseInt(sessionUser.user.id)
-				// )
-				else if(parseInt(currentReview.userId) === parseInt(sessionUser.id)) {
+				} else {
 					return (
 						<div>
 							<div className="review-details">
 								<i class="fa-solid fa-star" />{' '}
-								{currentReview.stars}{' '}·{' '}
+								{currentReview.stars} ·{' '}
 								{currentReview.User.firstName}
 							</div>
 							<div className="review-timestamp">
@@ -138,33 +166,8 @@ function ReviewComponenet() {
 							<div className="review-review">
 								{currentReview.review}
 							</div>
-							{reviewComponent.map((currReview) => {
-								if (
-									currReview.userId ===
-									parseInt(sessionUser.id)
-								) {
-									return (
-										<>
-											<EditReview review={currReview} />
-										</>
-									);
-								}
-							})}
 						</div>
 					);
-					{
-						reviewComponent.map((currReview) => {
-							if (
-								currReview.userId === parseInt(sessionUser.id)
-							) {
-								return (
-									<>
-										<EditReview review={currReview} />
-									</>
-								);
-							}
-						});
-					}
 				}
 			})}
 		</div>
