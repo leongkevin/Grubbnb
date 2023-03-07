@@ -40,9 +40,6 @@ function SpotModalEdit() {
 				setErrors(data.errors);
 			}
 		});
-		// if(true){
-		// 	history.push(`/spots/current`)
-		// }
 
 	};
 
