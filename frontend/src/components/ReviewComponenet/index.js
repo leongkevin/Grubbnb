@@ -7,6 +7,7 @@ import OpenModalButton from '../OpenModalButton';
 import './ReviewGetAll.css';
 import ReviewFormEdit from '../ReviewFormEdit';
 import DeleteReview from '../ReviewButtonDelete';
+import ReviewCreate from '../ReviewCreate';
 
 function ReviewComponenet() {
 	const dispatch = useDispatch();
@@ -68,24 +69,72 @@ function ReviewComponenet() {
 
 	// console.log(sessionUser)
 
+	let sessionLinks;
+
+	if (sessionUser) {
+		sessionLinks = (
+			<div id="review-box">
+				<ReviewCreate />
+			</div>
+		);
+	}
+
+	let count = 0;
+
 	return (
 		<div className="review-page-container">
-			{spotComponent.map((spot) => {
-				if (spot.id === parseInt(spotId)) {
-					// console.log(`this is ${parseInt(spotId)}`);
-					// console.log(`this is ${parseInt(spot.id)}`);
-					return (
-						<div>
-							<div className="review-total"></div>
-							<div className="review-title">
-								<i class="fa-solid fa-star" /> {spot.avgRating}{' '}
-								· {reviewComponent.length} Reviews
+			<div className="review-box">
+				{spotComponent.map((spot) => {
+					if (spot.id === parseInt(spotId)) {
+						// console.log(`this is ${parseInt(spotId)}`);
+						// console.log(`this is ${parseInt(spot.id)}`);
+						return (
+							<div>
+								<div className="review-total"></div>
+								<div className="review-title">
+									<i class="fa-solid fa-star" />{' '}
+									{spot.avgRating} · {reviewComponent.length}{' '}
+									Reviews
+								</div>
 							</div>
-						</div>
-					);
-				}
-			})}
-			<div></div>
+						);
+					}
+				})}
+
+				{reviewComponent.map((currReview) => {
+					// console.log(currReview);
+					// console.log(
+					// 	sessionUser &&
+					// 		sessionUser.id === parseInt(currReview.userId)
+					// );
+
+					count += 1;
+					console.log(reviewComponent.length)
+					console.log(count)
+					if (
+						sessionUser &&
+						sessionUser.id === parseInt(currReview.userId)
+					) {
+						return (
+							<div className="review-box">
+								<ReviewFormEdit review={currReview} />
+								<button
+									onClick={deleteReview}
+									className="profile-input delete-review"
+								>
+									Delete Your Review
+								</button>
+							</div>
+						);
+					} else if(sessionUser && reviewComponent.length === count) {
+						return (
+							<div className="review-box">
+								{sessionLinks}
+							</div>
+						);
+					}
+				})}
+			</div>
 			{reviewComponent.map((currentReview) => {
 				myReview = parseInt(currentReview.id);
 				// if (!sessionUser && currentReview.id) {
@@ -108,11 +157,11 @@ function ReviewComponenet() {
 
 					return (
 						<>
-							<div>
+							<div className="review-box">
 								<div className="review-details">
 									<i class="fa-solid fa-star" />{' '}
-									{currentReview.stars} ·{' '}
-									{currentReview.User.firstName}
+									{currentReview.stars} · Your Review
+									{/* {currentReview.User.firstName} */}
 								</div>
 								<div className="review-timestamp">
 									{Date(currentReview.updatedAt)}
@@ -121,7 +170,7 @@ function ReviewComponenet() {
 									{currentReview.review}
 								</div>
 								{/* <EditReview review={currentReview} /> */}
-								{reviewComponent.map((currReview) => {
+								{/* {reviewComponent.map((currReview) => {
 									console.log(currReview);
 									console.log(
 										sessionUser &&
@@ -135,26 +184,26 @@ function ReviewComponenet() {
 											parseInt(currReview.userId)
 									) {
 										return (
-											<>
+											<div  className="review-box" >
 												<ReviewFormEdit
 													review={currReview}
 												/>
 												<button
 													onClick={deleteReview}
-													className="review-component submit"
+													className="profile-input delete-review"
 												>
 													Delete Your Review
 												</button>
-											</>
+											</ div>
 										);
 									}
-								})}
+								})} */}
 							</div>
 						</>
 					);
 				} else {
 					return (
-						<div>
+						<div className="review-box">
 							<div className="review-details">
 								<i class="fa-solid fa-star" />{' '}
 								{currentReview.stars} ·{' '}
@@ -170,6 +219,30 @@ function ReviewComponenet() {
 					);
 				}
 			})}
+			{/* {reviewComponent.map((currReview) => {
+				console.log(currReview);
+				console.log(
+					sessionUser &&
+						sessionUser.id === parseInt(currReview.userId)
+				);
+
+				if (
+					sessionUser &&
+					sessionUser.id === parseInt(currReview.userId)
+				) {
+					return (
+						<div className="review-box">
+							<ReviewFormEdit review={currReview} />
+							<button
+								onClick={deleteReview}
+								className="profile-input delete-review"
+							>
+								Delete Your Review
+							</button>
+						</div>
+					);
+				}
+			})} */}
 		</div>
 	);
 }

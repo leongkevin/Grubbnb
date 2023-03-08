@@ -33,13 +33,16 @@ function SpotModalEdit() {
 				description,
 				price,
 				id: spotId,
-			})		// .then(spotActions.getAllSpots())
+			})
 		).catch(async (res) => {
 			const data = await res.json();
 			if (data && data.errors) {
 				setErrors(data.errors);
 			}
 		});
+		// if(true){
+		// 	history.push(`/spots/current`)
+		// }
 
 	};
 
