@@ -52,7 +52,7 @@ function Hosting() {
 						}
 
 						let mainImage = [spot.previewImage];
-						console.log(`mainImage ${mainImage}`);
+						// console.log(`mainImage ${mainImage}`);
 						if (!mainImage.length) {
 							mainImage =
 								'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/2048px-No_image_available.svg.png';

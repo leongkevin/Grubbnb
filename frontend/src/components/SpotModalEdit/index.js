@@ -41,7 +41,7 @@ function SpotModalEdit() {
 			}
 		});
 		// if(true){
-		// 	history.push(`/spots/current`)
+			history.push(`/spots/current`)
 		// }
 
 	};

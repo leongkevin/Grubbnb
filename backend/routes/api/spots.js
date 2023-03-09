@@ -132,7 +132,7 @@ router.get('/', async (req, res) => {
 	// res.status(200).json(page)
 
 	if (Number.isNaN(page)) page = 1;
-	if (Number.isNaN(size)) size = 20;
+	if (Number.isNaN(size)) size = 200;
 
 	let limit;
 	let offset;
@@ -638,6 +638,8 @@ router.post(
 	[requireAuth, validateSpotImage],
 	async (req, res) => {
 		const { url, preview } = req.body;
+console.log(url, preview)
+
 		const spot = req.params;
 		// res.json(spot);
 		const findSpot = await Spot.findAll({

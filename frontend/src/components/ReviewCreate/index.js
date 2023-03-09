@@ -18,7 +18,8 @@ function ReviewCreate() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 
-		setErrors([]);
+		setErrors([])
+		//await
 		dispatch(
 			reviewActions.publishReview({
 				review: review,
@@ -32,7 +33,7 @@ function ReviewCreate() {
 			if (data && data.errors) setErrors(data.errors);
 		})
         .then(() => window.location.reload(true));
-
+		// .then
 		return setErrors(['Errors']);
 	};
     // console.log(`this is user ${sessionUser.id}`)

@@ -27,9 +27,17 @@ export const createSpot = (spot) => {
 	};
 };
 
+const CREATE_SPOTIMAGES = 'spots/CREATE_SPOTIMAGES';
+export const createSpotImages = (spotImagesArr) => {
+	return {
+		type: CREATE_SPOTIMAGES,
+		payload: spotImagesArr,
+	};
+};
+
 const GET_SPOTS = 'spots/GET_SPOTS';
 export const getAllSpots = (spots) => {
-	console.log(spots);
+	// console.log(spots);
 	return {
 		type: GET_SPOTS,
 		payload: spots,
@@ -84,14 +92,23 @@ export const spotReducer = (state = initialState, action) => {
 			newState[action.payload.id] = action.payload;
 			return newState;
 		}
+		case CREATE_SPOTIMAGES:
+			// const newState = {
+				console.log(action)
+				return {
+				...state,
+				[action.payload.id]: {
+					...state[action.payload.id],
+				},
+				// return newState;
+			};
 		default:
 			return state;
 	}
 };
 
-export const publishSpot = (spot) => async (dispatch) => {
-	// console.log(spot)
-	const {
+export const publishSpot = (spot, imageArr) => async (dispatch) => {
+	let {
 		address,
 		city,
 		state,
@@ -101,6 +118,7 @@ export const publishSpot = (spot) => async (dispatch) => {
 		name,
 		description,
 		price,
+		imagesArr,
 	} = spot;
 	const response = await csrfFetch('/api/spots', {
 		method: 'POST',
@@ -117,9 +135,39 @@ export const publishSpot = (spot) => async (dispatch) => {
 			name,
 			description,
 			price,
+			imagesArr,
 		}),
 	});
+
+	imagesArr = imagesArr.map((url,i) => { // we need to turn the image arr into arr of obj, isntead of arr of str
+        let obj = {}
+        if (i === 0) {
+            obj.preview = true;
+            obj.url = url;
+        } else {
+            obj.preview = false;
+            obj.url = url;
+        }
+        return obj;
+    })
+console.log(imagesArr, "152")
+
 	const newSpot = await response.json(response);
+
+
+	console.log(`this is imageArr: ${imagesArr}`)
+	for await (let img of imagesArr) {
+		const submitImages = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(img),
+		});
+		const imgURL = await submitImages.json();
+		dispatch(createSpotImages(imgURL));
+	}
+
 	dispatch(createSpot(newSpot));
 	return newSpot.id;
 };
@@ -127,7 +175,7 @@ export const publishSpot = (spot) => async (dispatch) => {
 export const getSpots = () => async (dispatch) => {
 	const response = await csrfFetch('/api/spots');
 	const spots = await response.json();
-	console.log(spots);
+	// console.log(spots);
 	dispatch(getAllSpots(spots));
 	// console.log(spots);
 	return response;
