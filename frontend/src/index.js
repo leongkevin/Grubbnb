@@ -11,6 +11,7 @@ import App from './App';
 import configureStore from './store';
 import { restoreCSRF, csrfFetch } from "./store/csrf";
 import * as sessionActions from './store/session';
+import ErrorBoundary from './components/ErrorBoundary';
 
 const store = configureStore();
 
@@ -30,8 +31,10 @@ function Root() {
     <ModalProvider>
       <Provider store={store}>
         <BrowserRouter>
+        <ErrorBoundary>
           <App />
           <Modal />
+          </ErrorBoundary>
         </BrowserRouter>
       </Provider>
     </ModalProvider>

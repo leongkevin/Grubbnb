@@ -5,7 +5,7 @@ import OpenModalButton from '../OpenModalButton';
 import SignupFormModal from '../SignupFormModal';
 import LoginFormModal from '../LoginFormModal';
 import DemoUserButton from '../DemoUserButton';
-
+import ErrorBoundary from '../ErrorBoundary'
 function Authentication({ user }) {
 	const dispatch = useDispatch();
 	const [showMenu, setShowMenu] = useState(false);
@@ -52,10 +52,12 @@ function Authentication({ user }) {
 						/>
 					</div>
 					<div>
+						{/* <ErrorBoundary> */}
 						<OpenModalButton
 							buttonText="Log in"
 							modalComponent={<LoginFormModal />}
 						/>
+						{/* </ErrorBoundary> */}
 					</div>
 					<hr></hr>
 					<div>

@@ -18,19 +18,23 @@ function LoginFormModal() {
 			.then(closeModal)
 			.catch(async (res) => {
 				const data = await res.json();
-				if (data && data.errors) setErrors(data.errors);
+				console.log(data.message);
+				// console.log(errors.message);
+				if (data && data.message) setErrors(data.message);
+				// console.log(errors);
 			});
 	};
 
 	return (
 		<>
-			<h1 className='welcome-header'>Welcome to Grubbnb</h1>
+			<h1 className="welcome-header">Log in to Grubbnb</h1>
 			<form onSubmit={handleSubmit}>
-				<ul>
+				{/* <ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
-				</ul>
+				</ul> */}
+				<div  className="welcome-header"><li>{errors}</li></div>
 				<div>
 					<input
 						type="text"
