@@ -107,10 +107,10 @@ function SpotPage() {
 								</div>
 								<div className="spot-page-details">
 									<div className="spot-page-details-left">
-										{' '}
+										{/* {' '}
 										Entire home hosted by ownerId:{' '}
-										{spot.ownerId}
-										<hr />
+										{spot.ownerId} */}
+										{/* <hr /> */}
 										<img
 											src="https://a0.muscache.com/im/pictures/54e427bb-9cb7-4a81-94cf-78f19156faad.jpg"
 											width="30%"

@@ -22,7 +22,8 @@ export const createReview = (review) => {
 const UPDATE_REVIEW = 'review/UPDATE_REVIEW';
 export const editReview = (review) => ({
 	type: UPDATE_REVIEW,
-	payload: review.id,
+	// payload: review.id,
+	payload: review,
 });
 
 const REMOVE_REVIEW = 'review/REMOVE_REVIEW';
@@ -57,13 +58,28 @@ const reviewReducer = (state = initialState, action) => {
 				...state,
 				...action.payload,
 			};
+
+
+			// const newState = {};
+			// // console.log(`This is review ${newState}`);
+			// // newState.forEach((review) => {
+			// // 	console.log(review)
+			// // 	state[review.id] = review;
+			// // });
+			// // newState.state[review.id] = action.payload
+			// let currState = [...state]
+			// console.log(currState)
+			// currState.review.forEach((reviewId) => {
+			// 	state[reviewId] = action.payload
+			// })
+
 			return newState;
 		}
 
 		case REMOVE_REVIEW: {
 			const newState = { ...state };
-			console.log(`${state}`);
-			console.log(`${action.reviewId}`);
+			// console.log(`${state}`);
+			// console.log(`${action.reviewId}`);
 			delete newState[action.reviewId];
 			return newState;
 		}
@@ -108,7 +124,7 @@ export const publishReview = (data, review, stars) => async (dispatch) => {
 };
 
 export const updateReviewAction = (review) => async (dispatch) => {
-	console.log( review);
+	// console.log( review);
 	const response = await csrfFetch(`/api/reviews/${review.id}`, {
 	// { ${review[31].id}
 

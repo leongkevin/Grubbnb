@@ -31,8 +31,9 @@ function ReviewFormEdit(props) {
 			})
 		).catch(async (res) => {
 			// console.log({review})
-			// console.log(res)
+
 			const data = await res.json();
+			console.log(res)
 			if (data && data.errors) setErrors(data.errors);
 		});
 

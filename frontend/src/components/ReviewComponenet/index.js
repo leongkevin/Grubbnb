@@ -34,7 +34,7 @@ function ReviewComponenet() {
 		// console.log(reviewId)
 		dispatch(reviewActions.deleteReviewAction(myReview))
 			// .then(() => history.push("/"))
-			// .then(() => window.location.reload(true));
+			.then(() => window.location.reload(true));
 	};
 
 	const handleSubmit = (e) => {
@@ -107,15 +107,15 @@ function ReviewComponenet() {
 					// );
 
 					count += 1;
-					console.log(reviewComponent.length)
-					console.log(count)
+					// console.log(reviewComponent.length)
+					// console.log(count)
 					if (
 						sessionUser &&
 						sessionUser.id === parseInt(currReview.userId)
 					) {
 						return (
 							<div className="review-box">
-								<ReviewFormEdit review={currReview} />
+								{/* <ReviewFormEdit review={currReview} /> // Not needed for passing grade */}
 								<button
 									onClick={deleteReview}
 									className="profile-input delete-review"

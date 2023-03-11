@@ -31,7 +31,7 @@ function ReviewCreate() {
             // console.log(res)
 			const data = await res.json();
 			console.log(data)
-			if (data && data.errors) setErrors(data.errors);
+			if (data && data.message) setErrors(data.message);
 		})
 		// .then
 
@@ -44,11 +44,12 @@ function ReviewCreate() {
 				Leave a review.
 			</h1>
 			<form onSubmit={handleSubmit}>
-				<ul>
+				{/* <ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
-				</ul>
+				</ul> */}
+				{errors}
 				<input
 					type="review"
 					value={review}
