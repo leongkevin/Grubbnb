@@ -73,7 +73,7 @@ function CreateSpotModal() {
 	};
 
 	return (
-		<>
+		<div 							className="modal-body">
 			<h1 className="welcome-header">Welcome to Grubbnb</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>
@@ -87,7 +87,7 @@ function CreateSpotModal() {
 					onChange={(e) => setAddress(e.target.value)}
 					required
 					placeholder="Address"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -95,7 +95,7 @@ function CreateSpotModal() {
 					onChange={(e) => setCity(e.target.value)}
 					required
 					placeholder="City"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -103,7 +103,7 @@ function CreateSpotModal() {
 					onChange={(e) => setState(e.target.value)}
 					required
 					placeholder="State"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -111,7 +111,7 @@ function CreateSpotModal() {
 					onChange={(e) => setCountry(e.target.value)}
 					required
 					placeholder="Country"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -119,7 +119,7 @@ function CreateSpotModal() {
 					onChange={(e) => setLat(e.target.value)}
 					required
 					placeholder="Lat"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -127,7 +127,7 @@ function CreateSpotModal() {
 					onChange={(e) => setLng(e.target.value)}
 					required
 					placeholder="Lng"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -135,7 +135,7 @@ function CreateSpotModal() {
 					onChange={(e) => setName(e.target.value)}
 					required
 					placeholder="Name"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -143,7 +143,7 @@ function CreateSpotModal() {
 					onChange={(e) => setDescription(e.target.value)}
 					required
 					placeholder="Description"
-					// className="profile-input"
+					className="profile-input"
 				/>
 				<input
 					type="text"
@@ -151,7 +151,7 @@ function CreateSpotModal() {
 					onChange={(e) => setPrice(e.target.value)}
 					required
 					placeholder="Price"
-					// className="profile-input"
+					className="profile-input"
 				/>
 
 				<input
@@ -160,7 +160,7 @@ function CreateSpotModal() {
 					onChange={(e) => setPreviewImage(e.target.value)}
 					required
 					placeholder="1st Image"
-					// className="profile-input"
+					className="profile-input"
 				/>
 
 				<input
@@ -169,7 +169,7 @@ function CreateSpotModal() {
 					onChange={(e) => setImageTwo(e.target.value)}
 					required
 					placeholder="2nd Image"
-					// className="profile-input"
+					className="profile-input"
 				/>
 
 				<input
@@ -178,7 +178,7 @@ function CreateSpotModal() {
 					onChange={(e) => setImageThree(e.target.value)}
 					required
 					placeholder="3rd Image"
-					// className="profile-input"
+					className="profile-input"
 				/>
 
 				<input
@@ -187,7 +187,7 @@ function CreateSpotModal() {
 					onChange={(e) => setImageFour(e.target.value)}
 					required
 					placeholder="4th Image"
-					// className="profile-input"
+					className="profile-input"
 				/>
 
 				<input
@@ -196,14 +196,14 @@ function CreateSpotModal() {
 					onChange={(e) => setImageFive(e.target.value)}
 					required
 					placeholder="5th Image"
-					// className="profile-input"
+					className="profile-input"
 				/>
 
 				<button type="submit" className="profile-input submit">
 					Publish Spot
 				</button>
 			</form>
-		</>
+		</div>
 	);
 }
 

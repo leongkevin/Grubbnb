@@ -79,7 +79,7 @@
     border: 0;
     border-radius: 8px;
     height: 50px;
-    width: 50%;
+    width: 100%;
 
     font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
     font-size: 16px;
@@ -108,6 +108,33 @@
 
 
 .submit {
+    border: 1px solid #CCC;
+    box-sizing: border-box;
+    cursor: pointer;
+    /* padding: .5em 10em; */
+
+    background: rgb(255, 56, 92);
+
+    transition: background-color .50s, color .50s;
+
+    /* font */
+    font-weight: 400;
+    color: white;
+
+    /* border */
+    border: 0;
+    border-radius: 8px;
+    height: 50px;
+    width: 25%;
+
+    font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;
+    font-size: 16px;
+    font-weight: 10;
+
+
+}
+
+.submit-update {
     border: 1px solid #CCC;
     box-sizing: border-box;
     cursor: pointer;

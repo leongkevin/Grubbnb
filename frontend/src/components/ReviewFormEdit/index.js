@@ -29,33 +29,29 @@ function ReviewFormEdit(props) {
 				spotId: props.spotId,
 				id: props.review.id,
 			})
-		)
-			.catch(async (res) => {
-				// console.log({review})
-				// console.log(res)
-				const data = await res.json();
-				if (data && data.errors) setErrors(data.errors);
-			})
-			// .then(() => window.location.reload(true));
+		).catch(async (res) => {
+			// console.log({review})
+			// console.log(res)
+			const data = await res.json();
+			if (data && data.errors) setErrors(data.errors);
+		});
+		// .then(() => window.location.reload(true));
 	};
 
 	return (
 		<div>
 			{/* className="edit-spot-container" */}
 			<form onSubmit={handleSubmit}>
+
+				<label>
+					Update Your <i class="fa-solid fa-star" />{' '}
+					{props.review.stars} Review:
+				</label>
 				<ul>
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
-				<div className="review-page-container">
-					<div className="welcome-header">
-						Update your <i class="fa-solid fa-star" />{' '}
-						{props.review.stars} review
-					</div>
-				</div>
-				<label>Your Review:</label>
-
 				<textarea
 					type="text"
 					// style={{ height: '100px', overflow: 'auto' }}
@@ -65,8 +61,6 @@ function ReviewFormEdit(props) {
 					placeholder="Review"
 					className="review-profile-input review-form"
 				/>
-
-				<label>Your Rating:</label>
 				<select
 					className="review-profile-input"
 					onChange={(e) => setStars(e.target.value)}
@@ -79,9 +73,10 @@ function ReviewFormEdit(props) {
 					<option value={4}>4 Stars</option>
 					<option value={5}>5 Stars</option>
 				</select>
-				<button type="submit" className="review-profile-input submit">
+				<button type="submit" className="review-profile-input submit-update">
 					Edit Your Review
 				</button>
+
 			</form>
 		</div>
 	);

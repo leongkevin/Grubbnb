@@ -34,7 +34,7 @@ function LoginFormModal() {
 						<li key={idx}>{error}</li>
 					))}
 				</ul> */}
-				<div  className="welcome-header"><li>{errors}</li></div>
+				<div  className="welcome-header">{errors}</div>
 				<div>
 					<input
 						type="text"

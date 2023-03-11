@@ -25,3 +25,8 @@
     background-color: white;
     border-radius: 8px;
 }
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
