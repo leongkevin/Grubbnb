@@ -46,7 +46,13 @@ function CreateSpotModal() {
 	//   setHasSubmitted(false);
 	// }
 
-	const imagesArr = [previewImage, imageTwo, imageThree, imageThree, imageFour]
+	const imagesArr = [
+		previewImage,
+		imageTwo,
+		imageThree,
+		imageThree,
+		imageFour,
+	];
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -62,18 +68,19 @@ function CreateSpotModal() {
 				name,
 				description,
 				price,
-				imagesArr
+				imagesArr,
 			})
 		)
 			.then(closeModal)
-			// .catch(async (res) => {
-			// 	const data = await res.json();
-			// 	if (data && data.errors) setErrors(data.errors);
-			// });
+			.catch(async (res) => {
+				const data = await res.json();
+				if (data && data.errors) setErrors(data.errors);
+			})
+			.then(() => window.location.reload(true));
 	};
 
 	return (
-		<div 							className="modal-body">
+		<div className="modal-body">
 			<h1 className="welcome-header">Welcome to Grubbnb</h1>
 			<form onSubmit={handleSubmit}>
 				<ul>

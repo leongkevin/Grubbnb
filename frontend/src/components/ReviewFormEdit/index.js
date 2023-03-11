@@ -35,6 +35,7 @@ function ReviewFormEdit(props) {
 			const data = await res.json();
 			if (data && data.errors) setErrors(data.errors);
 		});
+
 		// .then(() => window.location.reload(true));
 	};
 
@@ -74,7 +75,7 @@ function ReviewFormEdit(props) {
 					<option value={5}>5 Stars</option>
 				</select>
 				<button type="submit" className="review-profile-input submit-update">
-					Edit Your Review
+					Publish Changes
 				</button>
 
 			</form>

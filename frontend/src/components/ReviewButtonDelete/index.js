@@ -1,34 +1,33 @@
-import { useParams, useHistory } from 'react-router-dom';
-import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useParams, useHistory } from 'react-router-dom';
+// import React from 'react';
+// import { useDispatch } from 'react-redux';
 
-import * as reviewActions from '../../store/review';
-
-
-const ReviewButtonDelete = () => {
-	const dispatch = useDispatch();
-	const { reviewId } = useParams();
-	const history = useHistory();
+// import * as reviewActions from '../../store/review';
 
 
-	const deleteReview = async (e) => {
-		e.preventDefault();
-		// console.log(reviewId)
-		// dispatch(reviewActions.deleteReviewAction(spotId))
-		dispatch(reviewActions.deleteReviewAction(1000))
-		// dispatch(reviewActions.deleteReviewAction(10))
-		// .then(() => history.push("/"))
-		// .then(() => window.location.reload(true));
-	};
+// const ReviewButtonDelete = () => {
+// 	const dispatch = useDispatch();
+// 	const { reviewId } = useParams();
+// 	const history = useHistory();
 
-	return (
-		<div>
-			{/* <button onClick={deleteReview}
-			// className="profile-input submit"
 
-			>Delete Review</button> */}
-		</div>
-	);
-};
+// 	const deleteReview = async (e) => {
+// 		e.preventDefault();
+// 		// console.log(reviewId)
+// 		// dispatch(reviewActions.deleteReviewAction(spotId))
+// 		dispatch(reviewActions.deleteReviewAction(1000))
+// 		// .then(() => history.push("/"))
+// 		// .then(() => window.location.reload(true));
+// 	};
 
-export default ReviewButtonDelete;
+// 	return (
+// 		<div>
+// 			{/* <button onClick={deleteReview}
+// 			// className="profile-input submit"
+
+// 			>Delete Review</button> */}
+// 		</div>
+// 	);
+// };
+
+// export default ReviewButtonDelete;
