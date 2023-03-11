@@ -51,7 +51,7 @@ function SpotPage() {
 				let rating = spot.avgRating;
 				if (rating === null) {
 					// console.log(rating)
-					rating = 'none';
+					rating = '';
 				}
 				// console.log(parseInt(spotId) === spot.id)
 				// console.log(parseInt(spotId) === spot.id)
