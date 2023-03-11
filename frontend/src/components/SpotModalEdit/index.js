@@ -40,9 +40,9 @@ function SpotModalEdit() {
 				setErrors(data.errors);
 			}
 		});
-		// if(true){
+		if(!errors){
 			history.push(`/spots/current`)
-		// }
+		}
 
 	};
 
@@ -82,6 +82,11 @@ function SpotModalEdit() {
 						}
 					})}
 
+						{errors.map((error, idx) => (
+							<div className="spot-errors" key={idx}>{error}</div>
+						))}
+
+
 					<input
 						type="text"
 						value={name}
@@ -109,11 +114,7 @@ function SpotModalEdit() {
 						className="profile-input"
 					/>
 
-<>
-						{errors.map((error, idx) => (
-							<div className="spot-errors" key={idx}>{error}</div>
-						))}
-					</>
+
 
 					<button type="submit" className="profile-input submit">
 						{spotComponent.map((spot) => {
