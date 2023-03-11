@@ -36,7 +36,7 @@ function ReviewFormEdit(props) {
 				const data = await res.json();
 				if (data && data.errors) setErrors(data.errors);
 			})
-			.then(() => window.location.reload(true));
+			// .then(() => window.location.reload(true));
 	};
 
 	return (

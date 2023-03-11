@@ -134,8 +134,6 @@ function SpotPage() {
 									</div>
 								</div>
 								<hr />
-
-								<ReviewCreate />
 								<ReviewComponenet />
 							</div>
 						</div>

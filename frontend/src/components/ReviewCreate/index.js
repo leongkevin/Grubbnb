@@ -28,13 +28,13 @@ function ReviewCreate() {
 				userId: sessionUser.id,
 			})
 		).catch(async (res) => {
-            console.log(res.json())
+            // console.log(res)
 			const data = await res.json();
+			console.log(data)
 			if (data && data.errors) setErrors(data.errors);
 		})
-        .then(() => window.location.reload(true));
 		// .then
-		return setErrors(['Errors']);
+
 	};
     // console.log(`this is user ${sessionUser.id}`)
     // console.log(`this is spot params  ${spotId}`)
