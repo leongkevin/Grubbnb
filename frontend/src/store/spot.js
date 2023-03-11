@@ -94,7 +94,7 @@ export const spotReducer = (state = initialState, action) => {
 		}
 		case CREATE_SPOTIMAGES:
 			// const newState = {
-				console.log(action)
+				// console.log(action)
 				return {
 				...state,
 				[action.payload.id]: {
@@ -150,7 +150,7 @@ export const publishSpot = (spot, imageArr) => async (dispatch) => {
         }
         return obj;
     })
-console.log(imagesArr, "152")
+// console.log(imagesArr, "152")
 
 	const newSpot = await response.json(response);
 

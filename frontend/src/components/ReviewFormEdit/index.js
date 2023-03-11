@@ -33,7 +33,7 @@ function ReviewFormEdit(props) {
 			// console.log({review})
 
 			const data = await res.json();
-			console.log(res)
+			// console.log(res)
 			if (data && data.errors) setErrors(data.errors);
 		});
 

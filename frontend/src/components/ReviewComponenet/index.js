@@ -17,7 +17,7 @@ function ReviewComponenet() {
 
 	const spotComponent = useSelector((state) => Object.values(state.spot));
 	const reviewComponent = useSelector((state) => Object.values(state.review));
-	// const reviewMyReview = useSelector((state) => state.review[23]);
+	const reviewMyReview = useSelector((state) => state.review[23]);
 	// console.log(`This is rc: ${JSON.stringify(reviewMyReview)}`);
 
 	const sessionUser = useSelector((state) => state.session.user);
@@ -32,7 +32,9 @@ function ReviewComponenet() {
 	const deleteReview = async (e) => {
 		e.preventDefault();
 		// console.log(reviewId)
+		// dispatch(reviewActions.deleteReviewAction(spotId))
 		dispatch(reviewActions.deleteReviewAction(myReview))
+			// dispatch(reviewActions.deleteReviewAction(10))
 			// .then(() => history.push("/"))
 			.then(() => window.location.reload(true));
 	};
@@ -115,7 +117,7 @@ function ReviewComponenet() {
 					) {
 						return (
 							<div className="review-box">
-								{/* <ReviewFormEdit review={currReview} /> // Not needed for passing grade */}
+								<ReviewFormEdit review={currReview} />
 								<button
 									onClick={deleteReview}
 									className="profile-input delete-review"

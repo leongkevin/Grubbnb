@@ -117,7 +117,7 @@ export const publishReview = (data, review, stars) => async (dispatch) => {
 			stars: data.stars,
 		}),
 	});
-	console.log(response);
+	// console.log(response);
 	const newReview = await response.json();
 	dispatch(createReview(newReview));
 	return newReview;
