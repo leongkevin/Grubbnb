@@ -155,7 +155,7 @@ export const publishSpot = (spot, imageArr) => async (dispatch) => {
 	const newSpot = await response.json(response);
 
 
-	console.log(`this is imageArr: ${imagesArr}`)
+	// console.log(`this is imageArr: ${imagesArr}`)
 	for await (let img of imagesArr) {
 		const submitImages = await csrfFetch(`/api/spots/${newSpot.id}/images`, {
 			method: 'POST',

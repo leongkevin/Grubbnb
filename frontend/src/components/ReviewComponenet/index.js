@@ -117,7 +117,7 @@ function ReviewComponenet() {
 					) {
 						return (
 							<div className="review-box">
-								<ReviewFormEdit review={currReview} />
+								{/* <ReviewFormEdit review={currReview} /> // not required for pass */}
 								<button
 									onClick={deleteReview}
 									className="profile-input delete-review"
