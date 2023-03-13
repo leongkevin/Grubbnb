@@ -40,9 +40,10 @@ function SpotModalEdit() {
 				setErrors(data.errors);
 			}
 		});
-		if(!errors){
-			history.push(`/spots/current`)
-		}
+		// if(!errors){
+		// 	history.push(`/spots/current`)
+		// }
+		history.push(`/spots/current`)
 
 	};
 
